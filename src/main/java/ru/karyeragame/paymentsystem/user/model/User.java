@@ -22,8 +22,9 @@ public class User {
     private String email;
     @Column(nullable = false)
     private String password;
-    @Column(nullable = false)
-    private String avatar;
+    @ManyToOne
+    @JoinColumn(name = "avatar_id", nullable = false)
+    private Avatar avatar;
     @Enumerated(EnumType.STRING)
     private Roles role;
 

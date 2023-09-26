@@ -29,7 +29,7 @@ public class KaryeragameApplication {
                                 .username("admin")
                                 .email("admin@gmail.com")
                                 .password("psw1")
-                                .avatar("avatar")
+                                .avatar(2L)
                                 .build());
                 service.makeUserAdmin(repository.findByEmail("admin@gmail.com").get().getId());
             } catch (DataIntegrityViolationException e) {

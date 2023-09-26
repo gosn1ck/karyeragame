@@ -6,11 +6,11 @@ import ru.karyeragame.paymentsystem.user.dto.UserDto;
 import java.util.List;
 
 public interface UserService {
-    UserDto register(NewUserDto newUserDto);
+    UserDto register(NewUserDto dto);
 
     UserDto getUser(Long id);
 
     List<UserDto> getAllUsers(int size, int from);
 
-    UserDto makeUserAdmin(Long userId);
+    UserDto makeUserAdmin(Long id);
 }

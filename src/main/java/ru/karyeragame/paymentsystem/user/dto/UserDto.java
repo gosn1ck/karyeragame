@@ -2,7 +2,7 @@ package ru.karyeragame.paymentsystem.user.dto;
 
 import lombok.Builder;
 import lombok.Data;
-import ru.karyeragame.paymentsystem.enums.Roles;
+import ru.karyeragame.paymentsystem.user.model.Avatar;
 
 import java.time.LocalDateTime;
 
@@ -12,9 +12,7 @@ public class UserDto {
     private Long id;
     private String username;
     private String email;
-    private String password;
-    private String avatar;
-    private Roles role;
+    private Avatar avatar;
     private LocalDateTime createdOn;
 
 }

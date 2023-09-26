@@ -21,11 +21,11 @@ import java.util.List;
 public class UserController {
     private final UserService service;
 
-    @PostMapping("/register")
+    @PostMapping("/auth/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public UserDto registerUser(@Valid @RequestBody NewUserDto newUserDto) {
-        log.info("registerUser started with body: {}", newUserDto);
-        UserDto result = service.register(newUserDto);
+    public UserDto registerUser(@Valid @RequestBody NewUserDto dto) {
+        log.info("registerUser started with body: {}", dto);
+        UserDto result = service.register(dto);
         log.info("registerUser finished with result: {}", result);
         return result;
     }
@@ -50,9 +50,9 @@ public class UserController {
     }
 
     @PatchMapping("/admin/{id}")
-    public UserDto makeUserAdmin(@PathVariable(name = "id") Long userId) {
-        log.info("makeUserAdmin started with id: {}", userId);
-        UserDto result = service.makeUserAdmin(userId);
+    public UserDto makeUserAdmin(@PathVariable(name = "id") Long id) {
+        log.info("makeUserAdmin started with id: {}", id);
+        UserDto result = service.makeUserAdmin(id);
         log.info("makeUserAdmin finished with result: {}", result);
         return result;
     }
