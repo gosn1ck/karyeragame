@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS Users (
         email varchar(100) NOT NULL,
         password varchar(100) NOT NULL,
         avatar_id BIGINT NOT NULL,
-        role varchar(15) NOT NULL,
+        roles varchar(15) NOT NULL,
         created_on timestamp NOT NULL,
         CONSTRAINT FK_USERS_ON_AVATARS FOREIGN KEY (avatar_id) REFERENCES Avatars (id),
         CONSTRAINT UQ_USERS_EMAIL UNIQUE (email)
