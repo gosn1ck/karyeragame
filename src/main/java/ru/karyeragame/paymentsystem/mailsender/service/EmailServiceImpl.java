@@ -1,6 +1,7 @@
-package ru.karyeragame.paymentsystem.service;
+package ru.karyeragame.paymentsystem.mailsender.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -12,18 +13,19 @@ import javax.mail.internet.MimeMessage;
 
 @Service
 @Slf4j
-public record EmailServiceImpl(JavaMailSender javaMailSender) implements EmailService {
+public record EmailServiceImpl(JavaMailSender sender, @Value("${email.from}") String emailFrom)
+        implements EmailService {
 
     @Override
     public void sendSimpleMessage(String to, String subject, String text) {
 
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("careerA.game@gmail.com");
+        message.setFrom(emailFrom);
         message.setTo(to);
         message.setSubject(subject);
         message.setText(text);
 
-        javaMailSender.send(message);
+        sender.send(message);
         log.info("Отправлено письмо: {}", message);
     }
 
@@ -31,10 +33,10 @@ public record EmailServiceImpl(JavaMailSender javaMailSender) implements EmailSe
     public void sendMessageWithAttachment(String to, String subject, String text, String path)
             throws MessagingException {
 
-        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessage message = sender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
-        helper.setFrom("careerA.game@gmail.com");
+        helper.setFrom(emailFrom);
         helper.setTo(to);
         helper.setSubject(subject);
         helper.setText(text);
@@ -42,9 +44,7 @@ public record EmailServiceImpl(JavaMailSender javaMailSender) implements EmailSe
         ClassPathResource file = new ClassPathResource(path);
         helper.addAttachment("Money", file, "image/jpeg");
 
-        javaMailSender.send(message);
+        sender.send(message);
         log.info("Отправлено письмо: {}", message);
     }
-
-
 }

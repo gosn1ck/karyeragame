@@ -1,4 +1,4 @@
-package ru.karyeragame.paymentsystem.service;
+package ru.karyeragame.paymentsystem.mailsender.service;
 
 import javax.mail.MessagingException;
 

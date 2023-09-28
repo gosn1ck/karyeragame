@@ -1,4 +1,4 @@
-package ru.karyeragame.paymentsystem.config;
+package ru.karyeragame.paymentsystem.mailsender.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
