@@ -22,14 +22,14 @@ public class EmailController {
 
     @PostMapping("/send-email")
     public ResponseEntity sendEmail(@RequestBody EmailMessage emailMessage) {
-        emailService.sendSimpleMessage(emailMessage.getTo(), emailMessage.getSubject(), emailMessage.getMessage());
+        emailService.sendSimpleMessage(emailMessage.to(), emailMessage.subject(), emailMessage.message());
         return ResponseEntity.ok("Success");
     }
 
     @PostMapping("/send-email/attach")
     public ResponseEntity sendEmailWithAttach(@RequestBody EmailMessage emailMessage) throws MessagingException {
-        emailService.sendMessageWithAttachment(emailMessage.getTo(), emailMessage.getSubject(),
-                emailMessage.getMessage(), emailMessage.getPath());
+        emailService.sendMessageWithAttachment(emailMessage.to(), emailMessage.subject(),
+                emailMessage.message(), emailMessage.path());
         return ResponseEntity.ok("Success");
     }
 }
