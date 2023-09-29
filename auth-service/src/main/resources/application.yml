@@ -3,7 +3,7 @@ server:
 
 devuser:
   email: dev@karyeragame.com
-  password: devpass
+  password: devpass           # change to strong password and inject via env
 
 spring:
   jpa:

@@ -77,6 +77,8 @@ public class AuthorizationServerConfig {
                                 .build()
                         )
                         .build(),
+
+                // Client for testing
                 RegisteredClient.withId(UUID.randomUUID().toString())
                         .clientId("postman")
                         .clientSecret("{noop}postman")

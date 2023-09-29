@@ -1,6 +1,7 @@
 package ru.karyeragame.authservice.controller;
 
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -10,15 +11,10 @@ import ru.karyeragame.authservice.usercredential.UserCredentialDto;
 import ru.karyeragame.authservice.usercredential.service.UserCredentialService;
 
 @RestController
+@AllArgsConstructor
 @Slf4j
 public class AuthController {
     private final UserCredentialService service;
-
-    public AuthController(
-            UserCredentialService service
-    ) {
-        this.service = service;
-    }
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
@@ -43,8 +39,4 @@ public class AuthController {
     @GetMapping("/authorized")
     public void au() {}
 
-    @GetMapping("/test")
-    public String test() {
-        return "test";
-    }
 }

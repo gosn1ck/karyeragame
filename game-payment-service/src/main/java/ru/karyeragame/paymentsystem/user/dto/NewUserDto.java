@@ -17,8 +17,5 @@ public class NewUserDto {
     @Email
     @NotBlank
     private String email;
-    @Pattern(regexp = "^[\\p{ASCII}\\p{Punct}\\p{Graph}]+$")// латиница, 0-9, видимые символы
-    @NotBlank
-    private String password;
     private Long avatar;
 }

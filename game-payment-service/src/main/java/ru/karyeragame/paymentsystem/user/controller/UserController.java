@@ -21,39 +21,31 @@ import java.util.List;
 public class UserController {
     private final UserService service;
 
-    @PostMapping("/auth/register")
+    @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     public UserDto registerUser(@Valid @RequestBody NewUserDto dto) {
-        log.info("registerUser started with body: {}", dto);
-        UserDto result = service.register(dto);
-        log.info("registerUser finished with result: {}", result);
+        log.debug("registerUser started with body: {}", dto);
+        var result = service.register(dto);
+        log.debug("registerUser finished with result: {}", result);
         return result;
     }
 
     @GetMapping("/{id}")
     public UserDto getUser(@PathVariable(name = "id") Long id) {
-        log.info("getUser started with id: {}", id);
-        UserDto result = service.getUser(id);
-        log.info("getUser finished with result: {}", result);
+        log.debug("getUser started with id: {}", id);
+        var result = service.getUser(id);
+        log.debug("getUser finished with result: {}", result);
         return result;
     }
 
     @GetMapping
     public List<UserDto> getAllUsers(@RequestParam(value = "size", defaultValue = "10", required = false) @Min(10) int size,
                                      @RequestParam(value = "from", defaultValue = "1", required = false) @Min(1) int from) {
-        log.info("getAllUsers started with params: " +
+        log.debug("getAllUsers started with params: " +
                 "size: {}; " +
                 "from: {}", size, from);
-        List<UserDto> result = service.getAllUsers(size, from - 1);
-        log.info("getAllUsers finished with result: {}", result);
-        return result;
-    }
-
-    @PatchMapping("/admin/{id}")
-    public UserDto makeUserAdmin(@PathVariable(name = "id") Long id) {
-        log.info("makeUserAdmin started with id: {}", id);
-        UserDto result = service.makeUserAdmin(id);
-        log.info("makeUserAdmin finished with result: {}", result);
+        var result = service.getAllUsers(size, from - 1);
+        log.debug("getAllUsers finished with result: {}", result);
         return result;
     }
 }

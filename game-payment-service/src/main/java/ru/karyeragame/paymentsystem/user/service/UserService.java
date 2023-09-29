@@ -11,6 +11,4 @@ public interface UserService {
     UserDto getUser(Long id);
 
     List<UserDto> getAllUsers(int size, int from);
-
-    UserDto makeUserAdmin(Long id);
 }

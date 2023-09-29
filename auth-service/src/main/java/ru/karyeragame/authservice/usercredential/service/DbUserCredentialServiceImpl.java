@@ -2,7 +2,6 @@ package ru.karyeragame.authservice.usercredential.service;
 
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -42,7 +41,7 @@ public class DbUserCredentialServiceImpl implements UserCredentialService, UserD
             add(
                     UserCredentialDto.builder()
                             .email(email)
-                            .password(pw) //generate strong psw and inject via env
+                            .password(pw)
                             .matchPassword(pw)
                             .build());
             grantRole(userCredentialRepository.findByEmail("dev@karyeragame.com").get().getId(), Roles.DEV);

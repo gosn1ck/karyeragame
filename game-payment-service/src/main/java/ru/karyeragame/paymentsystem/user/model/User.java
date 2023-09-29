@@ -3,7 +3,6 @@ package ru.karyeragame.paymentsystem.user.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import ru.karyeragame.paymentsystem.enums.Roles;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -20,13 +19,9 @@ public class User {
     private String username;
     @Column(unique = true, nullable = false)
     private String email;
-    @Column(nullable = false)
-    private String password;
     @ManyToOne
     @JoinColumn(name = "avatar_id", nullable = false)
     private Avatar avatar;
-    @Enumerated(EnumType.STRING)
-    private Roles role;
 
     @Column(nullable = false, name = "created_on")
     private LocalDateTime createdOn;
@@ -39,15 +34,13 @@ public class User {
         return Objects.equals(id, user.id)
                 && Objects.equals(username, user.username)
                 && Objects.equals(email, user.email)
-                && Objects.equals(password, user.password)
                 && Objects.equals(avatar, user.avatar)
-                && Objects.equals(role, user.role)
                 && Objects.equals(createdOn, user.createdOn);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, email, password, avatar, role, createdOn);
+        return Objects.hash(id, username, email, avatar, createdOn);
     }
 
     @Override
@@ -56,9 +49,7 @@ public class User {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 ", avatar='" + avatar + '\'' +
-                ", role='" + role + '\'' +
                 ", createdOn='" + createdOn + '\'' +
                 '}';
     }
