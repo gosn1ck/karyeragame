@@ -14,7 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.karyeragame.authservice.Role.Role;
 import ru.karyeragame.authservice.Role.RoleRepository;
 import ru.karyeragame.authservice.Role.Roles;
-import ru.karyeragame.authservice.usercredential.*;
+import ru.karyeragame.authservice.usercredential.Mapper;
+import ru.karyeragame.authservice.usercredential.ResponseUserCredDto;
+import ru.karyeragame.authservice.usercredential.UserCredentialDto;
+import ru.karyeragame.authservice.usercredential.UserCredentialRepository;
 import ru.karyeragame.authservice.utils.PropertiesReader;
 
 import java.util.List;
