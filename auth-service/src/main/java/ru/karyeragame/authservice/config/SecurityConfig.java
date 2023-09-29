@@ -53,9 +53,12 @@ public class SecurityConfig {
     public OAuth2TokenCustomizer<JwtEncodingContext> tokenCustomizer() {
         return (context) -> {
             if (OAuth2TokenType.ACCESS_TOKEN.equals(context.getTokenType())) {
-                context.getClaims().claims(claim -> claim.put(
-                        "authorities", context.getPrincipal().getAuthorities().stream()
-                                .map(GrantedAuthority::getAuthority).collect(Collectors.toSet()))
+                context.getClaims().claims(claim -> {
+                            claim.put(
+                                    "authorities", context.getPrincipal().getAuthorities().stream()
+                                            .map(GrantedAuthority::getAuthority).collect(Collectors.toSet())
+                            );
+                        }
                 );
             }
         };

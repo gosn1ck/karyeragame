@@ -5,6 +5,6 @@ Career Game Payment System
 # ER Diagram
 
 
-![er-karyeragame.png](er-karyeragame.png)
+![er-karyeragame.png](pictures/er-karyeragame.png)
 
-([click here to edit](https://dbdiagram.io/d/65073ff902bd1c4a5ebbbf05))
+([click here to edit](https://dbdiagram.io/d/6517319bffbf5169f0c3013f))

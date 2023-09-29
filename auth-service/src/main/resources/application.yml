@@ -5,6 +5,9 @@ devuser:
   email: dev@karyeragame.com
   password: devpass           # change to strong password and inject via env
 
+email:
+  from: careerA.game@gmail.com
+
 spring:
   jpa:
     hibernate:
@@ -22,6 +25,18 @@ spring:
     driver-class-name: org.postgresql.Driver
     username: testuser
     password:
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${EMAIL}
+    password: ${PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          debug: true
+          starttls.enable: true
 
 logging:
   level:

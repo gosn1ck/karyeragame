@@ -5,6 +5,8 @@ import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.karyeragame.paymentsystem.user.dto.NewUserDto;
@@ -23,7 +25,15 @@ public class UserController {
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public UserDto registerUser(@Valid @RequestBody NewUserDto dto) {
+    public UserDto registerUser(
+            @Valid @RequestBody NewUserDto dto,
+            @AuthenticationPrincipal Jwt jwt
+    ) {
+        var emailFromJwt = jwt.getClaim("sub");
+        if (!emailFromJwt.equals(dto.getEmail())) {
+            log.warn("!!! Email from jwt and registration form not match.");
+            throw new IllegalArgumentException("Security issue. Contact administrator.");
+        }
         log.debug("registerUser started with body: {}", dto);
         var result = service.register(dto);
         log.debug("registerUser finished with result: {}", result);
@@ -47,5 +57,10 @@ public class UserController {
         var result = service.getAllUsers(size, from - 1);
         log.debug("getAllUsers finished with result: {}", result);
         return result;
+    }
+
+    @GetMapping("/admin")
+    public String test() {
+        return "Ok";
     }
 }
