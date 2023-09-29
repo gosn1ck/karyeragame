@@ -19,22 +19,23 @@ public class KaryeragameApplication {
         SpringApplication.run(KaryeragameApplication.class, args);
     }
 
-	@Bean
-	public CommandLineRunner run(UserService service, UserRepository repository, PasswordEncoder encoder) {
-		return args ->
-		{
-			try {
-				service.register(
-						NewUserDto.builder()
-								.username("admin")
-								.email("admin@gmail.com")
-								.password("psw1")
-								.avatar(2L)
-								.build());
-				service.makeUserAdmin(repository.findByEmail("admin@gmail.com").get().getId());
-			} catch (DataIntegrityViolationException e) {
-				log.info("Первый администратор уже есть в базе данных. Повторное добавление отменено");
-			}
-		};
-	}
-}
+
+    @Bean
+    public CommandLineRunner run(UserService service, UserRepository repository, PasswordEncoder encoder) {
+        return args ->
+        {
+            try {
+                service.register(
+                        NewUserDto.builder()
+                                .username("admin")
+                                .email("admin@gmail.com")
+                                .password("psw1")
+                                .avatar(2L)
+                                .build());
+                service.makeUserAdmin(repository.findByEmail("admin@gmail.com").get().getId());
+            } catch (DataIntegrityViolationException e) {
+                log.info("Первый администратор уже есть в базе данных. Повторное добавление отменено");
+            }
+        };
+    }
+
