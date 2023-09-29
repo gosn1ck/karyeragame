@@ -1,0 +1,718 @@
+{
+	"info": {
+		"_postman_id": "974d141b-7e51-44e0-880d-cf6d33c0d98a",
+		"name": "Karyera with OAuth2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create auth accounts",
+			"item": [
+				{
+					"name": "Create first user acc",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"firstUserId\", pm.response.json().id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"first@user.com\",\n    \"password\": \"gyi1Hui9\",\n    \"matchPassword\": \"gyi1Hui9\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{authUrl}}/register",
+							"host": [
+								"{{authUrl}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Dev login",
+					"protocolProfileBehavior": {
+						"followRedirects": false
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "dev@karyeragame.com",
+									"type": "default"
+								},
+								{
+									"key": "password",
+									"value": "devpass",
+									"type": "default"
+								},
+								{
+									"key": "submit",
+									"value": "",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{authUrl}}/login",
+							"host": [
+								"{{authUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Dev auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let params = pm.response.headers.get('Location').split('=');",
+									"pm.collectionVariables.set(\"authCode\", params[1]);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": false
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{authUrl}}/oauth2/authorize?client_id={{clientId}}&redirect_uri={{redirectUrl}}&scope={{scope}}&response_type=code&response_mode=form_post",
+							"host": [
+								"{{authUrl}}"
+							],
+							"path": [
+								"oauth2",
+								"authorize"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{clientId}}"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "{{redirectUrl}}"
+								},
+								{
+									"key": "scope",
+									"value": "{{scope}}"
+								},
+								{
+									"key": "response_type",
+									"value": "code"
+								},
+								{
+									"key": "response_mode",
+									"value": "form_post"
+								},
+								{
+									"key": "state",
+									"value": "bfv8sq7l5uq",
+									"disabled": true
+								},
+								{
+									"key": "nonce",
+									"value": "tzg0qww40ne",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get tokens dev",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"refreshTokenDev\", pm.response.json().refresh_token);",
+									"pm.collectionVariables.set(\"accessTokenDev\", pm.response.json().access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": false,
+						"disableUrlEncoding": false
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{secret}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{clientId}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{authUrl}}/oauth2/token?redirect_uri={{redirectUrl}}&grant_type=authorization_code&code={{authCode}}",
+							"host": [
+								"{{authUrl}}"
+							],
+							"path": [
+								"oauth2",
+								"token"
+							],
+							"query": [
+								{
+									"key": "redirect_uri",
+									"value": "{{redirectUrl}}"
+								},
+								{
+									"key": "grant_type",
+									"value": "authorization_code"
+								},
+								{
+									"key": "code",
+									"value": "{{authCode}}"
+								},
+								{
+									"key": "state",
+									"value": "bfv8sq7l5uq",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "First login",
+					"protocolProfileBehavior": {
+						"followRedirects": false
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "first@user.com",
+									"type": "default"
+								},
+								{
+									"key": "password",
+									"value": "gyi1Hui9",
+									"type": "default"
+								},
+								{
+									"key": "submit",
+									"value": "",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{authUrl}}/login",
+							"host": [
+								"{{authUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "First auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let params = pm.response.headers.get('Location').split('=');",
+									"pm.collectionVariables.set(\"authCode\", params[1]);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": false
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{authUrl}}/oauth2/authorize?client_id={{clientId}}&redirect_uri={{redirectUrl}}&scope={{scope}}&response_type=code&response_mode=form_post",
+							"host": [
+								"{{authUrl}}"
+							],
+							"path": [
+								"oauth2",
+								"authorize"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{clientId}}"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "{{redirectUrl}}"
+								},
+								{
+									"key": "scope",
+									"value": "{{scope}}"
+								},
+								{
+									"key": "response_type",
+									"value": "code"
+								},
+								{
+									"key": "response_mode",
+									"value": "form_post"
+								},
+								{
+									"key": "state",
+									"value": "bfv8sq7l5uq",
+									"disabled": true
+								},
+								{
+									"key": "nonce",
+									"value": "tzg0qww40ne",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get tokens first",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"refreshTokenFirst\", pm.response.json().refresh_token);",
+									"pm.collectionVariables.set(\"accessTokenFirst\", pm.response.json().access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": false
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{secret}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{clientId}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{authUrl}}/oauth2/token?redirect_uri={{redirectUrl}}&grant_type=authorization_code&code={{authCode}}",
+							"host": [
+								"{{authUrl}}"
+							],
+							"path": [
+								"oauth2",
+								"token"
+							],
+							"query": [
+								{
+									"key": "redirect_uri",
+									"value": "{{redirectUrl}}"
+								},
+								{
+									"key": "grant_type",
+									"value": "authorization_code"
+								},
+								{
+									"key": "code",
+									"value": "{{authCode}}"
+								},
+								{
+									"key": "state",
+									"value": "bfv8sq7l5uq",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Main Service",
+			"item": [
+				{
+					"name": "Create first user in main service",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessTokenFirst}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"first@user.com\",\n    \"username\": \"First\",\n    \"avatar\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{resourceUrl}}/users/register",
+							"host": [
+								"{{resourceUrl}}"
+							],
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessTokenFirst}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{resourceUrl}}/users/1",
+							"host": [
+								"{{resourceUrl}}"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessTokenFirst}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{resourceUrl}}/users",
+							"host": [
+								"{{resourceUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin endpoint",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([403]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessTokenFirst}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{resourceUrl}}/users/admin",
+							"host": [
+								"{{resourceUrl}}"
+							],
+							"path": [
+								"users",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin endpoint by dev",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessTokenDev}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{resourceUrl}}/users/admin",
+							"host": [
+								"{{resourceUrl}}"
+							],
+							"path": [
+								"users",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "grant admin",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "{{authUrl}}/admin/grant/2",
+					"host": [
+						"{{authUrl}}"
+					],
+					"path": [
+						"admin",
+						"grant",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "authUrl",
+			"value": "http://127.0.0.1:9009",
+			"type": "default"
+		},
+		{
+			"key": "redirectUrl",
+			"value": "http://127.0.0.1:9009/authorized",
+			"type": "default"
+		},
+		{
+			"key": "resourceUrl",
+			"value": "http://127.0.0.1:9090",
+			"type": "default"
+		},
+		{
+			"key": "----",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "clientId",
+			"value": "postman",
+			"type": "default"
+		},
+		{
+			"key": "secret",
+			"value": "postman",
+			"type": "default"
+		},
+		{
+			"key": "scope",
+			"value": "postman",
+			"type": "default"
+		},
+		{
+			"key": "---------",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "authCode",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "accessTokenDev",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "refreshTokenDev",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "accessTokenFirst",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "refreshTokenFirst",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "----------",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "devUserId",
+			"value": "1",
+			"type": "default"
+		},
+		{
+			"key": "firstUserId",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "secondUserId",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
