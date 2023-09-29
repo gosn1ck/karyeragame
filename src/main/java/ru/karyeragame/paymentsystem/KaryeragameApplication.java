@@ -19,6 +19,7 @@ public class KaryeragameApplication {
         SpringApplication.run(KaryeragameApplication.class, args);
     }
 
+
     @Bean
     public CommandLineRunner run(UserService service, UserRepository repository, PasswordEncoder encoder) {
         return args ->
@@ -38,3 +39,4 @@ public class KaryeragameApplication {
         };
     }
 }
+

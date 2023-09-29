@@ -1,0 +1,68 @@
+{
+  "info": {
+    "_postman_id": "7b6682d2-446f-47d5-b29c-c53b7c471ead",
+    "name": "Email Sender",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "26388332",
+    "_collection_link": "https://lively-crescent-670631.postman.co/workspace/Team-Workspace~e7592ab3-aa12-4fcd-8535-d63feece9a44/collection/26388332-7b6682d2-446f-47d5-b29c-c53b7c471ead?action=share&source=collection_link&creator=26388332"
+  },
+  "item": [
+    {
+      "name": "Отправка тестового сообщения",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"to\": \"molodcov.ao@yandex.ru\",\r\n    \"subject\": \"Тестовое сообщение\",\r\n    \"message\": \"Это тестовое сообщение отправлено из приложения Карьера\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/send-email",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "send-email"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Отправка тестового письма с вложением",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"to\": \"molodcov.ao@yandex.ru\",\r\n    \"subject\": \"Тестовое сообщение с вложением\",\r\n    \"message\": \"Это тестовое сообщение с вложением отправлено из приложения Карьера\",\r\n    \"path\": \"5000.jpg\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/send-email/attach",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "send-email",
+            "attach"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
