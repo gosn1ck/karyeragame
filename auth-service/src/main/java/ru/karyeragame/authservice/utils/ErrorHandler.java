@@ -1,5 +1,6 @@
 package ru.karyeragame.authservice.utils;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -12,6 +13,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestControllerAdvice(basePackages = "ru.karyeragame.authservice")
+@Hidden
 public class ErrorHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.UNAUTHORIZED)

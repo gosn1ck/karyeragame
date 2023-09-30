@@ -2,6 +2,10 @@ server:
   port: 9090
 
 spring:
+  data:
+    rest:
+      detection-strategy: annotated
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -40,3 +44,14 @@ spring:
 
 email:
   from: careerA.game@gmail.com
+
+springdoc:
+  api-docs:
+    path=: /game-payment-service/v3/api-docs
+  swagger-ui:
+    oauth:
+      clientId: gateway
+      clientSecret: gateway-secret
+  oAuthFlow:
+    authorizationUrl: http://127.0.0.1:8080/oauth2/authorize
+    tokenUrl: http://127.0.0.1:8080/oauth2/token

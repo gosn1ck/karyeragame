@@ -1,4 +1,4 @@
-package ru.karyeragame.paymentsystem.exceptions;
+package ru.karyeragame.authservice.utils;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

@@ -1,0 +1,72 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: api
+          uri: http://127.0.0.1:9090/api/v1
+          predicates:
+            - Path=/api/v1/**
+          filters:
+            - TokenRelay=
+            - RemoveRequestHeader=Cookie
+
+        - id: auth
+          uri: http://127.0.0.1:9009
+          predicates:
+            - Path=/oauth2/**
+            - Path=/login
+            - Path=/register
+#http://127.0.0.1:8080/webjars/swagger-ui/4.15.5/index.html
+        - id: game-payment-swagger
+          uri: http://127.0.0.1:9090
+          predicates:
+            - Path=/game-payment-service/v3/api-docs/**
+        - id: auth-swagger
+          uri: http://127.0.0.1:9009
+          predicates:
+            - Path=/auth-service/**
+
+  security:
+    oauth2:
+      client:
+        registration:
+          gateway:
+            provider: spring
+            client-id: gateway
+            client-secret: gateway-secret
+            client-authentication-method: client_secret_basic
+            authorization-grant-type: authorization_code
+            redirect-uri:
+                - "{baseUrl}/login/oauth2/code/{registrationId}"
+            scope: openid
+        provider:
+          spring:
+            issuer-uri: http://127.0.0.1:9009
+
+  data:
+    rest:
+      detection-strategy: annotated
+
+springdoc:
+  enable-native-support: true
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    config-url: /v3/api-docs/swagger-config
+    urls:
+      - url: /v3/api-docs
+        name: API Gateway Service
+      - url: http://127.0.0.1:9090/game-payment-service/v3/api-docs
+        name: Game Payment System Service
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.security.oauth2: DEBUG

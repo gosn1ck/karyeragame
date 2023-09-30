@@ -9,6 +9,12 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -19,9 +25,15 @@ public class ResourceServerConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests((authorize) ->
                         authorize
-                                .requestMatchers("/users/admin/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_DEV")
+                                .requestMatchers("/game-payment-service/v3/api-docs/**",
+                                        "/game-payment-service/swagger-ui/**",
+                                        "/game-payment-service/swagger-resources/**",
+                                        "/game-payment-service/webjars/**",
+                                        "/game-payment-service/swagger-ui.html").permitAll()
+                                .requestMatchers("api/v1/users/admin/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_DEV")
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(
@@ -42,5 +54,17 @@ public class ResourceServerConfig {
         JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
         jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(grantedAuthoritiesConverter);
         return jwtAuthenticationConverter;
+    }
+
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        final CorsConfiguration corsConfig = new CorsConfiguration();
+        corsConfig.setAllowedOrigins(List.of("http://127.0.0.1:8080"));
+        corsConfig.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS", "HEAD", "PUT"));
+        corsConfig.addAllowedHeader("Access-Control-Allow-Origin");
+
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", corsConfig);
+        return source;
     }
 }

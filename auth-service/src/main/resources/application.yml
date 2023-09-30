@@ -9,6 +9,10 @@ email:
   from: careerA.game@gmail.com
 
 spring:
+  data:
+    rest:
+      detection-strategy: annotated
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -37,6 +41,12 @@ spring:
           auth: true
           debug: true
           starttls.enable: true
+
+springdoc:
+  swagger-ui:
+    path: /auth-service/swagger-ui.html
+  api-docs:
+    path=: /auth-service/v3/api-docs
 
 logging:
   level:

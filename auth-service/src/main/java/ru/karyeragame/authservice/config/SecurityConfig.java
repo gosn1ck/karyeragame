@@ -15,6 +15,7 @@ import org.springframework.security.oauth2.server.authorization.OAuth2TokenType;
 import org.springframework.security.oauth2.server.authorization.token.JwtEncodingContext;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfigurationSource;
 
 import java.util.stream.Collectors;
 
@@ -22,11 +23,14 @@ import java.util.stream.Collectors;
 @EnableWebSecurity
 public class SecurityConfig {
     private final UserDetailsService userDetailsService;
+    private final CorsConfigurationSource corsConfigurationSource;
 
     public SecurityConfig(
-            UserDetailsService userDetailsService
+            UserDetailsService userDetailsService,
+            CorsConfigurationSource corsConfigurationSource
     ) {
         this.userDetailsService = userDetailsService;
+        this.corsConfigurationSource = corsConfigurationSource;
     }
 
     @Autowired
@@ -38,8 +42,14 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
+                .cors(cors -> cors.configurationSource(corsConfigurationSource))
                 .authorizeHttpRequests((authorize) ->
                         authorize
+                                .requestMatchers("/auth-service/v3/api-docs/**",
+                                        "/auth-service/swagger-ui/**",
+                                        "/auth-service/swagger-resources/**",
+                                        "/auth-service/webjars/**",
+                                        "/auth-service/swagger-ui.html").permitAll()
                                 .requestMatchers("/admin/grant/**").hasAuthority("ROLE_DEV")
                                 .requestMatchers("/register/**").permitAll()
                                 .anyRequest().authenticated()
