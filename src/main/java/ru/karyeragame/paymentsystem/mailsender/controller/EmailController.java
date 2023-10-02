@@ -1,5 +1,6 @@
 package ru.karyeragame.paymentsystem.mailsender.controller;
 
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -7,8 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import ru.karyeragame.paymentsystem.mailsender.resource.EmailMessage;
 import ru.karyeragame.paymentsystem.mailsender.service.EmailService;
-
-import javax.mail.MessagingException;
 
 /*
  * Тестовый контроллер
