@@ -9,6 +9,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.karyeragame.paymentsystem.enums.Roles;
 import ru.karyeragame.paymentsystem.exceptions.NotFoundException;
+import ru.karyeragame.paymentsystem.security.resetPassword.model.PasswordResetToken;
+import ru.karyeragame.paymentsystem.security.resetPassword.repository.PasswordTokenRepository;
 import ru.karyeragame.paymentsystem.user.dto.NewUserDto;
 import ru.karyeragame.paymentsystem.user.dto.UserDto;
 import ru.karyeragame.paymentsystem.user.mapper.UserMapper;
@@ -19,6 +21,7 @@ import ru.karyeragame.paymentsystem.user.repository.UserRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,6 +31,20 @@ public class UserServiceImpl implements UserService {
     private final UserMapper mapper;
     private final PasswordEncoder encoder;
     private final AvatarRepository avatarRepository;
+    private final PasswordTokenRepository passwordTokenRepository;
+
+    @Override
+    public void createPasswordResetTokenForUser(User user, String token) {
+        PasswordResetToken myToken = new PasswordResetToken(user, token);
+        passwordTokenRepository.save(myToken);
+    }
+
+    @Override
+    public User findUserByEmail(String userEmail) {
+        return repository.findByEmail(userEmail).orElseThrow(()
+            -> new NotFoundException(String.format("User with email {} is not found", userEmail)));
+    }
+
 
     @Override
     @Transactional
