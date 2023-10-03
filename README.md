@@ -7,4 +7,4 @@ Career Game Payment System
 
 ![er-karyeragame.png](er-karyeragame.png)
 
-([click here to edit](https://dbdiagram.io/d/Copy-of-karyeragame-651b0126ffbf5169f0e25b31))
+([click here to edit](https://dbdiagram.io/d/karyeragame-65073ff902bd1c4a5ebbbf05))
