@@ -7,17 +7,16 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import ru.karyeragame.paymentsystem.avatar.model.Avatar;
+import ru.karyeragame.paymentsystem.avatar.repository.AvatarRepository;
 import ru.karyeragame.paymentsystem.enums.Roles;
 import ru.karyeragame.paymentsystem.exceptions.NotFoundException;
 import ru.karyeragame.paymentsystem.user.dto.NewUserDto;
 import ru.karyeragame.paymentsystem.user.dto.UserDto;
 import ru.karyeragame.paymentsystem.user.mapper.UserMapper;
-import ru.karyeragame.paymentsystem.user.model.Avatar;
 import ru.karyeragame.paymentsystem.user.model.User;
-import ru.karyeragame.paymentsystem.user.repository.AvatarRepository;
 import ru.karyeragame.paymentsystem.user.repository.UserRepository;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,9 +31,8 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserDto register(NewUserDto dto) {
-        User user = mapper.toEntity(dto, getAvatar(dto.getAvatar()));
+        User user = mapper.toEntity(dto);
         user.setRole(Roles.USER);
-        user.setCreatedOn(LocalDateTime.now());
         user.setPassword(encoder.encode(user.getPassword()));
         return mapper.toDto(repository.save(user));
     }
@@ -67,6 +65,7 @@ public class UserServiceImpl implements UserService {
     }
 
     private User getUserEntity(Long id) {
+        System.out.println(id);
         return repository.findById(id)
                 .orElseThrow(() -> new NotFoundException("User not found"));
     }

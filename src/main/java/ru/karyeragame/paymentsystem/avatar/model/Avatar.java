@@ -1,4 +1,4 @@
-package ru.karyeragame.paymentsystem.user.model;
+package ru.karyeragame.paymentsystem.avatar.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;

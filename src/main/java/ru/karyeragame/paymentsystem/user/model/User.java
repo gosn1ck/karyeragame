@@ -3,6 +3,8 @@ package ru.karyeragame.paymentsystem.user.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import ru.karyeragame.paymentsystem.avatar.model.Avatar;
 import ru.karyeragame.paymentsystem.enums.Roles;
 
 import java.time.LocalDateTime;
@@ -29,6 +31,7 @@ public class User {
     private Roles role;
 
     @Column(nullable = false, name = "created_on")
+    @CreationTimestamp
     private LocalDateTime createdOn;
 
     @Override

@@ -16,8 +16,19 @@ public class ErrorHandler {
     @ExceptionHandler({NotFoundException.class, EntityNotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponse handleNotFoundException(final Exception e) {
-        log.error("Стек трейс ошибки: {}", e.getStackTrace());
+        log.error("Стек трейс ошибки:");
+        e.printStackTrace();
         return new ErrorResponse(HttpStatus.NOT_FOUND,
+                e.getMessage(),
+                LocalDateTime.now());
+    }
+
+    @ExceptionHandler({InvalidFormatException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleBadRequestException(final Exception e) {
+        log.error("Стек трейс ошибки:");
+        e.printStackTrace();
+        return new ErrorResponse(HttpStatus.BAD_REQUEST,
                 e.getMessage(),
                 LocalDateTime.now());
     }

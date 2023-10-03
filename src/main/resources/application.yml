@@ -1,4 +1,7 @@
 spring:
+  servlet:
+    multipart:
+      max-file-size: 8MB
   mail:
     host: smtp.gmail.com
     port: 587
@@ -10,6 +13,30 @@ spring:
           auth: true
           debug: true
           starttls.enable: true
+  sql:
+    init:
+      mode: always
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+  datasource:
+    url: jdbc:h2:file:./db/karyeragame-db;MODE=PostgreSQL
+    username: admin
+    driverClassName: org.h2.Driver
+    password: admin
+  h2:
+    console:
+      enabled: true
+      path: /h2
 
 email:
   from: careerA.game@gmail.com
+
+server:
+  port: 8080

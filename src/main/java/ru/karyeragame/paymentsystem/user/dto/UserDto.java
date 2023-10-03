@@ -2,7 +2,7 @@ package ru.karyeragame.paymentsystem.user.dto;
 
 import lombok.Builder;
 import lombok.Data;
-import ru.karyeragame.paymentsystem.user.model.Avatar;
+import ru.karyeragame.paymentsystem.avatar.model.Avatar;
 
 import java.time.LocalDateTime;
 
