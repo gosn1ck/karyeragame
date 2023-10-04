@@ -65,7 +65,6 @@ public class UserServiceImpl implements UserService {
     }
 
     private User getUserEntity(Long id) {
-        System.out.println(id);
         return repository.findById(id)
                 .orElseThrow(() -> new NotFoundException("User not found"));
     }

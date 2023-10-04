@@ -2,7 +2,6 @@ package ru.karyeragame.paymentsystem.avatar.service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,6 +29,7 @@ public class AvatarServiceImpl implements AvatarService {
     private final AvatarMapper mapper;
     private final AvatarRepository repository;
     private final UserRepository userRepository;
+
     @Override
     @Transactional
     public AvatarDto saveAvatar(MultipartFile file, Long id) throws IOException {
@@ -67,8 +67,8 @@ public class AvatarServiceImpl implements AvatarService {
     }
 
     private void updateUserAvatar(Avatar avatar, Long id) {
-        System.out.println(userRepository.findAll());
         User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("Пользователь не найден"));
         user.setAvatar(avatar);
+        userRepository.save(user);
     }
 }

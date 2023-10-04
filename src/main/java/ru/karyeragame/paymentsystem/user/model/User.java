@@ -25,7 +25,7 @@ public class User {
     @Column(nullable = false)
     private String password;
     @ManyToOne
-    @JoinColumn(name = "avatar_id", nullable = false)
+    @JoinColumn(name = "avatar_id")
     private Avatar avatar;
     @Enumerated(EnumType.STRING)
     private Roles role;
