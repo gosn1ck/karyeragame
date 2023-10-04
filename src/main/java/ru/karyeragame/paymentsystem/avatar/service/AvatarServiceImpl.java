@@ -35,6 +35,12 @@ public class AvatarServiceImpl implements AvatarService {
     public AvatarDto saveAvatar(MultipartFile file, Long id) throws IOException {
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
 
+        Avatar entity = new Avatar();
+        entity.setUrl(fileName);
+
+        Avatar result = repository.save(entity);
+        updateUserAvatar(result, id);
+
         if (ImageIO.read(file.getInputStream()) == null) {
             throw new InvalidFormatException("Аватар должен быть изображением");
         }
@@ -52,22 +58,17 @@ public class AvatarServiceImpl implements AvatarService {
         } catch (IOException e) {
             throw new IOException("Не получилось сохранить файл: " + fileName);
         }
-        Avatar entity = new Avatar();
-        entity.setUrl(fileName);
-
-        Avatar result = repository.save(entity);
-        updateUserAvatar(result, id);
 
         return mapper.toDto(result);
     }
 
     @Override
     public AvatarDto getAvatar(Long id) {
-        return mapper.toDto(repository.findById(id).orElseThrow(() -> new NotFoundException("Аватар не найден")));
+        return mapper.toDto(repository.findById(id).orElseThrow(() -> new NotFoundException("Аватар с id %s не найден", id)));
     }
 
     private void updateUserAvatar(Avatar avatar, Long id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("Пользователь не найден"));
+        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("Пользователь с id %s не найден", id));
         user.setAvatar(avatar);
         userRepository.save(user);
     }
