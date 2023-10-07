@@ -13,4 +13,6 @@ public interface UserService {
     List<UserDto> getAllUsers(int size, int from);
 
     UserDto makeUserAdmin(Long id);
+
+    void deleteUserByAdmin(Long id);
 }

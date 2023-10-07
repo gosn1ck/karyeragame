@@ -23,7 +23,7 @@ public class ErrorHandler {
                 LocalDateTime.now());
     }
 
-    @ExceptionHandler({InvalidFormatException.class})
+    @ExceptionHandler({InvalidFormatException.class, NotEnoughRightsException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleBadRequestException(final Exception e) {
         log.error("Стек трейс ошибки: {}", Arrays.toString(e.getStackTrace()));
