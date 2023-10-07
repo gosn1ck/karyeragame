@@ -1,10 +1,7 @@
 package ru.karyeragame.paymentsystem.participant.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
 import ru.karyeragame.paymentsystem.game.model.Game;
 import ru.karyeragame.paymentsystem.user.model.User;
 

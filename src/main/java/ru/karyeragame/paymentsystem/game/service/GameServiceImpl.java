@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ru.karyeragame.paymentsystem.enums.GameStatus;
 import ru.karyeragame.paymentsystem.enums.ParticipantsSort;
@@ -20,11 +19,9 @@ import ru.karyeragame.paymentsystem.participant.dto.ParticipantDto;
 import ru.karyeragame.paymentsystem.participant.mapper.ParticipantMapper;
 import ru.karyeragame.paymentsystem.participant.model.Participant;
 import ru.karyeragame.paymentsystem.participant.repository.ParticipantRepository;
-import ru.karyeragame.paymentsystem.user.dto.UserDto;
 import ru.karyeragame.paymentsystem.user.model.User;
 import ru.karyeragame.paymentsystem.user.repository.UserRepository;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,7 +38,7 @@ public class GameServiceImpl implements GameService {
     @Override
     public GameDto addGame(NewGameDto dto, Long id) {
         User initiator = userRepository.findById(id)
-                .orElseThrow(()->new NotFoundException("Initiator with id %s not found", id));
+                .orElseThrow(() -> new NotFoundException("Initiator with id %s not found", id));
         System.out.println(mapper.toEntity(dto, initiator));
         Game game = mapper.toEntity(dto, initiator);
         game.setStatus(GameStatus.WAITING);
@@ -52,7 +49,7 @@ public class GameServiceImpl implements GameService {
     @Override
     public GameDto getGame(Long id) {
         return mapper.toDto(repository.findById(id)
-                .orElseThrow(()-> new NotFoundException("Game with id %s not found", id)));
+                .orElseThrow(() -> new NotFoundException("Game with id %s not found", id)));
     }
 
     @Override
@@ -75,17 +72,17 @@ public class GameServiceImpl implements GameService {
     @Override
     public GameDto patchGame(UpdateGameDto upd, Long id) {
         Game original = repository.findById(id)
-                .orElseThrow(()-> new NotFoundException("Game with id %s not found", id));
-        if (upd.getName() != null){
+                .orElseThrow(() -> new NotFoundException("Game with id %s not found", id));
+        if (upd.getName() != null) {
             original.setName(upd.getName());
         }
-        if (upd.getStatus() != null){
+        if (upd.getStatus() != null) {
             original.setStatus(upd.getStatus());
         }
-        if (upd.getComment() != null){
+        if (upd.getComment() != null) {
             original.setComment(upd.getComment());
         }
-        if (upd.getStartBalance() != null){
+        if (upd.getStartBalance() != null) {
             original.setStartBalance(upd.getStartBalance());
         }
         return mapper.toDto(repository.save(original));
@@ -96,9 +93,9 @@ public class GameServiceImpl implements GameService {
     public ParticipantDto addParticipant(Long gameId, Long userId) {
         Participant participant = new Participant();
         participant.setGame(repository.findById(gameId)
-                .orElseThrow(()-> new NotFoundException("Game with id %s not found", gameId)));
+                .orElseThrow(() -> new NotFoundException("Game with id %s not found", gameId)));
         participant.setUser(userRepository.findById(userId)
-                .orElseThrow(()-> new NotFoundException("User with id %s not found", userId)));
+                .orElseThrow(() -> new NotFoundException("User with id %s not found", userId)));
         return participantMapper.toDto(participantRepository.save(participant));
     }
 
@@ -110,7 +107,7 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public List<ParticipantDto> getAllParticipantsByGame(Long gameId, int size, int from, ParticipantsSort sort) {
-        Pageable pageable = PageRequest.of(from-1, size);
+        Pageable pageable = PageRequest.of(from - 1, size);
         PagedListHolder<ParticipantDto> page = new PagedListHolder<>(participantRepository.findAll(pageable)
                 .stream()
                 .filter(participant -> participant.getGame().getId().equals(gameId))
@@ -122,7 +119,7 @@ public class GameServiceImpl implements GameService {
     @Transactional
     @Override
     public GameDto changeGameStatus(GameStatus status, Long id) {
-        Game game = repository.findById(id).orElseThrow(()-> new NotFoundException("Game with id %s not found", id));
+        Game game = repository.findById(id).orElseThrow(() -> new NotFoundException("Game with id %s not found", id));
         game.setStatus(status);
         return mapper.toDto(repository.save(game));
     }

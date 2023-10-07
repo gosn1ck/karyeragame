@@ -25,7 +25,7 @@ public class Game {
     private String name;
     @Column
     private String comment;
-    @Column(name = "created_on",nullable = false)
+    @Column(name = "created_on", nullable = false)
     @CreationTimestamp
     private LocalDateTime createdOn;
     @ManyToOne
@@ -33,6 +33,6 @@ public class Game {
     private User createdBy;
     @Enumerated(EnumType.STRING)
     private GameStatus status;
-    @Column(name = "start_balance",nullable = false)
+    @Column(name = "start_balance", nullable = false)
     private Integer startBalance;
 }

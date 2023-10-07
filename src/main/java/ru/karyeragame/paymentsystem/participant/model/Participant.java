@@ -5,12 +5,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.annotations.CreationTimestamp;
-import ru.karyeragame.paymentsystem.enums.GameStatus;
 import ru.karyeragame.paymentsystem.game.model.Game;
 import ru.karyeragame.paymentsystem.user.model.User;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "participants", schema = "public")
