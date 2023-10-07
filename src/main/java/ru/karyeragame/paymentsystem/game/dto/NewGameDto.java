@@ -23,9 +23,6 @@ public class NewGameDto {
     @NotNull
     private Long createdBy;
     @NotNull
-    @Size(max = 20)
-    private GameStatus status;
-    @NotNull
     @PositiveOrZero
     private Integer startBalance;
 }

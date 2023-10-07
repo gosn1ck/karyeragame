@@ -15,5 +15,6 @@ public interface GameMapper {
 
     Game toEntity(GameDto dto);
     @Mapping(target = "createdBy", source = "user")
+    @Mapping(ignore = true, target = "id")
     Game toEntity(NewGameDto dto, User user);
 }

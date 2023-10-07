@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.karyeragame.paymentsystem.avatar.dto.AvatarDto;
 import ru.karyeragame.paymentsystem.avatar.service.AvatarService;
+import ru.karyeragame.paymentsystem.enums.GameStatus;
+import ru.karyeragame.paymentsystem.enums.ParticipantsSort;
 import ru.karyeragame.paymentsystem.game.dto.GameDto;
 import ru.karyeragame.paymentsystem.game.dto.NewGameDto;
 import ru.karyeragame.paymentsystem.game.dto.UpdateGameDto;
@@ -64,6 +66,13 @@ public class GameController {
         log.info("patchGame finished with result: {}", result);
         return result;
     }
+    @PatchMapping("/{id}/status")
+    public GameDto changeGameStatus(@RequestParam(name = "status")GameStatus status, @PathVariable("id") Long id) {
+        log.info("changeGameStatus started with status: {} and id: {}", status, id);
+        GameDto result = service.changeGameStatus(status, id);
+        log.info("changeGameStatus finished with result: {}", result);
+        return result;
+    }
     @PostMapping("/{gameId}/participants/{userId}")
     public ParticipantDto addParticipant(@PathVariable(name = "gameId") Long gameId,
                                          @PathVariable(name = "userId") Long userId) {
@@ -72,12 +81,13 @@ public class GameController {
         log.info("addParticipant finished with result: {}", result);
         return result;
     }
-    @GetMapping("/{gameId}/participants")
+    @GetMapping("/{gameId}/participants")//TODO: реализовать сортировку по имени, балансу (может еще по чему-либо) после создания аккаунтов
     public List<ParticipantDto> getAllParticipantByGame(@PathVariable(name = "gameId") Long gameId,
-                                                        @RequestParam(value = "size", defaultValue = "10", required = false) @Min(10) int size,
+                                                        @RequestParam(value = "sort", defaultValue = "USERNAME" ,required = false) ParticipantsSort sort,
+                                                        @RequestParam(value = "size", defaultValue = "10", required = false)@Min(10) int size,
                                                         @RequestParam(value = "from", defaultValue = "1", required = false) @Min(1) int from) {
         log.info("getAllParticipantByGame started with gameId: {}", gameId);
-        List<ParticipantDto> result = service.getAllParticipantsByGame(gameId, size, from);
+        List<ParticipantDto> result = service.getAllParticipantsByGame(gameId, size, from, sort);
         log.info("getAllParticipantByGame finished with result: {}", result);
         return result;
     }

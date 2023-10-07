@@ -23,11 +23,9 @@ public class Participant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    @Id
+    @JoinColumn(name = "user_id") //TODO: заменить на аккаунта
     private User user;
     @ManyToOne
     @JoinColumn(name = "game_id")
-    @Id
     private Game game;
 }

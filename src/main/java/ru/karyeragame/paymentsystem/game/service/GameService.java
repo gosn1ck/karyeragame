@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import ru.karyeragame.paymentsystem.avatar.dto.AvatarDto;
+import ru.karyeragame.paymentsystem.enums.GameStatus;
+import ru.karyeragame.paymentsystem.enums.ParticipantsSort;
 import ru.karyeragame.paymentsystem.game.dto.GameDto;
 import ru.karyeragame.paymentsystem.game.dto.NewGameDto;
 import ru.karyeragame.paymentsystem.game.dto.UpdateGameDto;
@@ -23,6 +25,7 @@ public interface GameService {
     GameDto patchGame(UpdateGameDto upd, Long id);
     ParticipantDto addParticipant(Long gameId, Long userId);
     void deleteParticipant(Long gameId, Long userId);
-    List<ParticipantDto> getAllParticipantsByGame(Long gameId, int size, int from);
+    List<ParticipantDto> getAllParticipantsByGame(Long gameId, int size, int from, ParticipantsSort sort);
+    GameDto changeGameStatus(GameStatus status, Long id);
 
 }
