@@ -1,5 +1,6 @@
 package ru.karyeragame.paymentsystem.user.service;
 
+import ru.karyeragame.paymentsystem.security.resetPassword.model.PasswordResetToken;
 import ru.karyeragame.paymentsystem.user.dto.NewUserDto;
 import ru.karyeragame.paymentsystem.user.dto.UserDto;
 import ru.karyeragame.paymentsystem.user.model.User;
@@ -16,7 +17,7 @@ public interface UserService {
 
     UserDto makeUserAdmin(Long id);
 
-    void createPasswordResetTokenForUser(User user, String token);
+    PasswordResetToken createPasswordResetTokenForUser(User user, String token);
 
     User findUserByEmail(String userEmail);
 }

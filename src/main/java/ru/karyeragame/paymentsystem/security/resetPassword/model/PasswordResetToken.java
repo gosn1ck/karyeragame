@@ -1,12 +1,18 @@
 package ru.karyeragame.paymentsystem.security.resetPassword.model;
 
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
 import ru.karyeragame.paymentsystem.user.model.User;
 
 import java.util.Date;
 
 @Entity
-public class PasswordResetToken {
+@Getter
+@EqualsAndHashCode
+@ToString
+public class PasswordResetToken {                       // токен сброса пароля
     private static final int EXPIRATION = 60 * 24;      // срок действия ссылки для восстановления пароля
 
     @Id
