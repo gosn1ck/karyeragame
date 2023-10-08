@@ -1,0 +1,96 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>КарьерА</title>
+    <link rel="icon" href="img/logo.png">
+    <link rel="stylesheet" href="style/style.css">
+
+</head>
+<body>
+    
+    <div class="main">
+
+        <div class="welcome">
+
+            <div class="welcome__text">
+                <p class="text-accented">Добро пожаловать</p>
+                <p class="text">в платёжную систему деловой игры КАРЬЕРА!</p>
+            </div>
+
+            <div class="welcome__img">
+                <img src="/img/Puples.png" alt="">
+            </div>
+
+
+        </div>
+
+
+        <div class="main__form">
+            
+            <div class="selection-buttons">
+                <button class="buttons__form-type" onclick="login()">Вход</button>
+                <button class="buttons__form-type buttons__form-type--active" onclick="register()">Регистрация</button>
+            </div>
+
+            <form action="" id="login" class="form form__login">
+
+                <div class="form__box">
+                    <label class="form__box-label">Ник:</label>
+                    <input class="form__box-input" type="text" />
+                    <label class="form__box-label">Пароль:</label>
+                    <input class="form__box-input" type="password"/>
+                </div>
+
+
+                <button class="form__button">Войти</button>
+
+
+
+            </form>
+            
+            
+            <form action="" id="register" class="form form__register">
+
+                <div class="form__box">
+                    <label class="form__box-label">Ник:</label>
+                    <input class="form__box-input" type="text" name="login"/>
+                    
+                    <label class="form__box-label" >E-mail:</label>
+                    <input class="form__box-input" type="text" />
+                    
+                    <label class="form__box-label">Пароль:</label>
+                    <input class="form__box-input" type="password" name="password"/>
+                   
+                    <label class="form__box-label">Подтверждение пароля:</label>
+                    <input class="form__box-input" type="password" name="passwordConf"/>
+                </div>
+
+
+                <button class="form__button">Войти</button>
+
+
+            </form>
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <script src="js/script.js"></script>
+
+
+
+</body>
+</html>

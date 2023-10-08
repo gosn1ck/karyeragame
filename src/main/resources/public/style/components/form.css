@@ -1,0 +1,128 @@
+.main__form{
+    display: flex;
+    flex-direction: column;
+    background-color: #F5FAFF;
+    padding: 1rem;
+    margin: 6rem 0rem;
+    width: 40%;
+    /* height: 100%; */
+    position: relative;
+    /* overflow: hidden; */
+}
+
+.buttons__form-type{
+    background: none;
+    border: none;
+    margin: 0rem 1rem;
+
+    font-family: Open Sans;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 41px;
+    letter-spacing: 0em;
+    text-align: center;
+
+    color: #8E9FA7;
+
+    cursor: pointer;
+}
+
+.buttons__form-type--active{
+    background: none;
+
+    border-bottom: 4px solid #FF5700;
+
+    font-family: Open Sans;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 41px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #1C2022;
+}
+
+
+.form{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    transition: 0.5s;
+
+}
+
+.form__box{
+    padding-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+
+.form__box-label{
+    font-family: Open Sans;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 33px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #20272B;
+    padding: 0rem 1rem;
+
+    
+}
+
+
+.form__box-input{
+    border: 1px solid #AAAEB0;
+    border-radius: 32px;
+    height: 3rem;
+
+    padding: 0px 32px;
+    font-family: Open Sans;
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 25px;
+    letter-spacing: 0em;
+    text-align: left;
+    text-transform: uppercase;
+
+    margin-bottom: 1rem;
+
+}
+.form__button{
+    width: 50%;
+    /* height: Fixed (52px); */
+    bottom: 0;
+    /* left: 143px; */
+    padding: 12.03px, 15px, 12.03px, 15px;
+    border-radius: 70px;
+    border: none;
+    /* gap: 15px; */
+    height: 3rem;
+
+    background: #48C2F2;
+
+    font-family: Open Sans;
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 28px;
+    letter-spacing: 0px;
+    /* text-align: left; */
+    color: #FFFFFF;
+
+}
+
+
+
+
+
+#login {
+    /* left: 50px; */
+  }
+  
+  #register {
+    left: 100%;
+  }
