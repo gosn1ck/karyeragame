@@ -30,26 +30,9 @@
         <div class="main__form">
             
             <div class="selection-buttons">
-                <button class="buttons__form-type" onclick="login()">Вход</button>
-                <button class="buttons__form-type buttons__form-type--active" onclick="register()">Регистрация</button>
+                <button id="button-login" class="buttons__form-type" onclick="login()">Вход</button>
+                <button id="button-register" class="buttons__form-type buttons__form-type--active" onclick="register()">Регистрация</button>
             </div>
-
-            <form action="" id="login" class="form form__login">
-
-                <div class="form__box">
-                    <label class="form__box-label">Ник:</label>
-                    <input class="form__box-input" type="text" />
-                    <label class="form__box-label">Пароль:</label>
-                    <input class="form__box-input" type="password"/>
-                </div>
-
-
-                <button class="form__button">Войти</button>
-
-
-
-            </form>
-            
             
             <form action="" id="register" class="form form__register">
 
@@ -72,6 +55,23 @@
 
 
             </form>
+            <form action="" id="login" class="form form__login">
+
+                <div class="form__box">
+                    <label class="form__box-label">Ник:</label>
+                    <input class="form__box-input" type="text" />
+                    <label class="form__box-label">Пароль:</label>
+                    <input class="form__box-input" type="password"/>
+                </div>
+
+
+                <button class="form__button">Войти</button>
+
+
+
+            </form>
+            
+            
 
 
         </div>

@@ -5,9 +5,10 @@
     padding: 1rem;
     margin: 6rem 0rem;
     width: 40%;
+    /* height: calc(100%-12rem); */
     /* height: 100%; */
     position: relative;
-    /* overflow: hidden; */
+    overflow: hidden;
 }
 
 .buttons__form-type{
@@ -48,9 +49,9 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    height: 100%;
+    /* height: 100%; */
     transition: 0.5s;
-
+    width: 90%;
 }
 
 .form__box{
@@ -58,6 +59,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    /* bottom: 0; */
 }
 
 
@@ -79,6 +81,7 @@
     border: 1px solid #AAAEB0;
     border-radius: 32px;
     height: 3rem;
+    background-color: #F5FAFF;
 
     padding: 0px 32px;
     font-family: Open Sans;
@@ -120,9 +123,11 @@
 
 
 #login {
-    /* left: 50px; */
-  }
-  
-  #register {
-    left: 100%;
+    top: 3rem;
+    left: -100%;
+}
+
+#register {
+    top: 3rem;
+    left: 5%;
   }
