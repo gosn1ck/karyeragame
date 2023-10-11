@@ -15,13 +15,12 @@ import ru.karyeragame.paymentsystem.game.dto.UpdateGameDto;
 import ru.karyeragame.paymentsystem.game.mapper.GameMapper;
 import ru.karyeragame.paymentsystem.game.model.Game;
 import ru.karyeragame.paymentsystem.game.repository.GameRepository;
-import ru.karyeragame.paymentsystem.participant.dto.ParticipantDto;
-import ru.karyeragame.paymentsystem.participant.mapper.ParticipantMapper;
-import ru.karyeragame.paymentsystem.participant.model.Participant;
-import ru.karyeragame.paymentsystem.participant.repository.ParticipantRepository;
+import ru.karyeragame.paymentsystem.user.dto.UserDto;
+import ru.karyeragame.paymentsystem.user.mapper.UserMapper;
 import ru.karyeragame.paymentsystem.user.model.User;
 import ru.karyeragame.paymentsystem.user.repository.UserRepository;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,25 +30,21 @@ public class GameServiceImpl implements GameService {
     private final GameRepository repository;
     private final GameMapper mapper;
     private final UserRepository userRepository;
-    private final ParticipantRepository participantRepository;
-    private final ParticipantMapper participantMapper;
+    private final UserMapper userMapper;
 
     @Transactional
     @Override
     public GameDto addGame(NewGameDto dto, Long id) {
-        User initiator = userRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Initiator with id %s not found", id));
-        System.out.println(mapper.toEntity(dto, initiator));
+        User initiator = getUserEntity(id);
         Game game = mapper.toEntity(dto, initiator);
         game.setStatus(GameStatus.WAITING);
-        System.out.println(game);
+        game.setParticipants(new HashSet<>());
         return mapper.toDto(repository.save(game));
     }
 
     @Override
     public GameDto getGame(Long id) {
-        return mapper.toDto(repository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Game with id %s not found", id)));
+        return mapper.toDto(getGameEntity(id));
     }
 
     @Override
@@ -70,57 +65,50 @@ public class GameServiceImpl implements GameService {
 
     @Transactional
     @Override
-    public GameDto patchGame(UpdateGameDto upd, Long id) {
-        Game original = repository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Game with id %s not found", id));
-        if (upd.getName() != null) {
-            original.setName(upd.getName());
-        }
-        if (upd.getStatus() != null) {
-            original.setStatus(upd.getStatus());
-        }
-        if (upd.getComment() != null) {
-            original.setComment(upd.getComment());
-        }
-        if (upd.getStartBalance() != null) {
-            original.setStartBalance(upd.getStartBalance());
-        }
-        return mapper.toDto(repository.save(original));
+    public GameDto patchGame(UpdateGameDto dto, Long id) {
+        return mapper.toDto(repository.save(mapper.updateGame(getGameEntity(id), dto)));
     }
 
     @Transactional
     @Override
-    public ParticipantDto addParticipant(Long gameId, Long userId) {
-        Participant participant = new Participant();
-        participant.setGame(repository.findById(gameId)
-                .orElseThrow(() -> new NotFoundException("Game with id %s not found", gameId)));
-        participant.setUser(userRepository.findById(userId)
-                .orElseThrow(() -> new NotFoundException("User with id %s not found", userId)));
-        return participantMapper.toDto(participantRepository.save(participant));
+    public GameDto addParticipant(Long gameId, Long userId) {
+        Game game = getGameEntity(gameId);
+        game.getParticipants().add(getUserEntity(userId));
+        repository.save(game);
+
+        return mapper.toDto(game);
     }
 
     @Override
     @Transactional
     public void deleteParticipant(Long gameId, Long userId) {
-        participantRepository.deleteByGameIdAndUserId(gameId, userId);
+        getGameEntity(gameId).getParticipants().remove(getUserEntity(userId));
     }
 
     @Override
-    public List<ParticipantDto> getAllParticipantsByGame(Long gameId, int size, int from, ParticipantsSort sort) {
-        Pageable pageable = PageRequest.of(from - 1, size);
-        PagedListHolder<ParticipantDto> page = new PagedListHolder<>(participantRepository.findAll(pageable)
+    public List<UserDto> getAllParticipantsByGame(Long gameId, int size, int from, ParticipantsSort sort) {
+        PagedListHolder<UserDto> page = new PagedListHolder<>(getGameEntity(gameId).getParticipants()
                 .stream()
-                .filter(participant -> participant.getGame().getId().equals(gameId))
-                .map(participantMapper::toDto)
+                .map(userMapper::toDto)
                 .collect(Collectors.toList()));
+        page.setPage(from - 1);
+        page.setPageSize(size);
         return page.getPageList();
     }
 
     @Transactional
     @Override
     public GameDto changeGameStatus(GameStatus status, Long id) {
-        Game game = repository.findById(id).orElseThrow(() -> new NotFoundException("Game with id %s not found", id));
+        Game game = getGameEntity(id);
         game.setStatus(status);
         return mapper.toDto(repository.save(game));
+    }
+
+    private Game getGameEntity(Long id) {
+        return repository.findById(id).orElseThrow(() -> new NotFoundException("Game with id %s not found", id));
+    }
+
+    private User getUserEntity(Long id) {
+        return userRepository.findById(id).orElseThrow(() -> new NotFoundException("User with id %s not found", id));
     }
 }

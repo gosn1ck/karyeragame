@@ -10,5 +10,5 @@ public class UpdateGameDto {
     private String name;
     private String comment;
     private GameStatus status;
-    private Integer startBalance;
+    private Float startBalance;
 }

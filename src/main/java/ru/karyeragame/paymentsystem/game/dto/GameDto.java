@@ -3,9 +3,9 @@ package ru.karyeragame.paymentsystem.game.dto;
 import lombok.Builder;
 import lombok.Data;
 import ru.karyeragame.paymentsystem.enums.GameStatus;
-import ru.karyeragame.paymentsystem.user.model.User;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Builder
 @Data
@@ -14,7 +14,8 @@ public class GameDto {
     private String name;
     private String comment;
     private LocalDateTime createdOn;
-    private User createdBy;
+    private Long createdById;
     private GameStatus status;
-    private Integer startBalance;
+    private Float startBalance;
+    private Set<Long> participantsIds;
 }

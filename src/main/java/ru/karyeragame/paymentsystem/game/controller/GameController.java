@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.karyeragame.paymentsystem.enums.GameStatus;
 import ru.karyeragame.paymentsystem.enums.ParticipantsSort;
@@ -12,7 +13,7 @@ import ru.karyeragame.paymentsystem.game.dto.GameDto;
 import ru.karyeragame.paymentsystem.game.dto.NewGameDto;
 import ru.karyeragame.paymentsystem.game.dto.UpdateGameDto;
 import ru.karyeragame.paymentsystem.game.service.GameService;
-import ru.karyeragame.paymentsystem.participant.dto.ParticipantDto;
+import ru.karyeragame.paymentsystem.user.dto.UserDto;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ import java.util.List;
 @RequestMapping("/games")
 @RequiredArgsConstructor
 @Slf4j
+@Validated
 public class GameController {
     private final GameService service;
 
@@ -58,9 +60,9 @@ public class GameController {
     }
 
     @PatchMapping("/{id}")
-    public GameDto patchGame(@RequestBody UpdateGameDto upd, @PathVariable("id") Long id) {
-        log.info("patchGame started with id: {} and upd: {}", id, upd);
-        GameDto result = service.patchGame(upd, id);
+    public GameDto patchGame(@RequestBody UpdateGameDto dto, @PathVariable("id") Long id) {
+        log.info("patchGame started with id: {} and upd: {}", id, dto);
+        GameDto result = service.patchGame(dto, id);
         log.info("patchGame finished with result: {}", result);
         return result;
     }
@@ -74,22 +76,22 @@ public class GameController {
     }
 
     @PostMapping("/{gameId}/participants/{userId}")
-    public ParticipantDto addParticipant(@PathVariable(name = "gameId") Long gameId,
-                                         @PathVariable(name = "userId") Long userId) {
+    public GameDto addParticipant(@PathVariable(name = "gameId") Long gameId,
+                                  @PathVariable(name = "userId") Long userId) {
         log.info("addParticipant started with gameId: {} and userId: {}", gameId, userId);
-        ParticipantDto result = service.addParticipant(gameId, userId);
+        GameDto result = service.addParticipant(gameId, userId);
         log.info("addParticipant finished with result: {}", result);
         return result;
     }
 
     @GetMapping("/{gameId}/participants")
 //TODO: реализовать сортировку по имени, балансу (может еще по чему-либо) после создания аккаунтов
-    public List<ParticipantDto> getAllParticipantByGame(@PathVariable(name = "gameId") Long gameId,
-                                                        @RequestParam(value = "sort", defaultValue = "USERNAME", required = false) ParticipantsSort sort,
-                                                        @RequestParam(value = "size", defaultValue = "10", required = false) @Min(10) int size,
-                                                        @RequestParam(value = "from", defaultValue = "1", required = false) @Min(1) int from) {
+    public List<UserDto> getAllParticipantByGame(@PathVariable(name = "gameId") Long gameId,
+                                                 @RequestParam(value = "sort", defaultValue = "USERNAME", required = false) ParticipantsSort sort,
+                                                 @RequestParam(value = "size", defaultValue = "10", required = false) @Min(10) int size,
+                                                 @RequestParam(value = "from", defaultValue = "1", required = false) @Min(1) int from) {
         log.info("getAllParticipantByGame started with gameId: {}", gameId);
-        List<ParticipantDto> result = service.getAllParticipantsByGame(gameId, size, from, sort);
+        List<UserDto> result = service.getAllParticipantsByGame(gameId, size, from, sort);
         log.info("getAllParticipantByGame finished with result: {}", result);
         return result;
     }

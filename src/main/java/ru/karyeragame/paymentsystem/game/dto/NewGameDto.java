@@ -19,5 +19,5 @@ public class NewGameDto {
     private Long createdBy;
     @NotNull
     @PositiveOrZero
-    private Integer startBalance;
+    private Float startBalance;
 }

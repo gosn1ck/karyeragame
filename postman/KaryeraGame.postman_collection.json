@@ -241,8 +241,21 @@
 						{
 							"name": "delete participant",
 							"request": {
-								"method": "GET",
-								"header": []
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/games/1/participants/2",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"games",
+										"1",
+										"participants",
+										"2"
+									]
+								}
 							},
 							"response": []
 						}
@@ -388,6 +401,34 @@
 					"request": {
 						"method": "GET",
 						"header": [],
+						"url": {
+							"raw": "localhost:8080/games/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"games",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update game",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Game 1000\",\r\n  \"comment\": \"td\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "localhost:8080/games/1",
 							"host": [

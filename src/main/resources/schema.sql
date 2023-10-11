@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS Games (
         created_on timestamp NOT NULL,
         created_by BIGINT NOT NULL,
         status varchar(20) NOT NULL,
-        start_balance int NOT NULL,
+        start_balance float(2) NOT NULL,
         CONSTRAINT FK_GAMES_ON_USERS FOREIGN KEY (created_by) REFERENCES Users (id)
 );
 

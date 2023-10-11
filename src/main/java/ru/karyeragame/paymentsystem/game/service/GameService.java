@@ -5,7 +5,7 @@ import ru.karyeragame.paymentsystem.enums.ParticipantsSort;
 import ru.karyeragame.paymentsystem.game.dto.GameDto;
 import ru.karyeragame.paymentsystem.game.dto.NewGameDto;
 import ru.karyeragame.paymentsystem.game.dto.UpdateGameDto;
-import ru.karyeragame.paymentsystem.participant.dto.ParticipantDto;
+import ru.karyeragame.paymentsystem.user.dto.UserDto;
 
 import java.util.List;
 
@@ -18,13 +18,13 @@ public interface GameService {
 
     void deleteGame(Long id);
 
-    GameDto patchGame(UpdateGameDto upd, Long id);
+    GameDto patchGame(UpdateGameDto dto, Long id);
 
-    ParticipantDto addParticipant(Long gameId, Long userId);
+    GameDto addParticipant(Long gameId, Long userId);
 
     void deleteParticipant(Long gameId, Long userId);
 
-    List<ParticipantDto> getAllParticipantsByGame(Long gameId, int size, int from, ParticipantsSort sort);
+    List<UserDto> getAllParticipantsByGame(Long gameId, int size, int from, ParticipantsSort sort);
 
     GameDto changeGameStatus(GameStatus status, Long id);
 
