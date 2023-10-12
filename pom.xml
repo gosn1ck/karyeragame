@@ -69,12 +69,6 @@
         </dependency>
         <!-- Data bases -->
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-mail</artifactId>
-            <version>${org.mailsender.version}</version>
-        </dependency>
-
         <!-- Spring Security -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -102,7 +96,17 @@
         </dependency>
         <!-- Spring Security -->
 
+
+        <!-- MailSenderStart -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+            <version>${org.mailsender.version}</version>
+        </dependency>
+        <!-- MailSenderEnd -->
+
     </dependencies>
+
 
     <build>
         <plugins>

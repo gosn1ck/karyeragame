@@ -3,6 +3,8 @@ package ru.karyeragame.paymentsystem.user.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import ru.karyeragame.paymentsystem.avatar.model.Avatar;
 import ru.karyeragame.paymentsystem.enums.Roles;
 
 import java.time.LocalDateTime;
@@ -23,12 +25,13 @@ public class User {
     @Column(nullable = false)
     private String password;
     @ManyToOne
-    @JoinColumn(name = "avatar_id", nullable = false)
+    @JoinColumn(name = "avatar_id")
     private Avatar avatar;
     @Enumerated(EnumType.STRING)
     private Roles role;
 
     @Column(nullable = false, name = "created_on")
+    @CreationTimestamp
     private LocalDateTime createdOn;
 
     @Override

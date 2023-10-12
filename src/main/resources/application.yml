@@ -1,4 +1,7 @@
 spring:
+  servlet:
+    multipart:
+      max-file-size: 8MB
   mail:
     host: smtp.gmail.com
     port: 587
@@ -21,7 +24,7 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: none
-    show-sql: true
+    show-sql: false
   datasource:
     url: jdbc:h2:file:./db/karyeragame-db;MODE=PostgreSQL
     username: admin
