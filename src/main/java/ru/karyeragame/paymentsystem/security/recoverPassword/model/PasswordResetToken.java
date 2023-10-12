@@ -1,4 +1,4 @@
-package ru.karyeragame.paymentsystem.security.resetPassword.model;
+package ru.karyeragame.paymentsystem.security.recoverPassword.model;
 
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;

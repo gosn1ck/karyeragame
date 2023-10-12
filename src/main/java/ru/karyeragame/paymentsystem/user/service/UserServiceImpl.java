@@ -11,8 +11,8 @@ import ru.karyeragame.paymentsystem.avatar.model.Avatar;
 import ru.karyeragame.paymentsystem.avatar.repository.AvatarRepository;
 import ru.karyeragame.paymentsystem.enums.Roles;
 import ru.karyeragame.paymentsystem.exceptions.NotFoundException;
-import ru.karyeragame.paymentsystem.security.resetPassword.model.PasswordResetToken;
-import ru.karyeragame.paymentsystem.security.resetPassword.repository.PasswordTokenRepository;
+import ru.karyeragame.paymentsystem.security.recoverPassword.model.PasswordResetToken;
+import ru.karyeragame.paymentsystem.security.recoverPassword.repository.PasswordTokenRepository;
 import ru.karyeragame.paymentsystem.user.dto.NewUserDto;
 import ru.karyeragame.paymentsystem.user.dto.UserDto;
 import ru.karyeragame.paymentsystem.user.mapper.UserMapper;
@@ -20,7 +20,6 @@ import ru.karyeragame.paymentsystem.user.model.User;
 import ru.karyeragame.paymentsystem.user.repository.UserRepository;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service

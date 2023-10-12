@@ -1,4 +1,4 @@
-package ru.karyeragame.paymentsystem.security.resetPassword;
+package ru.karyeragame.paymentsystem.security.recoverPassword;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import ru.karyeragame.paymentsystem.exceptions.ErrorPasswordRecovery;
+import ru.karyeragame.paymentsystem.exceptions.NotFoundException;
 import ru.karyeragame.paymentsystem.mailsender.service.EmailService;
-import ru.karyeragame.paymentsystem.security.resetPassword.model.PasswordResetToken;
+import ru.karyeragame.paymentsystem.security.recoverPassword.model.PasswordResetToken;
 import ru.karyeragame.paymentsystem.security.service.SecurityService;
 import ru.karyeragame.paymentsystem.user.model.User;
 import ru.karyeragame.paymentsystem.user.service.UserService;
@@ -20,32 +22,17 @@ import java.util.UUID;
 @RestController
 @Slf4j
 @AllArgsConstructor
-public class resetController {
-    UserService userService;
-    EmailService emailService;
+public class recoverController {
     SecurityService securityService;
-    String contextPath;
 
-
+    /**
+     * @param request - что здесь? не знаю пока... И нужно ли это тоже
+     * @param userEmail - введённый пользователем e-mail для восстановления пароля
+     */
     @PostMapping("/user/resetPassword")
     public void resetPassword(HttpServletRequest request,
                                           @RequestParam("email") String userEmail) {
-        log.info("Find user by email {} started", userEmail);
-        User user = userService.findUserByEmail(userEmail);
-
-        // создаём токен
-        String token = UUID.randomUUID().toString();
-        PasswordResetToken resetToken = userService.createPasswordResetTokenForUser(user, token);
-        log.info("User Id {} created token for reset password", user.getId());
-
-        String linkForResetPassword = contextPath + "\"/user/changePassword?token=\"" + token;
-
-        emailService.sendSimpleMessage(userEmail, "Восстановление пароля в платежной системе Игры «КарьерА»",
-            "Это письмо платежной системы Игры «КарьерА». " +
-                "Вы запрашивали восстановление пароля. Пройдите по сслыке, чтобы задать новый пароль: " +
-                 linkForResetPassword +
-                "\n" +
-                "Это письмо отправлено автоматически, на него не нужно отвечать.");
+        securityService.resetPassword(userEmail);
     }
 
     @GetMapping("/user/changePassword")

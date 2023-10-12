@@ -1,12 +1,11 @@
 package ru.karyeragame.paymentsystem.user.service;
 
-import ru.karyeragame.paymentsystem.security.resetPassword.model.PasswordResetToken;
+import ru.karyeragame.paymentsystem.security.recoverPassword.model.PasswordResetToken;
 import ru.karyeragame.paymentsystem.user.dto.NewUserDto;
 import ru.karyeragame.paymentsystem.user.dto.UserDto;
 import ru.karyeragame.paymentsystem.user.model.User;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface UserService {
     UserDto register(NewUserDto dto);
