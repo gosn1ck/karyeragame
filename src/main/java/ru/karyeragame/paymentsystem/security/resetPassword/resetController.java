@@ -56,11 +56,12 @@ public class resetController {
 
         return null; // Нужно что-то вернуть ..
 
-        } else {
-            passwordResetToken.addAttribute("token", token);
-            return "redirect:/updatePassword.html?lang=" + locale.getLanguage();
         }
+
+//        else {
+//            passwordResetToken.addAttribute("token", token);
+//            return "redirect:/updatePassword.html?lang=" + locale.getLanguage();
+//        }
+        return null;
     }
-
-
 }
