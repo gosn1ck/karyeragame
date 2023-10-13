@@ -2,77 +2,79 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>КарьерА</title>
-    <link rel="icon" href="img/logo.png">
     <link rel="stylesheet" href="style/style.css">
-
 </head>
+
 <body>
-    
-    <div class="main">
 
-        <div class="welcome">
+<div class="auth">
 
-            <div class="welcome__text">
-                <p class="text-accented">Добро пожаловать</p>
-                <p class="text">в платёжную систему деловой игры КАРЬЕРА!</p>
-            </div>
+    <div class="welcome">
+        <img src="img/logo.png" class="welcome__logo">
 
-            <div class="welcome__img">
-                <img src="/img/Puples.png" alt="">
-            </div>
-
-
+        <div class="welcome__text">
+            <p class="text-accented">Добро пожаловать</p>
+            <p class="text">в платёжную систему</p>
+            <p class="text text-small-accented">деловой игры КАРЬЕРА!</p>
         </div>
 
+        <div class="welcome__img">
+            <img src="img/pupils.png" class="welcome__img">
+        </div>
 
-        <div class="main__form">
-            
-            <div class="selection-buttons">
-                <button id="button-login" class="buttons__form-type" onclick="login()">Вход</button>
-                <button id="button-register" class="buttons__form-type buttons__form-type--active" onclick="register()">Регистрация</button>
+    </div>
+
+
+    <div class="auth__form">
+
+        <div class="auth__form__tabs">
+            <div class="auth__form__tabs__tab">
+                <input type="radio" id="tab-login" name="auth-tabs" checked>
+                <label for="tab-login" class="auth__form__tabs__tab__title">Вход</label>
+                <section class="auth__form__tabs__content">
+                    <form action="" id="login" class="form form__login">
+
+                        <div class="form__box">
+                            <label class="form__box-label">Логин</label>
+                            <input class="form__box-input" type="text"/>
+                            <label class="form__box-label">Пароль</label>
+                            <input class="form__box-input" type="password"/>
+                        </div>
+
+                        <button class="form__button">Войти</button>
+
+                    </form>
+                </section>
+                <!--                <button id="button-login" class="buttons__form-type" onclick="login()">Вход</button>-->
+                <div class="auth__form__tabs__tab">
+                    <input type="radio" id="tab-registry" name="auth-tabs">
+                    <label for="tab-registry" class="auth__form__tabs__tab__title">Регистрация</label>
+                    <section class="auth__form__tabs__content">
+                        <div class="form__box">
+                            <form method="post" id="register" class="form form__register">
+                                <label class="form__box-label">Логин</label>
+                                <input class="form__box-input" type="text" name="login"/>
+
+                                <label class="form__box-label">E-mail</label>
+                                <input class="form__box-input" type="text"/>
+
+                                <label class="form__box-label">Пароль</label>
+                                <input class="form__box-input" type="password" name="password"/>
+
+                                <label class="form__box-label">Подтверждение пароля</label>
+                                <input class="form__box-input" type="password" name="passwordConf"/>
+
+                                <button class="form__button">Зарегистрироваться</button>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+                <!--                <button id="button-register" class="buttons__form-type buttons__form-type&#45;&#45;active" onclick="register()">-->
+                <!--                    Регистрация-->
+                <!--                </button>-->
             </div>
-            
-            <form action="" id="register" class="form form__register">
-
-                <div class="form__box">
-                    <label class="form__box-label">Ник:</label>
-                    <input class="form__box-input" type="text" name="login"/>
-                    
-                    <label class="form__box-label" >E-mail:</label>
-                    <input class="form__box-input" type="text" />
-                    
-                    <label class="form__box-label">Пароль:</label>
-                    <input class="form__box-input" type="password" name="password"/>
-                   
-                    <label class="form__box-label">Подтверждение пароля:</label>
-                    <input class="form__box-input" type="password" name="passwordConf"/>
-                </div>
-
-
-                <button class="form__button">Войти</button>
-
-
-            </form>
-            <form action="" id="login" class="form form__login">
-
-                <div class="form__box">
-                    <label class="form__box-label">Ник:</label>
-                    <input class="form__box-input" type="text" />
-                    <label class="form__box-label">Пароль:</label>
-                    <input class="form__box-input" type="password"/>
-                </div>
-
-
-                <button class="form__button">Войти</button>
-
-
-
-            </form>
-            
-            
-
 
         </div>
 
@@ -80,17 +82,9 @@
     </div>
 
 
-
-
-
-
-
-
-
-
     <script src="js/script.js"></script>
 
 
-
+</div>
 </body>
 </html>

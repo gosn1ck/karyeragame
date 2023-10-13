@@ -1,9 +1,8 @@
-.main{
-    /* position: relative; */
-    padding: 0rem 12rem;
-    /* margin: 6rem 12rem; */
+.auth {
+    padding: 0 12rem;
+    margin: 10.875rem 12rem;
     display: flex;
     justify-content: space-between;
     /* width: 100%;*/
-    height: 100%;    
+    height: 100%;
 }

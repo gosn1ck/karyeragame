@@ -1,14 +1,32 @@
+:root {
+    /*--text-color: #000000;*/
+    --text-header-color: #004243;
+    --text-tab-color: #1C2022;
+    --test-label-color: #20272B;
+    --text-passive-color: #8E9FA7;
+    --accent-field-color: #CAE5FF;
+    --block-color: #F5FAFF;
+    --border-color: #AAAEB0;
+    --accent-primary-color: #48C2F2;
+    --accent-secondary-color: #FF0000;
+
+    /* TODO: Не утверждено с дизайнером */
+    --accent-primary-color-darker-20: #11ADEB;
+    --accent-primary-color-darker-40: #0C82B0;
+}
+
 html {
-  /* font-size: 62.5%; */
-  overflow: hidden;
+    /* font-size: 62.5%; */
+    font-size: 100%;
+/ / 16 px overflow: hidden;
 
     width: 100%;
-  height: 100%;
+    height: 100%;
 }
 
 body {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 body,
@@ -26,6 +44,6 @@ figcaption,
 blockquote,
 dl,
 dd {
-margin: 0;
-padding: 0;
+    margin: 0;
+    padding: 0;
 }
