@@ -190,6 +190,260 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "game",
+			"item": [
+				{
+					"name": "participants",
+					"item": [
+						{
+							"name": "add participant",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/games/2/participants/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"games",
+										"2",
+										"participants",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get all participants by game",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/games/2/participants",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"games",
+										"2",
+										"participants"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete participant",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/games/1/participants/2",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"games",
+										"1",
+										"participants",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "delete game",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/games/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"games",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add game",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "psw",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "john",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"Jack\",\r\n  \"email\": \"jack@gmail.com\",\r\n  \"password\": \"12f45@\",\r\n  \"avatar\": \"photo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/games",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"games"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find all games",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change game status",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/games/2/status?status=ACTIVE",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"games",
+								"2",
+								"status"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "ACTIVE"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find one game",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/games/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"games",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update game",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Game 1000\",\r\n  \"comment\": \"td\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/games/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"games",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
