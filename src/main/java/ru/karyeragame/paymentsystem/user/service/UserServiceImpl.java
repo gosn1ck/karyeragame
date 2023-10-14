@@ -67,11 +67,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUserByAdmin(Long id) {
-        User user = getUserEntity(id);
-        if (user.getRole().equals(Roles.ADMIN)) {
-            throw new NotEnoughRightsException("Not enough rights for delete user with role: " + Roles.ADMIN);
+        User userForDelete = getUserEntity(id);
+        if (userForDelete.getRole().equals(Roles.ADMIN)) {
+            throw new NotEnoughRightsException("There are not enough rights to delete user with role: " + Roles.ADMIN);
         }
-        repository.delete(getUserEntity(id));
+        repository.delete(userForDelete);
     }
 
     private User getUserEntity(Long id) {

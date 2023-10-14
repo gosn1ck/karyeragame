@@ -61,6 +61,6 @@ public class UserController {
     public void deleteUserByAdmin(@PathVariable(name = "id") Long id) {
         log.info("deleteUserByAdmin started with id: {}", id);
         service.deleteUserByAdmin(id);
-        log.info("deleteUserByAdmin finished with success. User with ID {} was deleted", id);
+        log.info("deleteUserByAdmin has finished");
     }
 }
