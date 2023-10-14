@@ -26,29 +26,27 @@ public class recoverController {
     SecurityService securityService;
 
     /**
-     * @param request - что здесь? не знаю пока... И нужно ли это тоже
      * @param userEmail - введённый пользователем e-mail для восстановления пароля
      */
     @PostMapping("/user/resetPassword")
-    public void resetPassword(HttpServletRequest request,
-                                          @RequestParam("email") String userEmail) {
+    public void resetPassword(@RequestParam("userEmail") String userEmail) {  // не забыть валидацию
         securityService.resetPassword(userEmail);
     }
 
-    @GetMapping("/user/changePassword")
-    public String showChangePasswordPage(PasswordResetToken passwordResetToken,
-                                         @RequestParam("token") String token) {
-        String result = securityService.validatePasswordResetToken(token);
-        if (result != null) {
-
-        return null; // Нужно что-то вернуть ..
-
-        }
+//    @GetMapping("/user/changePassword")
+//    public String showChangePasswordPage(PasswordResetToken passwordResetToken,
+//                                         @RequestParam("token") String token) {
+//        String result = securityService.validatePasswordResetToken(token);
+//        if (result != null) {
+//
+//        return null; // Нужно что-то вернуть ..
+//
+//        }
 
 //        else {
 //            passwordResetToken.addAttribute("token", token);
 //            return "redirect:/updatePassword.html?lang=" + locale.getLanguage();
 //        }
-        return null;
-    }
+//        return null;
+//    }
 }

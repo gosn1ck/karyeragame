@@ -2,6 +2,7 @@ package ru.karyeragame.paymentsystem.user.service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -23,6 +24,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository repository;
@@ -33,8 +35,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public PasswordResetToken createPasswordResetTokenForUser(User user, String token) {
-        PasswordResetToken myToken = new PasswordResetToken(user, token);
-        return passwordTokenRepository.save(myToken);
+        PasswordResetToken myToken = new PasswordResetToken(token, user);
+        log.info("Object {} is created", myToken);
+        myToken = passwordTokenRepository.save(myToken);
+        log.info("Object {} is saved to repo", myToken);
+
+        return myToken;
     }
 
     @Override

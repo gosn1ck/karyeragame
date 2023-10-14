@@ -18,10 +18,10 @@ import java.util.UUID;
 @Slf4j
 @RequiredArgsConstructor
 public class SecurityServiceImpl implements SecurityService{
-    PasswordTokenRepository passwordTokenRepository;
-    UserService userService;
-    EmailService emailService;
-    String contextPath;
+    private final PasswordTokenRepository passwordTokenRepository;
+    private final UserService userService;
+    private final EmailService emailService;
+    private String contextPath;
 
     @Override
     public String validatePasswordResetToken(String token) {
@@ -40,6 +40,7 @@ public class SecurityServiceImpl implements SecurityService{
             // создаём токен
             String token = UUID.randomUUID().toString();
             PasswordResetToken resetToken = userService.createPasswordResetTokenForUser(user, token);
+
             log.info("User Id {} created token for reset password", user.getId());
 
             String linkForResetPassword = contextPath + "\"/user/changePassword?token=\"" + token;
@@ -53,7 +54,7 @@ public class SecurityServiceImpl implements SecurityService{
                     "Это письмо отправлено автоматически, на него не нужно отвечать.");
 
         } catch (NotFoundException e) {
-            log.warn("e-mail {} is not found", userEmail);
+            log.warn("Could not find any user with the email {}", userEmail);
             throw new ErrorPasswordRecovery(e.getMessage());  // нужно ли тут бросать исключение ???
         }
     }
