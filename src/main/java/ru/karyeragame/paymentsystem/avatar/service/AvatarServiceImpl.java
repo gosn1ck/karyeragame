@@ -2,6 +2,7 @@ package ru.karyeragame.paymentsystem.avatar.service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,6 +16,7 @@ import ru.karyeragame.paymentsystem.user.model.User;
 import ru.karyeragame.paymentsystem.user.repository.UserRepository;
 
 import javax.imageio.ImageIO;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -22,6 +24,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -35,21 +38,28 @@ public class AvatarServiceImpl implements AvatarService {
     public AvatarDto saveAvatar(MultipartFile file, Long id) throws IOException {
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
 
-        Avatar entity = new Avatar();
-        entity.setUrl(fileName);
-
-        Avatar result = repository.save(entity);
+        Optional<Avatar> avatar = repository.findByUrl(fileName);
+        Avatar result;
+        if(avatar.isPresent()){
+            avatar.get().setUrl(id+"/"+fileName);
+            result = repository.save(avatar.get());
+        }else {
+            Avatar entity = new Avatar();
+            entity.setUrl(id+"/"+fileName);
+            result = repository.save(entity);
+        }
         updateUserAvatar(result, id);
 
         if (ImageIO.read(file.getInputStream()) == null) {
             throw new InvalidFormatException("Аватар должен быть изображением");
         }
-
-        String uploadDir = "./data/avatars/" + id + "/";
+        String uploadDir = Paths.get(".","data","avatars",id.toString()).toString();
 
         Path uploadPath = Paths.get(uploadDir);
         if (!Files.exists(uploadPath)) {
             Files.createDirectories(uploadPath);
+        }else {
+            FileUtils.cleanDirectory(new File(uploadDir));
         }
         try (InputStream inputStream = file.getInputStream()) {
             Path filePath = uploadPath.resolve(fileName);
@@ -58,7 +68,6 @@ public class AvatarServiceImpl implements AvatarService {
         } catch (IOException e) {
             throw new IOException("Не получилось сохранить файл: " + fileName);
         }
-
         return mapper.toDto(result);
     }
 
