@@ -64,7 +64,8 @@ public class UserServiceImpl implements UserService {
         return mapper.toDto(repository.save(user));
     }
 
-    private User getUserEntity(Long id) {
+    @Override
+    public User getUserEntity(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new NotFoundException("User not found"));
     }

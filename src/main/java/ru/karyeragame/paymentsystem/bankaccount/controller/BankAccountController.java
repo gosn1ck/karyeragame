@@ -7,7 +7,7 @@ import ru.karyeragame.paymentsystem.bankaccount.service.BankAccountService;
 import ru.karyeragame.paymentsystem.enums.BankAccountType;
 
 @RestController
-@RequestMapping(path = "/game")
+@RequestMapping(path = "/bankaccount")
 @RequiredArgsConstructor
 @Slf4j
 public class BankAccountController {
@@ -22,4 +22,8 @@ public class BankAccountController {
         log.info("Исходящий ответ: {}", balance);
         return balance;
     }
+
+
+
+
 }

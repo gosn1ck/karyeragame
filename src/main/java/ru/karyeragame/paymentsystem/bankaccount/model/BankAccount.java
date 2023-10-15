@@ -9,6 +9,7 @@ import ru.karyeragame.paymentsystem.enums.BankAccountStatus;
 import ru.karyeragame.paymentsystem.enums.BankAccountType;
 import ru.karyeragame.paymentsystem.user.model.User;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -26,7 +27,7 @@ public class BankAccount {
     @JoinColumn(name = "owner_id")
     private User owner;
 
-    private Float balance;
+    private BigDecimal balance;
 
     @Enumerated(EnumType.STRING)
     private BankAccountStatus status;
