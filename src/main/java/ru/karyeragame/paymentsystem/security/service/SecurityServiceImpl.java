@@ -12,6 +12,7 @@ import ru.karyeragame.paymentsystem.user.model.User;
 import ru.karyeragame.paymentsystem.user.service.UserService;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Service
@@ -64,7 +65,7 @@ public class SecurityServiceImpl implements SecurityService{
     }
 
     private boolean isTokenExpired(PasswordResetToken passToken) {
-        return passToken.getExpiryDate().toInstant().isBefore(Instant.now());
+        return passToken.getExpiryDate().isBefore(LocalDateTime.now());
     }
 
 
