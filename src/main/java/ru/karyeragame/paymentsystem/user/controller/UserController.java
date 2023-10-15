@@ -56,4 +56,11 @@ public class UserController {
         log.info("makeUserAdmin finished with result: {}", result);
         return result;
     }
+
+    @DeleteMapping ("/admin/{id}")
+    public void deleteUserByAdmin(@PathVariable(name = "id") Long id) {
+        log.info("deleteUserByAdmin started with id: {}", id);
+        service.deleteUserByAdmin(id);
+        log.info("deleteUserByAdmin has finished");
+    }
 }
