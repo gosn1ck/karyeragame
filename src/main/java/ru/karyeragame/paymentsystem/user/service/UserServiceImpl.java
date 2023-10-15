@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import ru.karyeragame.paymentsystem.avatar.model.Avatar;
 import ru.karyeragame.paymentsystem.avatar.repository.AvatarRepository;
 import ru.karyeragame.paymentsystem.enums.Roles;
+import ru.karyeragame.paymentsystem.exceptions.NotEnoughRightsException;
 import ru.karyeragame.paymentsystem.exceptions.NotFoundException;
 import ru.karyeragame.paymentsystem.user.dto.NewUserDto;
 import ru.karyeragame.paymentsystem.user.dto.UserDto;
@@ -68,5 +69,14 @@ public class UserServiceImpl implements UserService {
     public User getUserEntity(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new NotFoundException("User not found"));
+    }
+
+    @Override
+    public void deleteUserByAdmin(Long id) {
+        User userForDelete = getUserEntity(id);
+        if (userForDelete.getRole().equals(Roles.ADMIN)) {
+            throw new NotEnoughRightsException("There are not enough rights to delete user with role: " + Roles.ADMIN);
+        }
+        repository.delete(userForDelete);
     }
 }

@@ -8,7 +8,9 @@ import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import ru.karyeragame.paymentsystem.enums.GameStatus;
 import ru.karyeragame.paymentsystem.user.model.User;
+
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "games", schema = "public")
@@ -40,6 +42,12 @@ public class Game {
     private GameStatus status;
 
     @Column(name = "start_balance", nullable = false)
-    private Integer startBalance;
+    private Float startBalance;
 
+    @ManyToMany
+    @JoinTable(
+            name = "participants",
+            joinColumns = @JoinColumn(name = "game_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    Set<User> participants;
 }

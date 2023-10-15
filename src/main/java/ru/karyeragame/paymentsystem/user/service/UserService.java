@@ -16,4 +16,6 @@ public interface UserService {
     UserDto makeUserAdmin(Long id);
 
     User getUserEntity(Long id);
+
+    void deleteUserByAdmin(Long id);
 }

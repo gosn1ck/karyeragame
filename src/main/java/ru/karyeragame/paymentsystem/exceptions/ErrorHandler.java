@@ -48,4 +48,13 @@ public class ErrorHandler {
         log.error("Стек трейс ошибки: {}", Arrays.toString(e.getStackTrace()));
         return new ErrorResponse(status, e.getMessage(), LocalDateTime.now());
     }
+
+    @ExceptionHandler({NotEnoughRightsException.class})
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ErrorResponse handleForbiddenException(final Exception e) {
+        log.error("Стек трейс ошибки: {}", Arrays.toString(e.getStackTrace()));
+        return new ErrorResponse(HttpStatus.FORBIDDEN,
+                e.getMessage(),
+                LocalDateTime.now());
+    }
 }
