@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 public interface BankAccountService {
 
-    Float getBalanceByUserId(Long userId, BankAccountType type);
+    BigDecimal getBalanceByUserId(Long userId, BankAccountType type);
 
     BankAccount getBankAccountEntity(Long bankAccountId);
 

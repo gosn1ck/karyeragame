@@ -22,16 +22,14 @@ public class EmailController {
 
     @PostMapping("/send-email")
     @ResponseStatus(HttpStatus.OK)
-    public String sendEmail(@RequestBody EmailMessage emailMessage) {
+    public void sendEmail(@RequestBody EmailMessage emailMessage) {
         emailService.sendSimpleMessage(emailMessage.to(), emailMessage.subject(), emailMessage.message());
-        return "Success";
     }
 
     @PostMapping("/send-email/attach")
     @ResponseStatus(HttpStatus.OK)
-    public String sendEmailWithAttach(@RequestBody EmailMessage emailMessage) throws MessagingException {
+    public void sendEmailWithAttach(@RequestBody EmailMessage emailMessage) throws MessagingException {
         emailService.sendMessageWithAttachment(emailMessage.to(), emailMessage.subject(),
                 emailMessage.message(), emailMessage.path());
-        return "Success";
     }
 }

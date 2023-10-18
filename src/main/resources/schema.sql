@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS payments (
         payment_on timestamp NOT NULL,
         account_id_from BIGINT NOT NULL,
         account_id_to BIGINT NOT NULL,
-        message varchar(200),
+        message varchar(200) NOT NULL,
         game_id BIGINT NOT NULL,
         CONSTRAINT fk_account_from FOREIGN KEY (account_id_from) REFERENCES bank_accounts(id),
         CONSTRAINT fk_account_to FOREIGN KEY (account_id_to) REFERENCES bank_accounts(id),

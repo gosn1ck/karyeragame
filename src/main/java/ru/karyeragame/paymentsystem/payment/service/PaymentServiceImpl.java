@@ -54,7 +54,7 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     private void accountBalanceCheck(BankAccount from, BigDecimal sumForPayment) {
-        if (sumForPayment.equals(from.getBalance())) {
+        if (sumForPayment.compareTo(from.getBalance()) <= 0) {
             log.error("Банковский счет с id {} не располагает суммой {}", from.getId(), sumForPayment);
             throw new NotEnoughMoneyPaymentRequiredException(String.format("Банковский счет с id %d не располагает суммой %.2f",
                     from.getId(), sumForPayment));

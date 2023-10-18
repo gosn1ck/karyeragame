@@ -33,6 +33,15 @@ public class ErrorHandler {
         return handleErrorResponse(HttpStatus.PAYMENT_REQUIRED, e);
     }
 
+    //403 Forbidden
+    @ExceptionHandler({
+            NotEnoughRightsException.class
+    })
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ErrorResponse handleForbiddenException(final Exception e) {
+        return handleErrorResponse(HttpStatus.FORBIDDEN, e);
+    }
+
     //404 Not Found
     @ExceptionHandler({
             NotFoundException.class,
@@ -47,14 +56,5 @@ public class ErrorHandler {
     private ErrorResponse handleErrorResponse(HttpStatus status, Exception e) {
         log.error("Стек трейс ошибки: {}", Arrays.toString(e.getStackTrace()));
         return new ErrorResponse(status, e.getMessage(), LocalDateTime.now());
-    }
-
-    @ExceptionHandler({NotEnoughRightsException.class})
-    @ResponseStatus(HttpStatus.FORBIDDEN)
-    public ErrorResponse handleForbiddenException(final Exception e) {
-        log.error("Стек трейс ошибки: {}", Arrays.toString(e.getStackTrace()));
-        return new ErrorResponse(HttpStatus.FORBIDDEN,
-                e.getMessage(),
-                LocalDateTime.now());
     }
 }

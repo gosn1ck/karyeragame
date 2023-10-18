@@ -20,8 +20,8 @@ public class BankAccountServiceImpl implements BankAccountService {
     private final BankAccountRepository repository;
 
     @Override
-    public Float getBalanceByUserId(Long ownerId, BankAccountType type) {
-        return repository.findBalanceByOwnerIdAndType(ownerId, String.valueOf(type));
+    public BigDecimal getBalanceByUserId(Long ownerId, BankAccountType type) {
+        return repository.findBalanceByOwnerIdAndType(ownerId, type.name());
     }
 
     @Override

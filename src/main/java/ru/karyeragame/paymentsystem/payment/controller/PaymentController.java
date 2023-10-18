@@ -11,14 +11,14 @@ import ru.karyeragame.paymentsystem.payment.service.PaymentService;
 import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping("/payment")
 @RequiredArgsConstructor
 @Slf4j
 public class PaymentController {
 
     public final PaymentService service;
 
-    @PostMapping("/payment")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public PaymentDto createPayment(@RequestBody NewPaymentDto dto) {
         log.info("Входящий запрос POST /payment: {}", dto);
@@ -27,13 +27,13 @@ public class PaymentController {
         return response;
     }
 
-    @GetMapping("/statement")
+    @GetMapping("/statement/{accountId}/{gameId}")
     public List<PaymentDto> getStatement(
-            @RequestParam Long accountId,
-            @RequestParam Long gameId,
+            @PathVariable Long accountId,
+            @PathVariable Long gameId,
             @RequestParam(defaultValue = "0") int from,
             @RequestParam(defaultValue = "10") int size) {
-        log.info("Входящий запрос GET /statement?accountId={}&gameId={}&from={}&size={}", accountId, gameId, from, size);
+        log.info("Входящий запрос GET /statement/{}/{}?from={}&size={}", accountId, gameId, from, size);
         List<PaymentDto> resultList = service.getStatementByAccountId(accountId, gameId, from, size);
         log.info("Исходящий ответ: {}", resultList);
         return resultList;
