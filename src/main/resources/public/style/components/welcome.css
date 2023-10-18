@@ -1,22 +1,13 @@
-.welcome {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 2.563rem;
-    /*display: grid;*/
-    /*grid-template-rows: 12.5rem 20.75rem 1fr;*/
-    width: 50%;
-    /*justify-content: center*/
-    /* height: 100%; */
-}
-
-.welcome__logo {
-    margin: 0 29.688rem 6.25rem 0.625rem;
-}
+/*.welcome {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    justify-content: space-between;*/
+/*    align-items: center;*/
+/*    margin: 0 2.563rem;*/
+/*    width: 50%;*/
+/*}*/
 
 .text {
-    font-family: Open Sans, sans-serif;
     font-size: 40px;
     font-weight: 600;
     line-height: 65px;
@@ -26,7 +17,6 @@
 }
 
 .text-accented {
-    font-family: Open Sans, sans-serif;
     font-size: 48px;
     font-weight: 700;
     line-height: 76px;

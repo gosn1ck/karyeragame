@@ -1,8 +1,32 @@
-.auth {
+.auth-grid {
+    top: 25%;
+    left: 50%;
+    position: sticky;
+
     padding: 0 12rem;
-    margin: 10.875rem 12rem;
-    display: flex;
-    justify-content: space-between;
-    /* width: 100%;*/
-    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 54rem);
+    grid-template-rows: 1fr 1fr 40rem;
+    justify-content: center;
+    column-gap: 4.1rem;
+    grid-template-areas:
+    "logo form"
+    "text form"
+    "welcome-img form";
+}
+
+.welcome__logo {
+    grid-area: logo;
+}
+
+.welcome__text {
+    grid-area: text;
+}
+
+.welcome__img {
+    grid-area: welcome-img;
+}
+
+.auth__form {
+    grid-area: form;
 }
