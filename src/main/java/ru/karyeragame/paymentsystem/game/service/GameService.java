@@ -11,6 +11,7 @@ import ru.karyeragame.paymentsystem.game.model.Game;
 import java.util.List;
 
 public interface GameService {
+
     GameDto addGame(NewGameDto dto, Long id);
 
     GameDto getGame(Long id);

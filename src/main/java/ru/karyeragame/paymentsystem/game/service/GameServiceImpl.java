@@ -18,7 +18,7 @@ import ru.karyeragame.paymentsystem.game.repository.GameRepository;
 import ru.karyeragame.paymentsystem.user.dto.UserDto;
 import ru.karyeragame.paymentsystem.user.mapper.UserMapper;
 import ru.karyeragame.paymentsystem.user.model.User;
-import ru.karyeragame.paymentsystem.user.repository.UserRepository;
+import ru.karyeragame.paymentsystem.user.service.UserService;
 
 import java.util.HashSet;
 import java.util.List;
@@ -27,9 +27,10 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class GameServiceImpl implements GameService {
+
     private final GameRepository repository;
     private final GameMapper mapper;
-    private final UserRepository userRepository;
+    private final UserService userService;
     private final UserMapper userMapper;
 
     @Transactional
@@ -104,11 +105,12 @@ public class GameServiceImpl implements GameService {
         return mapper.toDto(repository.save(game));
     }
 
-    private Game getGameEntity(Long id) {
+    @Override
+    public Game getGameEntity(Long id) {
         return repository.findById(id).orElseThrow(() -> new NotFoundException("Game with id %s not found", id));
     }
 
     private User getUserEntity(Long id) {
-        return userRepository.findById(id).orElseThrow(() -> new NotFoundException("User with id %s not found", id));
+        return userService.getUserEntity(id);
     }
 }

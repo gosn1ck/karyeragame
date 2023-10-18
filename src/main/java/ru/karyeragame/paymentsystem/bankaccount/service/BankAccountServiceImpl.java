@@ -24,15 +24,14 @@ public class BankAccountServiceImpl implements BankAccountService {
         return repository.findBalanceByOwnerIdAndType(ownerId, String.valueOf(type));
     }
 
-
     @Override
     public BankAccount getBankAccountEntity(Long bankAccountId) {
         return repository.findById(bankAccountId)
                 .orElseThrow(() -> new BankAccountNotFoundException("BankAccount not found with id %d", bankAccountId));
-
     }
 
     @Override
+    @Transactional
     public void updateBankAccount(Long id, BigDecimal sum) {
         BankAccount toUpdate = getBankAccountEntity(id);
         toUpdate.setBalance(sum);

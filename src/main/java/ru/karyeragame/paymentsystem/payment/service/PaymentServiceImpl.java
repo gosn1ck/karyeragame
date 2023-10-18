@@ -25,9 +25,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PaymentServiceImpl implements PaymentService {
 
+    private final PaymentRepository paymentRepository;
     private final BankAccountService bankAccountService;
     private final GameService gameService;
-    private final PaymentRepository paymentRepository;
     private final PaymentMapper mapper;
 
     @Override

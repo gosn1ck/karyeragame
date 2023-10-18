@@ -12,8 +12,7 @@ import ru.karyeragame.paymentsystem.avatar.model.Avatar;
 import ru.karyeragame.paymentsystem.avatar.repository.AvatarRepository;
 import ru.karyeragame.paymentsystem.exceptions.InvalidFormatException;
 import ru.karyeragame.paymentsystem.exceptions.NotFoundException;
-import ru.karyeragame.paymentsystem.user.model.User;
-import ru.karyeragame.paymentsystem.user.repository.UserRepository;
+import ru.karyeragame.paymentsystem.user.service.UserService;
 
 import javax.imageio.ImageIO;
 import java.io.File;
@@ -29,9 +28,10 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class AvatarServiceImpl implements AvatarService {
+
     private final AvatarMapper mapper;
     private final AvatarRepository repository;
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     @Override
     @Transactional
@@ -40,25 +40,25 @@ public class AvatarServiceImpl implements AvatarService {
 
         Optional<Avatar> avatar = repository.findByUrl(fileName);
         Avatar result;
-        if(avatar.isPresent()){
-            avatar.get().setUrl(id+"/"+fileName);
+        if (avatar.isPresent()) {
+            avatar.get().setUrl(id + "/" + fileName);
             result = repository.save(avatar.get());
-        }else {
+        } else {
             Avatar entity = new Avatar();
-            entity.setUrl(id+"/"+fileName);
+            entity.setUrl(id + "/" + fileName);
             result = repository.save(entity);
         }
-        updateUserAvatar(result, id);
+        userService.updateUserAvatar(result, id);
 
         if (ImageIO.read(file.getInputStream()) == null) {
             throw new InvalidFormatException("Аватар должен быть изображением");
         }
-        String uploadDir = Paths.get(".","data","avatars",id.toString()).toString();
+        String uploadDir = Paths.get(".", "data", "avatars", id.toString()).toString();
 
         Path uploadPath = Paths.get(uploadDir);
         if (!Files.exists(uploadPath)) {
             Files.createDirectories(uploadPath);
-        }else {
+        } else {
             FileUtils.cleanDirectory(new File(uploadDir));
         }
         try (InputStream inputStream = file.getInputStream()) {
@@ -74,11 +74,5 @@ public class AvatarServiceImpl implements AvatarService {
     @Override
     public AvatarDto getAvatar(Long id) {
         return mapper.toDto(repository.findById(id).orElseThrow(() -> new NotFoundException("Аватар с id %s не найден", id)));
-    }
-
-    private void updateUserAvatar(Avatar avatar, Long id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("Пользователь с id %s не найден", id));
-        user.setAvatar(avatar);
-        userRepository.save(user);
     }
 }

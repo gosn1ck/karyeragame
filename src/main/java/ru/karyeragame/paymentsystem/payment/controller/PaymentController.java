@@ -38,5 +38,4 @@ public class PaymentController {
         log.info("Исходящий ответ: {}", resultList);
         return resultList;
     }
-
 }

@@ -6,6 +6,7 @@ import ru.karyeragame.paymentsystem.enums.BankAccountType;
 import java.math.BigDecimal;
 
 public interface BankAccountService {
+
     Float getBalanceByUserId(Long userId, BankAccountType type);
 
     BankAccount getBankAccountEntity(Long bankAccountId);

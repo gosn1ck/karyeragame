@@ -79,4 +79,11 @@ public class UserServiceImpl implements UserService {
         }
         repository.delete(userForDelete);
     }
+
+    @Override
+    public void updateUserAvatar(Avatar result, Long id) {
+        User user = getUserEntity(id);
+        user.setAvatar(result);
+        repository.save(user);
+    }
 }
