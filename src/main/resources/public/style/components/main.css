@@ -1,12 +1,12 @@
 .auth-grid {
-    top: 25%;
+    top: 10%;
     left: 50%;
     position: sticky;
 
     padding: 0 12rem;
     display: grid;
     grid-template-columns: repeat(2, 54rem);
-    grid-template-rows: 1fr 1fr 40rem;
+    grid-template-rows: 1fr 1fr 25rem;
     justify-content: center;
     column-gap: 4.1rem;
     grid-template-areas:

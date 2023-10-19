@@ -2,17 +2,22 @@
     --text-header-color: #004243;
     --text-tab-color: #1C2022;
     --test-label-color: #20272B;
+    --text-button-color: #FFF;
     --text-passive-color: #8E9FA7;
     --accent-field-color: #CAE5FF;
     --block-color: #F5FAFF;
-    --border-color: #AAAEB0;
+    --border-color: #8E9FA7;
     --accent-primary-color: #8DDFFF;
     --accent-secondary-color: #FBB591;
+    --button-disabled-color: #8E9FA7;
+    --input-disabled-color: #D7E0E5;
 
     --accent-primary-color-hover: #48C2F2;
     --accent-primary-color-focus: #039AD6;
     --accent-secondary-color-hover: #FF5700;
     --accent-secondary-color-focus: #B93F00;
+    --border-color-hover: #1C2022;
+    --border-color-input-outline-disabled: #AAAEB0;
 }
 
 html {
