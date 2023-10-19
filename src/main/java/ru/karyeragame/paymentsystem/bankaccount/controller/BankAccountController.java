@@ -9,21 +9,19 @@ import ru.karyeragame.paymentsystem.enums.BankAccountType;
 import java.math.BigDecimal;
 
 @RestController
-@RequestMapping(path = "/bankaccount")
+@RequestMapping(path = "/bank-accounts")
 @RequiredArgsConstructor
 @Slf4j
 public class BankAccountController {
 
     private final BankAccountService service;
 
-    @GetMapping("/balance/{userId}")
+    @GetMapping("/{userId}/balance")
     public BigDecimal getBalanceByUserId(@PathVariable Long userId,
                                          @RequestParam(name = "type") BankAccountType type) {
-        log.info("Входящий запрос GET /game/balance/{}?type={}", userId, type);
+        log.info("Входящий запрос GET /bank-accounts/{}/balance?type={}", userId, type);
         BigDecimal balance = service.getBalanceByUserId(userId, type);
         log.info("Исходящий ответ: {}", balance);
         return balance;
     }
-
-
 }
