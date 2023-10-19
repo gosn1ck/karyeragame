@@ -23,6 +23,7 @@ import java.util.List;
 @Slf4j
 @Validated
 public class GameController {
+
     private final GameService service;
 
     @PostMapping

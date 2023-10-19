@@ -6,10 +6,12 @@ import ru.karyeragame.paymentsystem.game.dto.GameDto;
 import ru.karyeragame.paymentsystem.game.dto.NewGameDto;
 import ru.karyeragame.paymentsystem.game.dto.UpdateGameDto;
 import ru.karyeragame.paymentsystem.user.dto.UserDto;
+import ru.karyeragame.paymentsystem.game.model.Game;
 
 import java.util.List;
 
 public interface GameService {
+
     GameDto addGame(NewGameDto dto, Long id);
 
     GameDto getGame(Long id);
@@ -28,4 +30,5 @@ public interface GameService {
 
     GameDto changeGameStatus(GameStatus status, Long id);
 
+    Game getGameEntity(Long gameId);
 }

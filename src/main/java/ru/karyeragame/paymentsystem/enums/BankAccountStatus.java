@@ -1,8 +1,7 @@
 package ru.karyeragame.paymentsystem.enums;
 
-public enum GameStatus {
+public enum BankAccountStatus {
 
-    WAITING,
     ACTIVE,
-    FINISHED
+    ARCHIVE
 }

@@ -13,10 +13,11 @@ import lombok.ToString;
 @ToString
 @RequiredArgsConstructor
 public class Avatar {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(nullable = false)
     private String url;
-
 }

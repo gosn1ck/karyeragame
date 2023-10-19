@@ -39,7 +39,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/users/register",
+							"raw": "localhost:8080/api/v1/users/register",
 							"host": [
 								"localhost"
 							],
@@ -73,7 +73,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/users",
+							"raw": "localhost:8080/api/v1/users",
 							"host": [
 								"localhost"
 							],
@@ -106,7 +106,7 @@
 						"method": "PATCH",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/users/admin/6",
+							"raw": "localhost:8080/api/v1/users/admin/6",
 							"host": [
 								"localhost"
 							],
@@ -149,7 +149,7 @@
 							]
 						},
 						"url": {
-							"raw": "localhost:8080/avatar/user/1",
+							"raw": "localhost:8080/api/v1/avatar/user/1",
 							"host": [
 								"localhost"
 							],
@@ -176,7 +176,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/avatar/1",
+							"raw": "localhost:8080/api/v1/avatar/1",
 							"host": [
 								"localhost"
 							],
@@ -203,7 +203,7 @@
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/games/2/participants/1",
+									"raw": "localhost:8080/api/v1/games/2/participants/1",
 									"host": [
 										"localhost"
 									],
@@ -224,7 +224,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/games/2/participants",
+									"raw": "localhost:8080/api/v1/games/2/participants",
 									"host": [
 										"localhost"
 									],
@@ -244,7 +244,7 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/games/1/participants/2",
+									"raw": "localhost:8080/api/v1/games/1/participants/2",
 									"host": [
 										"localhost"
 									],
@@ -267,7 +267,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/games/1",
+							"raw": "localhost:8080/api/v1/games/1",
 							"host": [
 								"localhost"
 							],
@@ -310,7 +310,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/games",
+							"raw": "localhost:8080/api/v1/games",
 							"host": [
 								"localhost"
 							],
@@ -343,7 +343,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/users",
+							"raw": "localhost:8080/api/v1/users",
 							"host": [
 								"localhost"
 							],
@@ -376,7 +376,7 @@
 						"method": "PATCH",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/games/2/status?status=ACTIVE",
+							"raw": "localhost:8080/api/v1/games/2/status?status=ACTIVE",
 							"host": [
 								"localhost"
 							],
@@ -402,7 +402,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/games/1",
+							"raw": "localhost:8080/api/v1/games/1",
 							"host": [
 								"localhost"
 							],
@@ -430,7 +430,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/games/1",
+							"raw": "localhost:8080/api/v1/games/1",
 							"host": [
 								"localhost"
 							],

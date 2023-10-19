@@ -9,6 +9,7 @@ import ru.karyeragame.paymentsystem.user.model.User;
 
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface GameMapper {
+
     @Mapping(target = "createdById", source = "createdBy.id")
     @Mapping(source = "participants", target = "participantsIds", qualifiedByName = "userToId")
     GameDto toDto(Game game);

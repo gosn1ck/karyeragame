@@ -66,6 +66,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUserEntity(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new NotFoundException("User not found"));
+    }
+
+    @Override
     public void deleteUserByAdmin(Long id) {
         User userForDelete = getUserEntity(id);
         if (userForDelete.getRole().equals(Roles.ADMIN)) {
@@ -74,8 +80,10 @@ public class UserServiceImpl implements UserService {
         repository.delete(userForDelete);
     }
 
-    private User getUserEntity(Long id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new NotFoundException("User not found"));
+    @Override
+    public void updateUserAvatar(Avatar result, Long id) {
+        User user = getUserEntity(id);
+        user.setAvatar(result);
+        repository.save(user);
     }
 }

@@ -1,7 +1,9 @@
 package ru.karyeragame.paymentsystem.user.service;
 
+import ru.karyeragame.paymentsystem.avatar.model.Avatar;
 import ru.karyeragame.paymentsystem.user.dto.NewUserDto;
 import ru.karyeragame.paymentsystem.user.dto.UserDto;
+import ru.karyeragame.paymentsystem.user.model.User;
 
 import java.util.List;
 
@@ -14,5 +16,9 @@ public interface UserService {
 
     UserDto makeUserAdmin(Long id);
 
+    User getUserEntity(Long id);
+
     void deleteUserByAdmin(Long id);
+
+    void updateUserAvatar(Avatar result, Long id);
 }

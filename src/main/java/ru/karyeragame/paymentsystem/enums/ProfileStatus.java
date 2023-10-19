@@ -1,8 +1,10 @@
 package ru.karyeragame.paymentsystem.enums;
 
-public enum GameStatus {
+public enum ProfileStatus {
 
     WAITING,
     ACTIVE,
-    FINISHED
+    PLAYING,
+    BLOCK,
+    ARCHIVE
 }

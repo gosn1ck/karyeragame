@@ -19,23 +19,31 @@ import java.util.Set;
 @ToString
 @RequiredArgsConstructor
 public class Game {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(nullable = false)
     private String name;
+
     @Column
     private String comment;
+
     @Column(name = "created_on", nullable = false)
     @CreationTimestamp
     private LocalDateTime createdOn;
+
     @ManyToOne
     @JoinColumn(name = "created_by", nullable = false)
     private User createdBy;
+
     @Enumerated(EnumType.STRING)
     private GameStatus status;
+
     @Column(name = "start_balance", nullable = false)
     private Float startBalance;
+
     @ManyToMany
     @JoinTable(
             name = "participants",

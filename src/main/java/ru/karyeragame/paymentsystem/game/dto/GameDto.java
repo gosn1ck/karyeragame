@@ -10,12 +10,20 @@ import java.util.Set;
 @Builder
 @Data
 public class GameDto {
+
     private Long id;
+
     private String name;
+
     private String comment;
+
     private LocalDateTime createdOn;
+
     private Long createdById;
+
     private GameStatus status;
+
     private Float startBalance;
+
     private Set<Long> participantsIds;
 }

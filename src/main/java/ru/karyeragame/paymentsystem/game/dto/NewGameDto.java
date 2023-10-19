@@ -10,13 +10,17 @@ import lombok.Data;
 @Builder
 @Data
 public class NewGameDto {
+
     @NotBlank
     @Size(max = 100)
     private String name;
+
     @Size(max = 255)
     private String comment;
+
     @NotNull
     private Long createdBy;
+
     @NotNull
     @PositiveOrZero
     private Float startBalance;

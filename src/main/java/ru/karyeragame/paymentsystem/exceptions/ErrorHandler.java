@@ -14,30 +14,47 @@ import java.util.Arrays;
 @Slf4j
 public class ErrorHandler {
 
-    @ExceptionHandler({NotFoundException.class, EntityNotFoundException.class})
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorResponse handleNotFoundException(final Exception e) {
-        log.error("Стек трейс ошибки: {}", Arrays.toString(e.getStackTrace()));
-        return new ErrorResponse(HttpStatus.NOT_FOUND,
-                e.getMessage(),
-                LocalDateTime.now());
-    }
 
-    @ExceptionHandler({InvalidFormatException.class})
+    //400 Bad Request
+    @ExceptionHandler({
+            InvalidFormatException.class
+    })
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleBadRequestException(final Exception e) {
-        log.error("Стек трейс ошибки: {}", Arrays.toString(e.getStackTrace()));
-        return new ErrorResponse(HttpStatus.BAD_REQUEST,
-                e.getMessage(),
-                LocalDateTime.now());
+        return handleErrorResponse(HttpStatus.BAD_REQUEST, e);
     }
 
-    @ExceptionHandler({NotEnoughRightsException.class})
+    //402 Payment Required
+    @ExceptionHandler({
+            NotEnoughMoneyPaymentRequiredException.class
+    })
+    @ResponseStatus(HttpStatus.PAYMENT_REQUIRED)
+    public ErrorResponse handlePaymentRequiredException(final Exception e) {
+        return handleErrorResponse(HttpStatus.PAYMENT_REQUIRED, e);
+    }
+
+    //403 Forbidden
+    @ExceptionHandler({
+            NotEnoughRightsException.class
+    })
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public ErrorResponse handleForbiddenException(final Exception e) {
+        return handleErrorResponse(HttpStatus.FORBIDDEN, e);
+    }
+
+    //404 Not Found
+    @ExceptionHandler({
+            NotFoundException.class,
+            EntityNotFoundException.class,
+            BankAccountNotFoundException.class
+    })
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorResponse handleNotFoundException(final Exception e) {
+        return handleErrorResponse(HttpStatus.NOT_FOUND, e);
+    }
+
+    private ErrorResponse handleErrorResponse(HttpStatus status, Exception e) {
         log.error("Стек трейс ошибки: {}", Arrays.toString(e.getStackTrace()));
-        return new ErrorResponse(HttpStatus.FORBIDDEN,
-                e.getMessage(),
-                LocalDateTime.now());
+        return new ErrorResponse(status, e.getMessage(), LocalDateTime.now());
     }
 }
