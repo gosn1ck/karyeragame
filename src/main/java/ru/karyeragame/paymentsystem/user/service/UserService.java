@@ -19,4 +19,6 @@ public interface UserService {
     PasswordResetToken createPasswordResetTokenForUser(User user, String token);
 
     User findUserByEmail(String userEmail);
+
+    UserDto changeUserPassword(Long userId, String newPassword);
 }

@@ -1,6 +1,6 @@
 package ru.karyeragame.paymentsystem.security.recoverPassword;
 
-import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
@@ -8,15 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ru.karyeragame.paymentsystem.exceptions.ErrorPasswordRecovery;
-import ru.karyeragame.paymentsystem.exceptions.NotFoundException;
-import ru.karyeragame.paymentsystem.mailsender.service.EmailService;
-import ru.karyeragame.paymentsystem.security.recoverPassword.model.PasswordResetToken;
+import ru.karyeragame.paymentsystem.security.recoverPassword.dto.PasswordDtoRequest;
 import ru.karyeragame.paymentsystem.security.service.SecurityService;
-import ru.karyeragame.paymentsystem.user.model.User;
-import ru.karyeragame.paymentsystem.user.service.UserService;
-
-import java.util.UUID;
 
 @Validated
 @RestController
@@ -33,20 +26,17 @@ public class recoverController {
         securityService.resetPassword(userEmail);
     }
 
-//    @GetMapping("/user/changePassword")
-//    public String showChangePasswordPage(PasswordResetToken passwordResetToken,
-//                                         @RequestParam("token") String token) {
-//        String result = securityService.validatePasswordResetToken(token);
-//        if (result != null) {
-//
-//        return null; // Нужно что-то вернуть ..
-//
-//        }
+    @GetMapping("/user/changePassword")
+    public String showChangePasswordPage(@RequestParam("token") String token) {
+        return securityService.showChangePasswordPage(token);
+    }
 
-//        else {
-//            passwordResetToken.addAttribute("token", token);
-//            return "redirect:/updatePassword.html?lang=" + locale.getLanguage();
-//        }
-//        return null;
-//    }
+    @PostMapping("/user/savePassword")
+    public void savePassword(@Valid PasswordDtoRequest passwordDtoRequest) {
+
+        securityService.savePassword(passwordDtoRequest);
+
+
+    }
+
 }

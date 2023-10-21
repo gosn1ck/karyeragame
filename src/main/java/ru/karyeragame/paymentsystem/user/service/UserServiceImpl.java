@@ -20,7 +20,6 @@ import ru.karyeragame.paymentsystem.user.mapper.UserMapper;
 import ru.karyeragame.paymentsystem.user.model.User;
 import ru.karyeragame.paymentsystem.user.repository.UserRepository;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,6 +47,15 @@ public class UserServiceImpl implements UserService {
     public User findUserByEmail(String userEmail) {
         return repository.findByEmail(userEmail).orElseThrow(()
             -> new NotFoundException(String.format("User with email {} is not found", userEmail)));
+    }
+
+    @Override
+    public UserDto changeUserPassword(Long userId, String newPassword) {
+        User user = getUserEntity(userId);
+        user.setPassword(encoder.encode(newPassword));
+        user = repository.save(user);
+        log.info("Password for user id {} was changed successfully", user.getId());
+        return mapper.toDto(user);
     }
 
 
