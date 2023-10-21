@@ -92,14 +92,14 @@
     width: 100%;
 }
 
-.form__box {
+.form-box {
     padding-top: 3rem;
     display: flex;
     flex-direction: column;
     width: 100%;
 }
 
-.form__box-label {
+.form-box__label {
     font-size: 20px;
     font-weight: 600;
     line-height: 33px;
@@ -110,7 +110,7 @@
     margin-bottom: 0.625rem;
 }
 
-.form__box-input {
+.form-box__input {
     border: 0.1rem solid var(--border-color);
     border-radius: 3.2rem;
     height: 6.4rem;
@@ -129,15 +129,15 @@
     margin-bottom: 1rem;
 }
 
-.form__box-input:hover {
+.form-box__input:hover {
     outline-color: var(--border-color-hover);
 }
 
-.form__box-input:focus {
+.form-box__input:focus {
     outline-color: var(--accent-primary-color);
 }
 
-.form__box-input:disabled {
+.form-box__input:disabled {
     background: var(--input-disabled-color);
     outline-color: var(--border-color-input-outline-disabled);
 }
@@ -167,10 +167,17 @@
 
 .form__button:focus {
     background: var(--accent-primary-color-focus);
+    box-shadow: -0.2rem -0.4rem 0.4rem 0 var(--accent-primary-color-hover) inset;
 }
 
 .form__button:disabled {
     background: var(--button-disabled-color);
+}
+
+.form-box--link {
+    margin-left: 1.5rem;
+    font-size: 1.4rem;
+    color: var(--text-label-color);
 }
 
 /*#login {*/
