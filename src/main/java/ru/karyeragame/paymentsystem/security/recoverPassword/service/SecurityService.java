@@ -1,4 +1,4 @@
-package ru.karyeragame.paymentsystem.security.service;
+package ru.karyeragame.paymentsystem.security.recoverPassword.service;
 
 import ru.karyeragame.paymentsystem.security.recoverPassword.dto.PasswordDtoFinal;
 import ru.karyeragame.paymentsystem.security.recoverPassword.dto.PasswordDtoRequest;

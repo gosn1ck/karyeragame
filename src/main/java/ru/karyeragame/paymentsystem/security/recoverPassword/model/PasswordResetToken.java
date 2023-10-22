@@ -12,6 +12,8 @@ import java.util.Date;
 @Getter
 @Setter
 @EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 @ToString
 public class PasswordResetToken {                       // токен сброса пароля
     private static final int EXPIRATION = 60 * 24;      // срок действия ссылки для восстановления пароля

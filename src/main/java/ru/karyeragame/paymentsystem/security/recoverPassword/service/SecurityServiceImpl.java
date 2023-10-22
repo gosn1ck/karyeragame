@@ -1,4 +1,4 @@
-package ru.karyeragame.paymentsystem.security.service;
+package ru.karyeragame.paymentsystem.security.recoverPassword.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +10,6 @@ import ru.karyeragame.paymentsystem.security.recoverPassword.dto.PasswordDtoFina
 import ru.karyeragame.paymentsystem.security.recoverPassword.dto.PasswordDtoRequest;
 import ru.karyeragame.paymentsystem.security.recoverPassword.model.PasswordResetToken;
 import ru.karyeragame.paymentsystem.security.recoverPassword.repository.PasswordTokenRepository;
-import ru.karyeragame.paymentsystem.user.dto.UserDto;
 import ru.karyeragame.paymentsystem.user.mapper.UserMapperImpl;
 import ru.karyeragame.paymentsystem.user.model.User;
 import ru.karyeragame.paymentsystem.user.service.UserService;
@@ -39,14 +38,12 @@ public class SecurityServiceImpl implements SecurityService{
 
             log.info("User Id {} created token for reset password", user.getId());
 
-            String linkForResetPassword = contextPath + "\"user/changePassword?token=\"" + token;
+            String linkForResetPassword = contextPath + "user/changePassword?token=" + token;
 
             emailService.sendSimpleMessage(userEmail, "Восстановление пароля в платежной системе Игры «КарьерА»",
-                "Это письмо платежной системы Игры «КарьерА». " +
-                    "Вы запрашивали восстановление пароля. Пройдите по ссылке, чтобы сбросить текущий пароль и " +
-                    "задать новый: " +
-                    linkForResetPassword +
-                    "\n" +
+                "Это письмо платежной системы Игры «КарьерА». " + "\n" +
+                    "Если Вы запрашивали восстановление пароля, пройдите по ссылке, чтобы сбросить текущий пароль и " +
+                    "задать новый: " + linkForResetPassword + "\n" +
                     "Это письмо отправлено автоматически, на него не нужно отвечать.");
 
         } catch (NotFoundException e) {
@@ -60,34 +57,49 @@ public class SecurityServiceImpl implements SecurityService{
         String result = validatePasswordResetToken(token);
 
         if (result != null) {
-            log.warn("Used the incorrect token");
-            return "Token is not correct";
+            log.warn("Token is incorrect");
+            return "Token is incorrect";
         } else {
-            log.info("Token accepted");
-            return "redirect:/updatePassword.html?lang=";
+            log.info("Token accepted. Link for update password is generated");
+            return "redirect:" + contextPath + "/updatePassword.html?lang=";
         }
     }
 
     @Override
     public PasswordDtoFinal savePassword(PasswordDtoRequest passwordDtoRequest) {
-
         String passToken = passwordDtoRequest.getToken();
         String result = validatePasswordResetToken(passToken);
+        String newPassword = passwordDtoRequest.getNewPassword();
+        Long userId = passwordTokenRepository.findByToken(passToken)
+                .orElseThrow(() -> new NotFoundException("User with this token Not Found!"))
+                .getUser().getId();
+
+        String email = userService.getUser(userId).getEmail();
 
         if(result != null) {
-            return new PasswordDtoFinal("Token is incorrect");
+            emailService.sendSimpleMessage(email, "Изменение пароля в ПС Игры «КарьерА»",
+                "Это письмо платежной системы Игры «КарьерА»."  + "\n" +
+                    "Восстановить пароль не удалось. Возможно был введён пустой пароль, либо устарела ссылка изменения пароля." +
+                    " Попробуйте ещё раз! "  + "\n" +
+                "Это письмо сформировано автоматически отвечать на него не нужно!");
+            return new PasswordDtoFinal("Token is incorrect. Password is not changed",
+                null, email, userId);
         } else {
-            Long userId = passwordTokenRepository.findByToken(passToken).getUser().getId();
-            userService.getUser(userId);
-            userService.changeUserPassword(userId, passwordDtoRequest.getNewPassword());
-                return new PasswordDtoFinal("Password is changed successful");
+            userService.changeUserPassword(userId, newPassword);
+            emailService.sendSimpleMessage(email, "Изменение пароля в ПС Игры «КарьерА»",
+                "Это письмо платежной системы Игры «КарьерА»."  + "\n" +
+                    "Пароль успешно обновлён. "  + "\n" +
+                    "Ваш новый пароль: " + newPassword + "\n" +
+                    "Это письмо сформировано автоматически отвечать на него не нужно!");
+
+            return new PasswordDtoFinal("Password is changed successfully", newPassword, email, userId);
         }
     }
 
     @Override
     public String validatePasswordResetToken(String token) {
-        final PasswordResetToken passToken = passwordTokenRepository.findByToken(token);
-
+        final PasswordResetToken passToken = passwordTokenRepository.findByToken(token)
+            .orElseThrow(() -> new NotFoundException("User with this token Not Found!"));
         return !isTokenFound(passToken) ? "invalidToken"
             : isTokenExpired(passToken) ? "expired"
             : null;

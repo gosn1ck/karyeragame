@@ -5,4 +5,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class PasswordDtoFinal {
     String resultMessage;
+    String savedPassword;
+    String email;
+    Long userId;
 }
