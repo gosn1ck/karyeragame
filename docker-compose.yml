@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  karyeragame-service:
+    build: .
+    image: karyeragame
+    container_name: karyeragame-server
+    depends_on:
+      - karyeragame-db
+    environment:
+      - SPRING_MAIL_USERNAME=careera.game@gmail.com
+      - SPRING_MAIL_PASSWORD=tcamrxchxiefqpgp
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://karyeragame-db:5432/karyeragame
+      - SPRING_DATASOURCE_USERNAME=karyeragame
+      - SPRING_DATASOURCE_PASSWORD=karyeragame
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - "8080:8080"
+
+  karyeragame-db:
+    image: postgres:16.0-alpine3.18
+    container_name: karyeragame-db
+    volumes:
+      - /var/lib/postgresql/data/
+    ports:
+      - "6542:5432"
+    environment:
+      - POSTGRES_USER=karyeragame
+      - POSTGRES_PASSWORD=karyeragame
+      - POSTGRES_DB=karyeragame
