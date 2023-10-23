@@ -1,39 +1,35 @@
 spring:
+  application:
+    name: karyeragame
   servlet:
     multipart:
       max-file-size: 8MB
   mail:
     host: smtp.gmail.com
     port: 587
-    username: ${EMAIL}
-    password: ${PASSWORD}
+    username: ${SPRING_MAIL_USERNAME}
+    password: ${SPRING_MAIL_PASSWORD}
     properties:
       mail:
         smtp:
           auth: true
           debug: true
           starttls.enable: true
-  sql:
-    init:
-      mode: always
+  datasource:
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    url: ${SPRING_DATASOURCE_URL}
   jpa:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
-    database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
-      ddl-auto: none
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO}
     show-sql: false
-  datasource:
-    url: jdbc:h2:file:./db/karyeragame-db;MODE=PostgreSQL
-    username: admin
-    driverClassName: org.h2.Driver
-    password: admin
-  h2:
-    console:
-      enabled: true
-      path: /h2
+  sql:
+    init:
+      mode: always
 
 email:
   from: careerA.game@gmail.com
