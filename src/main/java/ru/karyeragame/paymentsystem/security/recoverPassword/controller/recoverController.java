@@ -4,16 +4,13 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.karyeragame.paymentsystem.security.recoverPassword.dto.PasswordDtoFinal;
 import ru.karyeragame.paymentsystem.security.recoverPassword.dto.PasswordDtoRequest;
 import ru.karyeragame.paymentsystem.security.recoverPassword.service.SecurityService;
 
-@Validated
 @RestController
+@RequestMapping("password/")
 @Slf4j
 @AllArgsConstructor
 public class recoverController {
@@ -22,7 +19,7 @@ public class recoverController {
     /**
      * @param userEmail - введённый пользователем e-mail для восстановления пароля
      */
-    @PostMapping("/user/resetPassword")
+    @PostMapping("reset")
     public void resetPassword(@RequestParam("userEmail") String userEmail) {  // не забыть валидацию
         securityService.resetPassword(userEmail);
     }
@@ -32,20 +29,13 @@ public class recoverController {
      * @return - если токен корректный, открывается страница для введения нового пароля
      * Как эта страница должна открываться - видимо вопрос к фронту
      */
-    @GetMapping("/user/changePassword")
+    @GetMapping("change")
     public String showChangePasswordPage(@RequestParam("token") String token) {
         return securityService.showChangePasswordPage(token);
     }
 
-    /**
-     * @param newPassword  после введения нового пароля, пользователь нажимает кнопку "сохранить пароль"
-     * @param token если токен корректен и пароль валиден, происходит сохранение нового пароля,
-     *              пользователю отправляется письмо с новым паролем
-     */
-    @PostMapping("/user/savePassword")
-    public void savePassword(@RequestParam @Valid String newPassword,
-                             @RequestParam String token) {
-        PasswordDtoRequest passwordDtoRequest = new PasswordDtoRequest(token, newPassword);
-        PasswordDtoFinal result = securityService.savePassword(passwordDtoRequest);
+    @PostMapping("save")
+    public void savePassword(@Valid @RequestBody PasswordDtoRequest dto){
+        PasswordDtoFinal result = securityService.savePassword(dto);
     }
 }

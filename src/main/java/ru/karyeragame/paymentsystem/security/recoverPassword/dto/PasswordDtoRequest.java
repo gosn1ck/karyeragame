@@ -7,8 +7,8 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class PasswordDtoRequest {
+    @NotBlank
     String token;
-    // прописать аннотации с требованиями к новому паспорту
     @NotBlank
     String newPassword;
 }

@@ -1,8 +1,6 @@
 package ru.karyeragame.paymentsystem.mailsender.service;
 
 import jakarta.mail.MessagingException;
-import org.springframework.mail.SimpleMailMessage;
-import ru.karyeragame.paymentsystem.user.model.User;
 
 import java.util.Locale;
 

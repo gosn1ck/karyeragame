@@ -37,8 +37,7 @@ public class SecurityServiceImpl implements SecurityService{
             PasswordResetToken resetToken = userService.createPasswordResetTokenForUser(user, token);
 
             log.info("User Id {} created token for reset password", user.getId());
-
-            String linkForResetPassword = contextPath + "user/changePassword?token=" + token;
+            String linkForResetPassword = contextPath + "password/change?token=" + token;
 
             emailService.sendSimpleMessage(userEmail, "Восстановление пароля в платежной системе Игры «КарьерА»",
                 "Это письмо платежной системы Игры «КарьерА». " + "\n" +
@@ -61,7 +60,7 @@ public class SecurityServiceImpl implements SecurityService{
             return "Token is incorrect";
         } else {
             log.info("Token accepted. Link for update password is generated");
-            return "redirect:" + contextPath + "/updatePassword.html?lang=";
+            return "redirect:" + contextPath + "password/update.html?lang=";
         }
     }
 
@@ -100,6 +99,7 @@ public class SecurityServiceImpl implements SecurityService{
     public String validatePasswordResetToken(String token) {
         final PasswordResetToken passToken = passwordTokenRepository.findByToken(token)
             .orElseThrow(() -> new NotFoundException("User with this token Not Found!"));
+
         return !isTokenFound(passToken) ? "invalidToken"
             : isTokenExpired(passToken) ? "expired"
             : null;
@@ -112,6 +112,4 @@ public class SecurityServiceImpl implements SecurityService{
     private boolean isTokenExpired(PasswordResetToken passToken) {
         return passToken.getExpiryDate().isBefore(LocalDateTime.now());
     }
-
-
 }
