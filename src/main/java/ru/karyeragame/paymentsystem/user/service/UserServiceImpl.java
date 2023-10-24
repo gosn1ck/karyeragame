@@ -39,7 +39,6 @@ public class UserServiceImpl implements UserService {
         log.info("Object {} is created", myToken);
         myToken = passwordTokenRepository.save(myToken);
         log.info("Object {} is saved to repo", myToken);
-
         return myToken;
     }
 
@@ -53,11 +52,8 @@ public class UserServiceImpl implements UserService {
     public UserDto changeUserPassword(Long userId, String newPassword) {
         User user = getUserEntity(userId);
         user.setPassword(encoder.encode(newPassword));
-        user = repository.save(user);
-        log.info("Password for user id {} was changed successfully", user.getId());
-        return mapper.toDto(user);
+        return mapper.toDto(repository.save(user));
     }
-
 
     @Override
     @Transactional

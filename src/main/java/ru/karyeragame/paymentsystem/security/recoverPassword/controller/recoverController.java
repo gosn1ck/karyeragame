@@ -1,6 +1,7 @@
 package ru.karyeragame.paymentsystem.security.recoverPassword.controller;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
@@ -9,6 +10,7 @@ import ru.karyeragame.paymentsystem.security.recoverPassword.dto.PasswordDtoFina
 import ru.karyeragame.paymentsystem.security.recoverPassword.dto.PasswordDtoRequest;
 import ru.karyeragame.paymentsystem.security.recoverPassword.service.SecurityService;
 
+@Validated
 @RestController
 @RequestMapping("password/")
 @Slf4j
@@ -20,7 +22,7 @@ public class recoverController {
      * @param userEmail - введённый пользователем e-mail для восстановления пароля
      */
     @PostMapping("reset")
-    public void resetPassword(@RequestParam("userEmail") String userEmail) {  // не забыть валидацию
+    public void resetPassword(@RequestParam("userEmail") @Email String userEmail) {
         securityService.resetPassword(userEmail);
     }
 
@@ -35,7 +37,9 @@ public class recoverController {
     }
 
     @PostMapping("save")
-    public void savePassword(@Valid @RequestBody PasswordDtoRequest dto){
+    public PasswordDtoFinal savePassword(@Valid @RequestBody PasswordDtoRequest dto){
         PasswordDtoFinal result = securityService.savePassword(dto);
+        log.info("Password for user id {} was changed successfully", result.getUserId());
+        return result;
     }
 }
