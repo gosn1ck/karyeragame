@@ -40,11 +40,11 @@ public class UserController {
 
     @GetMapping
     public List<UserDto> getAllUsers(@RequestParam(value = "size", defaultValue = "10", required = false) @Min(10) int size,
-                                     @RequestParam(value = "from", defaultValue = "1", required = false) @Min(1) int from) {
+                                     @RequestParam(value = "from", defaultValue = "1", required = false) @Min(0) int from) {
         log.info("getAllUsers started with params: " +
                 "size: {}; " +
                 "from: {}", size, from);
-        List<UserDto> result = service.getAllUsers(size, from - 1);
+        List<UserDto> result = service.getAllUsers(size, from);
         log.info("getAllUsers finished with result: {}", result);
         return result;
     }
@@ -58,6 +58,7 @@ public class UserController {
     }
 
     @DeleteMapping ("/admin/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUserByAdmin(@PathVariable(name = "id") Long id) {
         log.info("deleteUserByAdmin started with id: {}", id);
         service.deleteUserByAdmin(id);
