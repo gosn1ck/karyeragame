@@ -21,11 +21,13 @@ public interface GameMapper {
 
     @Mapping(target = "createdBy", source = "user")
     @Mapping(target = "createdOn", source = "dto.createdOn")
+    @Mapping(target = "status", source = "dto.status")
     @Mapping(ignore = true, target = "id")
     Game toEntity(GameDto dto, User user);
 
     @Mapping(target = "createdBy", source = "user")
     @Mapping(ignore = true, target = "id")
+    @Mapping(ignore = true, target = "status")
     Game toEntity(NewGameDto dto, User user);
 
     Game updateGame(@MappingTarget Game game, UpdateGameDto dto);

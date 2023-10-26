@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import ru.karyeragame.paymentsystem.avatar.model.Avatar;
+import ru.karyeragame.paymentsystem.enums.ProfileStatus;
 import ru.karyeragame.paymentsystem.enums.Roles;
 
 import java.time.LocalDateTime;
@@ -33,6 +34,14 @@ public class User {
     @Column(nullable = false, name = "created_on")
     @CreationTimestamp
     private LocalDateTime createdOn;
+    @Enumerated(EnumType.STRING)
+    private ProfileStatus status;
+    @Column(name = "removed_on")
+    private LocalDateTime removedOn;
+    @ManyToOne
+    @JoinColumn(name = "removed_by")
+//    @Column(name = "removed_by")
+    private User removedBy;
 
     @Override
     public boolean equals(Object o) {
@@ -45,12 +54,15 @@ public class User {
                 && Objects.equals(password, user.password)
                 && Objects.equals(avatar, user.avatar)
                 && Objects.equals(role, user.role)
+                && Objects.equals(status, user.status)
+                && Objects.equals(removedOn, user.removedOn)
+                && Objects.equals(removedBy, user.removedBy)
                 && Objects.equals(createdOn, user.createdOn);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, email, password, avatar, role, createdOn);
+        return Objects.hash(id, username, email, password, avatar, role, createdOn, status, removedBy, removedOn);
     }
 
     @Override
@@ -62,7 +74,10 @@ public class User {
                 ", password='" + password + '\'' +
                 ", avatar='" + avatar + '\'' +
                 ", role='" + role + '\'' +
+                ", status='" + status + '\'' +
                 ", createdOn='" + createdOn + '\'' +
+                ", removedOn='" + removedOn + '\'' +
+                ", removedBy='" + removedBy + '\'' +
                 '}';
     }
 }

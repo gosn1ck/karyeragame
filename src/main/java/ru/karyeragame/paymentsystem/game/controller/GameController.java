@@ -13,7 +13,7 @@ import ru.karyeragame.paymentsystem.game.dto.GameDto;
 import ru.karyeragame.paymentsystem.game.dto.NewGameDto;
 import ru.karyeragame.paymentsystem.game.dto.UpdateGameDto;
 import ru.karyeragame.paymentsystem.game.service.GameService;
-import ru.karyeragame.paymentsystem.user.dto.UserDto;
+import ru.karyeragame.paymentsystem.user.dto.ShortUserDto;
 
 import java.util.List;
 
@@ -45,9 +45,9 @@ public class GameController {
 
     @GetMapping
     public List<GameDto> getAllGames(@RequestParam(value = "size", defaultValue = "10", required = false) @Min(10) int size,
-                                     @RequestParam(value = "from", defaultValue = "1", required = false) @Min(1) int from) {
+                                     @RequestParam(value = "from", defaultValue = "0", required = false) @Min(0) int from) {
         log.info("getAllGames started with size: {} and from: {}", size, from);
-        List<GameDto> result = service.getAllGames(size, from - 1);
+        List<GameDto> result = service.getAllGames(size, from);
         log.info("getAllGames finished with result: {}", result);
         return result;
     }
@@ -87,12 +87,12 @@ public class GameController {
 
     @GetMapping("/{gameId}/participants")
 //TODO: реализовать сортировку по имени, балансу (может еще по чему-либо) после создания аккаунтов
-    public List<UserDto> getAllParticipantByGame(@PathVariable(name = "gameId") Long gameId,
-                                                 @RequestParam(value = "sort", defaultValue = "USERNAME", required = false) ParticipantsSort sort,
-                                                 @RequestParam(value = "size", defaultValue = "10", required = false) @Min(10) int size,
-                                                 @RequestParam(value = "from", defaultValue = "1", required = false) @Min(1) int from) {
+    public List<ShortUserDto> getAllParticipantByGame(@PathVariable(name = "gameId") Long gameId,
+                                                      @RequestParam(value = "sort", defaultValue = "USERNAME", required = false) ParticipantsSort sort,
+                                                      @RequestParam(value = "size", defaultValue = "10", required = false) @Min(10) int size,
+                                                      @RequestParam(value = "from", defaultValue = "1", required = false) @Min(1) int from) {
         log.info("getAllParticipantByGame started with gameId: {}", gameId);
-        List<UserDto> result = service.getAllParticipantsByGame(gameId, size, from, sort);
+        List<ShortUserDto> result = service.getAllParticipantsByGame(gameId, size, from, sort);
         log.info("getAllParticipantByGame finished with result: {}", result);
         return result;
     }

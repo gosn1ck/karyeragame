@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import ru.karyeragame.paymentsystem.enums.ProfileStatus;
 import ru.karyeragame.paymentsystem.enums.Roles;
 import ru.karyeragame.paymentsystem.user.model.User;
 import ru.karyeragame.paymentsystem.user.repository.UserRepository;
@@ -28,8 +29,9 @@ public class KaryeragameApplication {
             try {
                 User admin = new User();
                 admin.setUsername("admin");
-                admin.setPassword("psw1");
+                admin.setPassword(encoder.encode("psw1"));
                 admin.setEmail("admin@gmail.com");
+                admin.setStatus(ProfileStatus.ACTIVE);
                 admin.setRole(Roles.ADMIN);
                 repository.save(admin);
             } catch (DataIntegrityViolationException e) {

@@ -15,7 +15,7 @@ import ru.karyeragame.paymentsystem.game.dto.UpdateGameDto;
 import ru.karyeragame.paymentsystem.game.mapper.GameMapper;
 import ru.karyeragame.paymentsystem.game.model.Game;
 import ru.karyeragame.paymentsystem.game.repository.GameRepository;
-import ru.karyeragame.paymentsystem.user.dto.UserDto;
+import ru.karyeragame.paymentsystem.user.dto.ShortUserDto;
 import ru.karyeragame.paymentsystem.user.mapper.UserMapper;
 import ru.karyeragame.paymentsystem.user.model.User;
 import ru.karyeragame.paymentsystem.user.service.UserService;
@@ -87,10 +87,10 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public List<UserDto> getAllParticipantsByGame(Long gameId, int size, int from, ParticipantsSort sort) {
-        PagedListHolder<UserDto> page = new PagedListHolder<>(getGameEntity(gameId).getParticipants()
+    public List<ShortUserDto> getAllParticipantsByGame(Long gameId, int size, int from, ParticipantsSort sort) {
+        PagedListHolder<ShortUserDto> page = new PagedListHolder<>(getGameEntity(gameId).getParticipants()
                 .stream()
-                .map(userMapper::toDto)
+                .map(userMapper::toShortDto)
                 .collect(Collectors.toList()));
         page.setPage(from - 1);
         page.setPageSize(size);

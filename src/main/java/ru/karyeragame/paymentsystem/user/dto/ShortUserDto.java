@@ -2,16 +2,14 @@ package ru.karyeragame.paymentsystem.user.dto;
 
 import lombok.Builder;
 import lombok.Data;
-
-import java.time.LocalDateTime;
+import ru.karyeragame.paymentsystem.enums.ProfileStatus;
 
 @Builder
 @Data
-public class UserDto {
+public class ShortUserDto {
     private Long id;
     private String username;
     private String email;
-    private Long avatarId;
-    private LocalDateTime createdOn;
+    private ProfileStatus status;
 
 }

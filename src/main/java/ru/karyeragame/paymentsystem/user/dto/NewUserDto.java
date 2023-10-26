@@ -16,8 +16,10 @@ public class NewUserDto {
     private String username;
     @Email
     @NotBlank
+    @Size(min = 6, max = 255)
     private String email;
     @Pattern(regexp = "^[\\p{ASCII}\\p{Punct}\\p{Graph}]+$")// латиница, 0-9, видимые символы
     @NotBlank
+    @Size(min = 5, max = 100)
     private String password;
 }

@@ -1,8 +1,10 @@
 package ru.karyeragame.paymentsystem.exceptions;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -17,7 +19,9 @@ public class ErrorHandler {
 
     //400 Bad Request
     @ExceptionHandler({
-            InvalidFormatException.class
+            InvalidFormatException.class,
+            MethodArgumentNotValidException.class,
+            ConstraintViolationException.class
     })
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleBadRequestException(final Exception e) {
@@ -51,6 +55,15 @@ public class ErrorHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponse handleNotFoundException(final Exception e) {
         return handleErrorResponse(HttpStatus.NOT_FOUND, e);
+    }
+
+    //409 Conflict
+    @ExceptionHandler({
+            DataConflictException.class
+    })
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ErrorResponse handleConflictException(final Exception e) {
+        return handleErrorResponse(HttpStatus.CONFLICT, e);
     }
 
     private ErrorResponse handleErrorResponse(HttpStatus status, Exception e) {
