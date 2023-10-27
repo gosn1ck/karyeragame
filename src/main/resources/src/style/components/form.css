@@ -140,8 +140,8 @@ cursor: pointer;
     height: 6.4rem;
     background-color: var(--block-color);
 
-    padding-top: 1.2rem;
-    padding-bottom: 1.2rem;
+    /* padding-top: 1.2rem; */
+    /* padding-bottom: 1.2rem; */
     padding-left: 2.4rem;
     font-size: 18px;
     font-weight: 300;
