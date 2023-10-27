@@ -99,6 +99,30 @@
     width: 100%;
 }
 
+.form__register input[type="file"] {
+    display: none;
+}
+
+.form-box__label-img {
+position: relative;
+/* left: calc((100%-4.8rem)/2); */
+left: calc(100%-4.8rem);
+
+width: 9.6rem; 
+height: 9.6rem;
+border-radius: 50%; 
+background-color: #CAE5FF; 
+font-size: 1.2rem;
+font-weight: bold;
+color: var(--text-button-color); 
+text-align: end;
+writing-mode: vertical-rl;
+cursor: pointer; 
+}
+
+
+
+
 .form-box__label {
     font-size: 20px;
     font-weight: 600;
