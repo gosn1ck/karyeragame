@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import ru.karyeragame.paymentsystem.bankaccount.service.BankAccountService;
-import ru.karyeragame.paymentsystem.enums.BankAccountType;
+import ru.karyeragame.paymentsystem.enums.bank_account.BankAccountType;
 
 import java.math.BigDecimal;
 

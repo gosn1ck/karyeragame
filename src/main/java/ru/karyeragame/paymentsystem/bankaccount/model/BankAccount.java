@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
-import ru.karyeragame.paymentsystem.enums.BankAccountStatus;
-import ru.karyeragame.paymentsystem.enums.BankAccountType;
+import ru.karyeragame.paymentsystem.enums.bank_account.BankAccountStatus;
+import ru.karyeragame.paymentsystem.enums.bank_account.BankAccountType;
 import ru.karyeragame.paymentsystem.user.model.User;
 
 import java.math.BigDecimal;

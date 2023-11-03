@@ -1,7 +1,7 @@
 package ru.karyeragame.paymentsystem.game.service;
 
-import ru.karyeragame.paymentsystem.enums.GameStatus;
-import ru.karyeragame.paymentsystem.enums.ParticipantsSort;
+import ru.karyeragame.paymentsystem.enums.game.GameStatus;
+import ru.karyeragame.paymentsystem.enums.game.ParticipantsSort;
 import ru.karyeragame.paymentsystem.game.dto.GameDto;
 import ru.karyeragame.paymentsystem.game.dto.NewGameDto;
 import ru.karyeragame.paymentsystem.game.dto.UpdateGameDto;

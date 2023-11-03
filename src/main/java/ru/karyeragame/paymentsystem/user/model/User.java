@@ -1,21 +1,29 @@
 package ru.karyeragame.paymentsystem.user.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import ru.karyeragame.paymentsystem.avatar.model.Avatar;
-import ru.karyeragame.paymentsystem.enums.ProfileStatus;
-import ru.karyeragame.paymentsystem.enums.Roles;
+import ru.karyeragame.paymentsystem.enums.user.ProfileStatus;
+import ru.karyeragame.paymentsystem.enums.user.Roles;
+import ru.karyeragame.paymentsystem.security.token.Token;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "users", schema = "public")
-@Getter
-@Setter
-public class User {
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,7 +38,6 @@ public class User {
     private Avatar avatar;
     @Enumerated(EnumType.STRING)
     private Roles role;
-
     @Column(nullable = false, name = "created_on")
     @CreationTimestamp
     private LocalDateTime createdOn;
@@ -40,44 +47,42 @@ public class User {
     private LocalDateTime removedOn;
     @ManyToOne
     @JoinColumn(name = "removed_by")
-//    @Column(name = "removed_by")
     private User removedBy;
+    @OneToMany(mappedBy = "user")
+    private List<Token> tokens;
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id)
-                && Objects.equals(username, user.username)
-                && Objects.equals(email, user.email)
-                && Objects.equals(password, user.password)
-                && Objects.equals(avatar, user.avatar)
-                && Objects.equals(role, user.role)
-                && Objects.equals(status, user.status)
-                && Objects.equals(removedOn, user.removedOn)
-                && Objects.equals(removedBy, user.removedBy)
-                && Objects.equals(createdOn, user.createdOn);
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return role.getAuthorities();
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(id, username, email, password, avatar, role, createdOn, status, removedBy, removedOn);
+    public String getPassword() {
+        return password;
     }
 
     @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", avatar='" + avatar + '\'' +
-                ", role='" + role + '\'' +
-                ", status='" + status + '\'' +
-                ", createdOn='" + createdOn + '\'' +
-                ", removedOn='" + removedOn + '\'' +
-                ", removedBy='" + removedBy + '\'' +
-                '}';
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

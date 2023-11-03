@@ -11,13 +11,13 @@ import ru.karyeragame.paymentsystem.avatar.service.AvatarService;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/avatar")
+@RequestMapping("/avatars")
 @RequiredArgsConstructor
 @Slf4j
 public class AvatarController {
     private final AvatarService service;
 
-    @PostMapping("/user/{userId}")
+    @PostMapping("/users/{userId}")
     @ResponseStatus(HttpStatus.CREATED)
     public AvatarDto saveAvatar(@RequestParam("avatar") MultipartFile file, @PathVariable(name = "userId") Long id) throws IOException {
         log.info("saveAvatar started with file: {} and userId: {}", file.getOriginalFilename(), id);

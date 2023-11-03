@@ -4,17 +4,23 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.karyeragame.paymentsystem.avatar.model.Avatar;
 import ru.karyeragame.paymentsystem.avatar.repository.AvatarRepository;
-import ru.karyeragame.paymentsystem.enums.ProfileStatus;
-import ru.karyeragame.paymentsystem.enums.Roles;
+import ru.karyeragame.paymentsystem.enums.user.ProfileStatus;
+import ru.karyeragame.paymentsystem.enums.user.Roles;
 import ru.karyeragame.paymentsystem.exceptions.DataConflictException;
 import ru.karyeragame.paymentsystem.exceptions.NotEnoughRightsException;
 import ru.karyeragame.paymentsystem.exceptions.NotFoundException;
-import ru.karyeragame.paymentsystem.security.UserDetailsImpl;
+import ru.karyeragame.paymentsystem.security.AuthResponse;
+import ru.karyeragame.paymentsystem.security.JwtService;
+import ru.karyeragame.paymentsystem.security.token.Token;
+import ru.karyeragame.paymentsystem.security.token.TokenRepository;
+import ru.karyeragame.paymentsystem.security.token.TokenType;
 import ru.karyeragame.paymentsystem.user.dto.FullUserDto;
 import ru.karyeragame.paymentsystem.user.dto.NewUserDto;
 import ru.karyeragame.paymentsystem.user.dto.ShortUserDto;
@@ -33,18 +39,43 @@ public class UserService {
     private final UserMapper mapper;
     private final PasswordEncoder encoder;
     private final AvatarRepository avatarRepository;
+    private final JwtService jwtService;
+    private final AuthenticationManager authenticationManager;
+    private final TokenRepository tokenRepository;
 
     @Transactional
-    public FullUserDto register(NewUserDto dto) {
-        User user = mapper.toEntity(dto);
+    public AuthResponse signUp(NewUserDto dto) {
+        var user = mapper.toEntity(dto);
         user.setRole(Roles.USER);
         user.setPassword(encoder.encode(user.getPassword()));
         user.setStatus(ProfileStatus.WAITING);
         try {
-            return mapper.toFullUserDto(repository.saveAndFlush(user));
+            var savedUser = repository.saveAndFlush(user);
+            var jwtToken = jwtService.generateToken(user);
+
+            saveUserToken(savedUser, jwtToken);
+            return AuthResponse
+                    .builder()
+                    .token(jwtToken)
+                    .build();
         } catch (DataIntegrityViolationException e) {
             throw new DataConflictException("User with this email already exists");
         }
+    }
+
+    @Transactional
+    public AuthResponse signIn(String email, String password) {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(email, password)
+        );
+        var user = repository.findByEmail(email).orElseThrow(() -> new NotFoundException("User not found"));
+        var jwtToken = jwtService.generateToken(user);
+        revokeAllUserTokens(user);
+        saveUserToken(user, jwtToken);
+        return AuthResponse
+                .builder()
+                .token(jwtToken)
+                .build();
     }
 
     public FullUserDto findUserById(Long id) {
@@ -78,12 +109,12 @@ public class UserService {
     }
 
     @Transactional
-    public FullUserDto makeUserAdmin(Long id) {
+    public FullUserDto changeUserRole(Roles role, Long id) {
         User user = getUserEntity(id);
         if (user.getStatus() == ProfileStatus.ARCHIVE) {
             throw new DataConflictException("Archived user cannot be made an admin");
         }
-        user.setRole(Roles.ADMIN);
+        user.setRole(role);
         return mapper.toFullUserDto(repository.save(user));
     }
 
@@ -126,7 +157,7 @@ public class UserService {
         userForDelete.setStatus(ProfileStatus.ARCHIVE);
         userForDelete.setRemovedOn(LocalDateTime.now());
 
-        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User userDetails = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         userForDelete.setRemovedBy(repository.findByEmail(
                         userDetails.getUsername())
                 .orElseThrow(() -> new NotFoundException("Delete initiator not found with email: " + userDetails.getUsername())));
@@ -142,5 +173,29 @@ public class UserService {
 
     private Avatar getAvatarEntity(Long id) {
         return avatarRepository.findById(id).orElseThrow(() -> new NotFoundException("Avatar not found with id %d", id));
+    }
+
+    @Transactional
+    private void revokeAllUserTokens(User user) {
+        var validUserTokens = tokenRepository.findAllValidTokenByUser(user.getId());
+        if (validUserTokens.isEmpty())
+            return;
+        validUserTokens.forEach(token -> {
+            token.setExpired(true);
+            token.setRevoked(true);
+        });
+        tokenRepository.saveAll(validUserTokens);
+    }
+
+    @Transactional
+    private void saveUserToken(User user, String jwtToken) {
+        var token = Token.builder()
+                .user(user)
+                .token(jwtToken)
+                .tokenType(TokenType.BEARER)
+                .expired(false)
+                .revoked(false)
+                .build();
+        tokenRepository.save(token);
     }
 }

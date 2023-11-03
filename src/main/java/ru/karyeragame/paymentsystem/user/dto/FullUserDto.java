@@ -2,8 +2,8 @@ package ru.karyeragame.paymentsystem.user.dto;
 
 import lombok.Builder;
 import lombok.Data;
-import ru.karyeragame.paymentsystem.enums.ProfileStatus;
-import ru.karyeragame.paymentsystem.enums.Roles;
+import ru.karyeragame.paymentsystem.enums.user.ProfileStatus;
+import ru.karyeragame.paymentsystem.enums.user.Roles;
 
 import java.time.LocalDateTime;
 

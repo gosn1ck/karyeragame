@@ -1,4 +1,4 @@
-package ru.karyeragame.paymentsystem.enums;
+package ru.karyeragame.paymentsystem.enums.user;
 
 public enum ProfileStatus {
 

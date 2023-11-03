@@ -3,10 +3,7 @@ package ru.karyeragame.paymentsystem.mailsender.controller;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.karyeragame.paymentsystem.mailsender.resource.EmailMessage;
 import ru.karyeragame.paymentsystem.mailsender.service.EmailService;
 
@@ -16,17 +13,18 @@ import ru.karyeragame.paymentsystem.mailsender.service.EmailService;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/send-email")
 public class EmailController {
 
     private final EmailService emailService;
 
-    @PostMapping("/send-email")
+    @PostMapping
     @ResponseStatus(HttpStatus.OK)
     public void sendEmail(@RequestBody EmailMessage emailMessage) {
         emailService.sendSimpleMessage(emailMessage.to(), emailMessage.subject(), emailMessage.message());
     }
 
-    @PostMapping("/send-email/attach")
+    @PostMapping("/attach")
     @ResponseStatus(HttpStatus.OK)
     public void sendEmailWithAttach(@RequestBody EmailMessage emailMessage) throws MessagingException {
         emailService.sendMessageWithAttachment(emailMessage.to(), emailMessage.subject(),
