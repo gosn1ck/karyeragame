@@ -1,7 +1,8 @@
-import logo from "./../img/logo.png"
-import pupils from "./../img/pupils.png"
+import logo from "./../../img/logo.png"
+import pupils from "./../../img/pupils.png"
 // import Avatar from "./../img/ava.jpg"
 
+import RegisterForm from "./RegisterForm"
 
 const Home = () => {
     return ( 
@@ -48,11 +49,14 @@ const Home = () => {
   
                             <section className="auth__form__tabs__content">
                                 <div className="form-box">
-                                    <form method="post" id="register" className="form form__register">
+                               
+                                        <RegisterForm/>
 
-                                        {/* <label for="file" class="form-box__label-img"> <span style="background-color: gray;">+</span></label> */}
+                                        {/*
+                                    <form method="post" id="register" className="form form__register">
+                                         <label for="file" class="form-box__label-img"> <span style="background-color: gray;">+</span></label> */}
                                       
-                                        <label for="file" class="form-box__label-img"></label>
+                                        {/* <label for="file" class="form-box__label-img"></label>
                                         <input type="file" id="file"/>
 
                                         <label className="form-box__label">Логин</label>
@@ -67,8 +71,9 @@ const Home = () => {
                                         <label className="form-box__label">Подтверждение пароля</label>
                                         <input className="form-box__input" type="password" name="passwordConf" />
   
-                                        <button className="form__button">Зарегистрироваться</button>
-                                    </form>
+                                        <button className="form__button">Зарегистрироваться</button> 
+                                     </form> */}
+
                                 </div>
                         </section>
                 </div>

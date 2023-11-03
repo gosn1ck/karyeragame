@@ -1,3 +1,5 @@
+// import { validationSchema, handleSubmit } from './components/validation';
+
 // var x = document.getElementById("login");
 // var y = document.getElementById("register");
 // // var bx = document.getElementById("button-login");
