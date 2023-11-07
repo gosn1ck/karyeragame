@@ -1,7 +1,7 @@
-package ru.karyeragame.paymentsystem.bankaccount.service;
+package ru.karyeragame.paymentsystem.bank_account.service;
 
-import ru.karyeragame.paymentsystem.bankaccount.model.BankAccount;
-import ru.karyeragame.paymentsystem.enums.bank_account.BankAccountType;
+import ru.karyeragame.paymentsystem.bank_account.model.BankAccount;
+import ru.karyeragame.paymentsystem.bank_account.model.BankAccountType;
 
 import java.math.BigDecimal;
 

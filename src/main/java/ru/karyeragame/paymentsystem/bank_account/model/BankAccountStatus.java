@@ -1,4 +1,4 @@
-package ru.karyeragame.paymentsystem.enums.bank_account;
+package ru.karyeragame.paymentsystem.bank_account.model;
 
 public enum BankAccountStatus {
 

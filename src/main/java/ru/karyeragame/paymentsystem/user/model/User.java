@@ -9,8 +9,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import ru.karyeragame.paymentsystem.avatar.model.Avatar;
-import ru.karyeragame.paymentsystem.enums.user.ProfileStatus;
-import ru.karyeragame.paymentsystem.enums.user.Roles;
 import ru.karyeragame.paymentsystem.security.token.Token;
 
 import java.time.LocalDateTime;

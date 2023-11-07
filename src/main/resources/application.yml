@@ -47,3 +47,5 @@ application:
     jwt:
       secret-key: 123SecretKeyKeryeraGame123123SecretKeyKeryeraGame123123SecretKeyKeryeraGame123123SecretKeyKeryeraGame123
       expiration: 86400000 # millis # 1 day
+      refresh-token:
+        expiration: 604800000 # millis # 7 days

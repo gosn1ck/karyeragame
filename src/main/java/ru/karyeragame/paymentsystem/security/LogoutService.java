@@ -14,6 +14,7 @@ import ru.karyeragame.paymentsystem.security.token.TokenRepository;
 public class LogoutService implements LogoutHandler {
 
     private final TokenRepository tokenRepository;
+    private final String BEARER = "Bearer ";
 
     @Override
     public void logout(
@@ -23,7 +24,7 @@ public class LogoutService implements LogoutHandler {
     ) {
         final String authHeader = request.getHeader("Authorization");
         final String jwt;
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+        if (authHeader == null || !authHeader.startsWith(BEARER)) {
             return;
         }
         jwt = authHeader.substring(7);

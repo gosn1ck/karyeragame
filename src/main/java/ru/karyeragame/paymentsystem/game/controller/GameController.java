@@ -7,11 +7,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.karyeragame.paymentsystem.enums.game.GameStatus;
-import ru.karyeragame.paymentsystem.enums.game.ParticipantsSort;
 import ru.karyeragame.paymentsystem.game.dto.GameDto;
 import ru.karyeragame.paymentsystem.game.dto.NewGameDto;
 import ru.karyeragame.paymentsystem.game.dto.UpdateGameDto;
+import ru.karyeragame.paymentsystem.game.model.GameStatus;
+import ru.karyeragame.paymentsystem.game.model.ParticipantsSort;
 import ru.karyeragame.paymentsystem.game.service.GameService;
 import ru.karyeragame.paymentsystem.user.dto.ShortUserDto;
 

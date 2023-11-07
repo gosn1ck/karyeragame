@@ -21,7 +21,8 @@ public class ErrorHandler {
     @ExceptionHandler({
             InvalidFormatException.class,
             MethodArgumentNotValidException.class,
-            ConstraintViolationException.class
+            ConstraintViolationException.class,
+            InvalidDataException.class
     })
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleBadRequestException(final Exception e) {

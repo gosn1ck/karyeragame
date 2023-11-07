@@ -22,9 +22,9 @@ import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 import static org.springframework.http.HttpMethod.*;
-import static ru.karyeragame.paymentsystem.enums.user.Permission.*;
-import static ru.karyeragame.paymentsystem.enums.user.Roles.ADMIN;
-import static ru.karyeragame.paymentsystem.enums.user.Roles.DEVELOPER;
+import static ru.karyeragame.paymentsystem.user.model.Permission.*;
+import static ru.karyeragame.paymentsystem.user.model.Roles.ADMIN;
+import static ru.karyeragame.paymentsystem.user.model.Roles.DEVELOPER;
 
 @Configuration
 @EnableWebSecurity

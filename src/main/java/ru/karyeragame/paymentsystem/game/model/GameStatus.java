@@ -1,4 +1,4 @@
-package ru.karyeragame.paymentsystem.enums.game;
+package ru.karyeragame.paymentsystem.game.model;
 
 public enum GameStatus {
 

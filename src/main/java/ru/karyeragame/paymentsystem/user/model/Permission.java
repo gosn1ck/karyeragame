@@ -1,4 +1,4 @@
-package ru.karyeragame.paymentsystem.enums.user;
+package ru.karyeragame.paymentsystem.user.model;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

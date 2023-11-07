@@ -1,11 +1,11 @@
 package ru.karyeragame.paymentsystem.game.service;
 
-import ru.karyeragame.paymentsystem.enums.game.GameStatus;
-import ru.karyeragame.paymentsystem.enums.game.ParticipantsSort;
 import ru.karyeragame.paymentsystem.game.dto.GameDto;
 import ru.karyeragame.paymentsystem.game.dto.NewGameDto;
 import ru.karyeragame.paymentsystem.game.dto.UpdateGameDto;
 import ru.karyeragame.paymentsystem.game.model.Game;
+import ru.karyeragame.paymentsystem.game.model.GameStatus;
+import ru.karyeragame.paymentsystem.game.model.ParticipantsSort;
 import ru.karyeragame.paymentsystem.user.dto.ShortUserDto;
 
 import java.util.List;

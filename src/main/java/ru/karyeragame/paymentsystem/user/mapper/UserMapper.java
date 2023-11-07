@@ -8,6 +8,8 @@ import ru.karyeragame.paymentsystem.user.dto.NewUserDto;
 import ru.karyeragame.paymentsystem.user.dto.ShortUserDto;
 import ru.karyeragame.paymentsystem.user.model.User;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface UserMapper {
     @Mapping(target = "avatarId", source = "avatar.id")
@@ -15,6 +17,8 @@ public interface UserMapper {
     FullUserDto toFullUserDto(User user);
 
     ShortUserDto toShortDto(User user);
+
+    List<ShortUserDto> toShortDtoList(List<User> user);
 
     User toEntity(NewUserDto newUserDto);
 

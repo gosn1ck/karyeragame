@@ -1,4 +1,4 @@
-package ru.karyeragame.paymentsystem.enums.user;
+package ru.karyeragame.paymentsystem.user.model;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static ru.karyeragame.paymentsystem.enums.user.Permission.*;
+import static ru.karyeragame.paymentsystem.user.model.Permission.*;
 
 @RequiredArgsConstructor
 public enum Roles {

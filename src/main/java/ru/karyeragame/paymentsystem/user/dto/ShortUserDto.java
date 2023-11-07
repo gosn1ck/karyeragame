@@ -2,7 +2,7 @@ package ru.karyeragame.paymentsystem.user.dto;
 
 import lombok.Builder;
 import lombok.Data;
-import ru.karyeragame.paymentsystem.enums.user.ProfileStatus;
+import ru.karyeragame.paymentsystem.user.model.ProfileStatus;
 
 @Builder
 @Data

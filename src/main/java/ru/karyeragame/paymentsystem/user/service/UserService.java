@@ -1,36 +1,32 @@
 package ru.karyeragame.paymentsystem.user.service;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.karyeragame.paymentsystem.avatar.model.Avatar;
-import ru.karyeragame.paymentsystem.avatar.repository.AvatarRepository;
-import ru.karyeragame.paymentsystem.enums.user.ProfileStatus;
-import ru.karyeragame.paymentsystem.enums.user.Roles;
-import ru.karyeragame.paymentsystem.exceptions.DataConflictException;
-import ru.karyeragame.paymentsystem.exceptions.NotEnoughRightsException;
-import ru.karyeragame.paymentsystem.exceptions.NotFoundException;
+import ru.karyeragame.paymentsystem.exceptions.*;
 import ru.karyeragame.paymentsystem.security.AuthResponse;
 import ru.karyeragame.paymentsystem.security.JwtService;
-import ru.karyeragame.paymentsystem.security.token.Token;
-import ru.karyeragame.paymentsystem.security.token.TokenRepository;
-import ru.karyeragame.paymentsystem.security.token.TokenType;
+import ru.karyeragame.paymentsystem.security.token.TokenService;
 import ru.karyeragame.paymentsystem.user.dto.FullUserDto;
 import ru.karyeragame.paymentsystem.user.dto.NewUserDto;
 import ru.karyeragame.paymentsystem.user.dto.ShortUserDto;
 import ru.karyeragame.paymentsystem.user.mapper.UserMapper;
+import ru.karyeragame.paymentsystem.user.model.ProfileStatus;
+import ru.karyeragame.paymentsystem.user.model.Roles;
 import ru.karyeragame.paymentsystem.user.model.User;
 import ru.karyeragame.paymentsystem.user.repository.UserRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -38,10 +34,9 @@ public class UserService {
     private final UserRepository repository;
     private final UserMapper mapper;
     private final PasswordEncoder encoder;
-    private final AvatarRepository avatarRepository;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
-    private final TokenRepository tokenRepository;
+    private final TokenService tokenService;
 
     @Transactional
     public AuthResponse signUp(NewUserDto dto) {
@@ -52,11 +47,13 @@ public class UserService {
         try {
             var savedUser = repository.saveAndFlush(user);
             var jwtToken = jwtService.generateToken(user);
+            var refreshToken = jwtService.generateRefreshToken(user);
 
-            saveUserToken(savedUser, jwtToken);
+            tokenService.saveUserToken(savedUser, jwtToken);
             return AuthResponse
                     .builder()
                     .token(jwtToken)
+                    .refreshToken(refreshToken)
                     .build();
         } catch (DataIntegrityViolationException e) {
             throw new DataConflictException("User with this email already exists");
@@ -68,50 +65,72 @@ public class UserService {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(email, password)
         );
-        var user = repository.findByEmail(email).orElseThrow(() -> new NotFoundException("User not found"));
+        var user = repository.findByEmail(email).orElseThrow(() -> new NotFoundException("User with email %s not found", email));
         var jwtToken = jwtService.generateToken(user);
-        revokeAllUserTokens(user);
-        saveUserToken(user, jwtToken);
+        var refreshToken = jwtService.generateRefreshToken(user);
+
+        tokenService.revokeAllUserTokens(user);
+        tokenService.saveUserToken(user, jwtToken);
         return AuthResponse
                 .builder()
                 .token(jwtToken)
+                .refreshToken(refreshToken)
                 .build();
+    }
+
+    public AuthResponse refreshToken(HttpServletRequest request) {
+        final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
+        final String refreshToken;
+        final String userEmail;
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            throw new InvalidFormatException("Invalid token format");
+        }
+        refreshToken = authHeader.substring(7);
+        userEmail = jwtService.extractUsername(refreshToken);
+        if (userEmail != null) {
+            var user = this.repository.findByEmail(userEmail)
+                    .orElseThrow();
+            if (jwtService.isTokenValid(refreshToken, user)) {
+                var accessToken = jwtService.generateToken(user);
+                tokenService.revokeAllUserTokens(user);
+                tokenService.saveUserToken(user, accessToken);
+                return AuthResponse.builder()
+                        .token(accessToken)
+                        .refreshToken(refreshToken)
+                        .build();
+            }
+        }
+        throw new InvalidDataException("User email is null");
     }
 
     public FullUserDto findUserById(Long id) {
         User user = getUserEntity(id);
-        if (user.getStatus() != ProfileStatus.ARCHIVE) return mapper.toFullUserDto(user);
-        throw new NotFoundException("user with id %d was not found");
+        if (!user.getStatus().equals(ProfileStatus.ARCHIVE)) return mapper.toFullUserDto(user);
+        throw new NotFoundException("User with id %d was not found", id);
     }
 
     public FullUserDto findArchivedUserById(Long id) {
         User user = getUserEntity(id);
-        if (user.getStatus() == ProfileStatus.ARCHIVE) return mapper.toFullUserDto(user);
-        throw new NotFoundException("user with id %d was not found in the archive");
+        if (user.getStatus().equals(ProfileStatus.ARCHIVE)) return mapper.toFullUserDto(user);
+        throw new NotFoundException("User with id %d was not found in the archive", id);
     }
 
     public List<ShortUserDto> findAllUsers(int size, int from) {
-        return repository.findAll(PageRequest.of(from, size))
-                .toList()
-                .stream()
-                .filter((user) -> user.getStatus() != ProfileStatus.ARCHIVE)
-                .map(mapper::toShortDto)
-                .collect(Collectors.toList());
+        return mapper
+                .toShortDtoList(
+                        repository.findAllByStatusNot(ProfileStatus.ARCHIVE, PageRequest.of(from, size)));
     }
 
     public List<ShortUserDto> findAllArchivedUsers(int size, int from) {
-        return repository.findAll(PageRequest.of(from, size))
-                .toList()
-                .stream()
-                .filter((user) -> user.getStatus() == ProfileStatus.ARCHIVE)
-                .map(mapper::toShortDto)
-                .collect(Collectors.toList());
+        return mapper
+                .toShortDtoList(
+                        repository.findAllByStatus(ProfileStatus.ARCHIVE, PageRequest.of(from, size)));
     }
 
     @Transactional
     public FullUserDto changeUserRole(Roles role, Long id) {
         User user = getUserEntity(id);
-        if (user.getStatus() == ProfileStatus.ARCHIVE) {
+        if (user.getStatus().equals(ProfileStatus.ARCHIVE)) {
             throw new DataConflictException("Archived user cannot be made an admin");
         }
         user.setRole(role);
@@ -121,7 +140,7 @@ public class UserService {
     @Transactional
     public FullUserDto changeUserStatus(ProfileStatus status, Long id) {
         User user = getUserEntity(id);
-        if (status == ProfileStatus.ARCHIVE) {
+        if (status.equals(ProfileStatus.ARCHIVE)) {
             throw new NotEnoughRightsException("You have to use delete operation to set ARCHIVE status");
         }
         user.setStatus(status);
@@ -131,7 +150,7 @@ public class UserService {
     @Transactional
     public FullUserDto recoverUser(Long id) {
         User user = getUserEntity(id);
-        if (user.getStatus() != ProfileStatus.ARCHIVE) {
+        if (!user.getStatus().equals(ProfileStatus.ARCHIVE)) {
             throw new DataConflictException("User with id %d is not i archive", id);
         }
         user.setStatus(ProfileStatus.WAITING);
@@ -142,7 +161,7 @@ public class UserService {
 
     public User getUserEntity(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new NotFoundException("User not found"));
+                .orElseThrow(() -> new NotFoundException("User with id %d not found", id));
     }
 
     @Transactional
@@ -151,7 +170,7 @@ public class UserService {
         if (userForDelete.getRole().equals(Roles.ADMIN)) {
             throw new NotEnoughRightsException("There are not enough rights to delete user with role: " + Roles.ADMIN);
         }
-        if (userForDelete.getStatus() == ProfileStatus.ARCHIVE) {
+        if (userForDelete.getStatus().equals(ProfileStatus.ARCHIVE)) {
             throw new DataConflictException("User has already been added to the archive");
         }
         userForDelete.setStatus(ProfileStatus.ARCHIVE);
@@ -169,33 +188,5 @@ public class UserService {
         User user = getUserEntity(id);
         user.setAvatar(result);
         repository.save(user);
-    }
-
-    private Avatar getAvatarEntity(Long id) {
-        return avatarRepository.findById(id).orElseThrow(() -> new NotFoundException("Avatar not found with id %d", id));
-    }
-
-    @Transactional
-    private void revokeAllUserTokens(User user) {
-        var validUserTokens = tokenRepository.findAllValidTokenByUser(user.getId());
-        if (validUserTokens.isEmpty())
-            return;
-        validUserTokens.forEach(token -> {
-            token.setExpired(true);
-            token.setRevoked(true);
-        });
-        tokenRepository.saveAll(validUserTokens);
-    }
-
-    @Transactional
-    private void saveUserToken(User user, String jwtToken) {
-        var token = Token.builder()
-                .user(user)
-                .token(jwtToken)
-                .tokenType(TokenType.BEARER)
-                .expired(false)
-                .revoked(false)
-                .build();
-        tokenRepository.save(token);
     }
 }
