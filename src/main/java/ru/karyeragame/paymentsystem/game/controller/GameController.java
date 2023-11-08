@@ -90,7 +90,7 @@ public class GameController {
     public List<ShortUserDto> getAllParticipantByGame(@PathVariable(name = "gameId") Long gameId,
                                                       @RequestParam(value = "sort", defaultValue = "USERNAME", required = false) ParticipantsSort sort,
                                                       @RequestParam(value = "size", defaultValue = "10", required = false) @Min(10) int size,
-                                                      @RequestParam(value = "from", defaultValue = "1", required = false) @Min(1) int from) {
+                                                      @RequestParam(value = "from", defaultValue = "0", required = false) @Min(0) int from) {
         log.info("getAllParticipantByGame started with gameId: {}", gameId);
         List<ShortUserDto> result = service.getAllParticipantsByGame(gameId, size, from, sort);
         log.info("getAllParticipantByGame finished with result: {}", result);

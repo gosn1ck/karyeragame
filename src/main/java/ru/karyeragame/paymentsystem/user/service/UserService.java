@@ -1,6 +1,7 @@
 package ru.karyeragame.paymentsystem.user.service;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -39,7 +40,7 @@ public class UserService {
     private final TokenService tokenService;
 
     @Transactional
-    public AuthResponse signUp(NewUserDto dto) {
+    public AuthResponse signUp(NewUserDto dto, HttpServletResponse response) {
         var user = mapper.toEntity(dto);
         user.setRole(Roles.USER);
         user.setPassword(encoder.encode(user.getPassword()));
@@ -50,6 +51,9 @@ public class UserService {
             var refreshToken = jwtService.generateRefreshToken(user);
 
             tokenService.saveUserToken(savedUser, jwtToken);
+
+            response.addHeader("X-User-Id", user.getId().toString());
+
             return AuthResponse
                     .builder()
                     .token(jwtToken)
@@ -61,7 +65,7 @@ public class UserService {
     }
 
     @Transactional
-    public AuthResponse signIn(String email, String password) {
+    public AuthResponse signIn(String email, String password, HttpServletResponse response) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(email, password)
         );
@@ -71,6 +75,9 @@ public class UserService {
 
         tokenService.revokeAllUserTokens(user);
         tokenService.saveUserToken(user, jwtToken);
+
+        response.addHeader("X-User-Id", user.getId().toString());
+
         return AuthResponse
                 .builder()
                 .token(jwtToken)
@@ -78,7 +85,8 @@ public class UserService {
                 .build();
     }
 
-    public AuthResponse refreshToken(HttpServletRequest request) {
+    @Transactional
+    public AuthResponse refreshToken(HttpServletRequest request, HttpServletResponse response) {
         final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
         final String refreshToken;
         final String userEmail;
@@ -91,10 +99,14 @@ public class UserService {
             var user = this.repository.findByEmail(userEmail)
                     .orElseThrow();
             if (jwtService.isTokenValid(refreshToken, user)) {
+
                 var accessToken = jwtService.generateToken(user);
                 tokenService.revokeAllUserTokens(user);
                 tokenService.saveUserToken(user, accessToken);
-                return AuthResponse.builder()
+
+                response.addHeader("X-User-Id", user.getId().toString());
+                return AuthResponse
+                        .builder()
                         .token(accessToken)
                         .refreshToken(refreshToken)
                         .build();

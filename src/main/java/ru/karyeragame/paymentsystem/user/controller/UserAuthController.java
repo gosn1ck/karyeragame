@@ -1,6 +1,7 @@
 package ru.karyeragame.paymentsystem.user.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,25 +22,29 @@ public class UserAuthController {
 
     @PostMapping("/auth/sign-up")
     @ResponseStatus(HttpStatus.CREATED)
-    public AuthResponse signUp(@Valid @RequestBody NewUserDto dto) {
+    public AuthResponse signUp(@Valid @RequestBody NewUserDto dto,
+                               HttpServletResponse response) {
         log.info("signUp started with body: {}", dto);
-        AuthResponse result = service.signUp(dto);
+        AuthResponse result = service.signUp(dto, response);
         log.info("signUp finished with result: {}", result);
         return result;
     }
 
     @PostMapping("/auth/sign-in")
-    public AuthResponse signIn(@RequestParam(name = "email") String email, @RequestParam(name = "password") String password) {
+    public AuthResponse signIn(@RequestParam(name = "email") String email,
+                               @RequestParam(name = "password") String password,
+                               HttpServletResponse response) {
         log.info("signIn started with email: {} and password: {}", email, password);
-        AuthResponse result = service.signIn(email, password);
+        AuthResponse result = service.signIn(email, password, response);
         log.info("signIn finished with result: {}", result);
         return result;
     }
 
     @PostMapping("/auth/refresh-token")
-    public AuthResponse refreshToken(HttpServletRequest request) {
+    public AuthResponse refreshToken(HttpServletRequest request,
+                                     HttpServletResponse response) {
         log.info("refreshToken started");
-        AuthResponse result = service.refreshToken(request);
+        AuthResponse result = service.refreshToken(request, response);
         log.info("refreshToken finished with result: {}", result);
         return result;
     }

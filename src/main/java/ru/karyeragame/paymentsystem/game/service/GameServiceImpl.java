@@ -92,7 +92,7 @@ public class GameServiceImpl implements GameService {
                 .stream()
                 .map(userMapper::toShortDto)
                 .collect(Collectors.toList()));
-        page.setPage(from - 1);
+        page.setPage(from);
         page.setPageSize(size);
         return page.getPageList();
     }
