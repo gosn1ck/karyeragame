@@ -73,6 +73,11 @@ public class AvatarServiceImpl implements AvatarService {
 
     @Override
     public AvatarDto getAvatar(Long id) {
-        return mapper.toDto(repository.findById(id).orElseThrow(() -> new NotFoundException("Аватар с id %s не найден", id)));
+        return mapper.toDto(getAvatarEntity(id));
+    }
+
+    @Override
+    public Avatar getAvatarEntity(Long id) {
+        return repository.findById(id).orElseThrow(() -> new NotFoundException("Avatar not found with id %d", id));
     }
 }

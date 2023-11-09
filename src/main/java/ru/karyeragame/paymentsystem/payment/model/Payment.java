@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import ru.karyeragame.paymentsystem.bankaccount.model.BankAccount;
+import ru.karyeragame.paymentsystem.bank_account.model.BankAccount;
 import ru.karyeragame.paymentsystem.game.model.Game;
 
 import java.math.BigDecimal;

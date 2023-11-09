@@ -1,11 +1,9 @@
-package ru.karyeragame.paymentsystem.bankaccount.model;
+package ru.karyeragame.paymentsystem.bank_account.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
-import ru.karyeragame.paymentsystem.enums.BankAccountStatus;
-import ru.karyeragame.paymentsystem.enums.BankAccountType;
 import ru.karyeragame.paymentsystem.user.model.User;
 
 import java.math.BigDecimal;

@@ -1,12 +1,12 @@
-package ru.karyeragame.paymentsystem.bankaccount.service;
+package ru.karyeragame.paymentsystem.bank_account.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.karyeragame.paymentsystem.bankaccount.model.BankAccount;
-import ru.karyeragame.paymentsystem.bankaccount.repository.BankAccountRepository;
-import ru.karyeragame.paymentsystem.enums.BankAccountType;
+import ru.karyeragame.paymentsystem.bank_account.model.BankAccount;
+import ru.karyeragame.paymentsystem.bank_account.model.BankAccountType;
+import ru.karyeragame.paymentsystem.bank_account.repository.BankAccountRepository;
 import ru.karyeragame.paymentsystem.exceptions.BankAccountNotFoundException;
 
 import java.math.BigDecimal;

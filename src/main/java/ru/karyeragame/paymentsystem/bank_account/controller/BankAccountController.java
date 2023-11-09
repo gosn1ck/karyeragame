@@ -1,10 +1,10 @@
-package ru.karyeragame.paymentsystem.bankaccount.controller;
+package ru.karyeragame.paymentsystem.bank_account.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-import ru.karyeragame.paymentsystem.bankaccount.service.BankAccountService;
-import ru.karyeragame.paymentsystem.enums.BankAccountType;
+import ru.karyeragame.paymentsystem.bank_account.model.BankAccountType;
+import ru.karyeragame.paymentsystem.bank_account.service.BankAccountService;
 
 import java.math.BigDecimal;
 

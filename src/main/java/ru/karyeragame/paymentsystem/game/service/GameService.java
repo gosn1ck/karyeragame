@@ -1,12 +1,12 @@
 package ru.karyeragame.paymentsystem.game.service;
 
-import ru.karyeragame.paymentsystem.enums.GameStatus;
-import ru.karyeragame.paymentsystem.enums.ParticipantsSort;
 import ru.karyeragame.paymentsystem.game.dto.GameDto;
 import ru.karyeragame.paymentsystem.game.dto.NewGameDto;
 import ru.karyeragame.paymentsystem.game.dto.UpdateGameDto;
-import ru.karyeragame.paymentsystem.user.dto.UserDto;
 import ru.karyeragame.paymentsystem.game.model.Game;
+import ru.karyeragame.paymentsystem.game.model.GameStatus;
+import ru.karyeragame.paymentsystem.game.model.ParticipantsSort;
+import ru.karyeragame.paymentsystem.user.dto.ShortUserDto;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public interface GameService {
 
     void deleteParticipant(Long gameId, Long userId);
 
-    List<UserDto> getAllParticipantsByGame(Long gameId, int size, int from, ParticipantsSort sort);
+    List<ShortUserDto> getAllParticipantsByGame(Long gameId, int size, int from, ParticipantsSort sort);
 
     GameDto changeGameStatus(GameStatus status, Long id);
 
