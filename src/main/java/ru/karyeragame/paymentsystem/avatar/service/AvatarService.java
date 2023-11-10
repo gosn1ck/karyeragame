@@ -1,12 +1,9 @@
 package ru.karyeragame.paymentsystem.avatar.service;
 
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.http.fileupload.FileUtils;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StreamUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import ru.karyeragame.paymentsystem.avatar.dto.AvatarDto;
@@ -14,12 +11,12 @@ import ru.karyeragame.paymentsystem.avatar.mapper.AvatarMapper;
 import ru.karyeragame.paymentsystem.avatar.model.Avatar;
 import ru.karyeragame.paymentsystem.avatar.repository.AvatarRepository;
 import ru.karyeragame.paymentsystem.exceptions.InvalidFormatException;
+import ru.karyeragame.paymentsystem.exceptions.LoadDataException;
 import ru.karyeragame.paymentsystem.exceptions.NotFoundException;
 import ru.karyeragame.paymentsystem.user.service.UserService;
 
 import javax.imageio.ImageIO;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -62,12 +59,12 @@ public class AvatarService {
 
             Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
-            throw new IOException("Cannot save image" + fileName);
+            throw new LoadDataException("Cannot save image: %s", fileName);
         }
         return mapper.toDto(avatar);
     }
 
-    public void loadAvatar(Long userId, HttpServletResponse response) throws IOException {
+    public File loadAvatar(Long userId) {
         AvatarDto avatarDto = mapper.toDto(getAvatarEntityByUserId(userId));
 
         Path uploadPath = Paths.get("./data/avatars/" + avatarDto.getUrl());
@@ -75,12 +72,7 @@ public class AvatarService {
         if (!Files.exists(uploadPath)) {
             throw new NotFoundException("Avatar with user id %d not found", userId);
         }
-        try (InputStream is = new FileInputStream(uploadPath.toFile())) {
-            response.setContentType(MediaType.IMAGE_PNG_VALUE);
-            StreamUtils.copy(is, response.getOutputStream());
-        } catch (IOException e) {
-            throw new IOException("Cannot load image");
-        }
+        return uploadPath.toFile();
     }
 
     public Avatar getAvatarEntity(Long id) {
