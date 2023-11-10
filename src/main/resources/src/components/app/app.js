@@ -2,8 +2,8 @@
 
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 
-import Home from "./pages/home/Home";
-import Profile from "./pages/account/Profile";
+import Home from "../pages/home/Home";
+import Profile from "../pages/account/Profile";
 
 
 function App() {

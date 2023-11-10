@@ -4,7 +4,7 @@ import {Formik, Field, Form, ErrorMessage} from 'formik';
 import {Link} from "react-router-dom";
 
 
-import {validationSchema, handleSubmit} from '../../js/components/validation';
+import {validationSchema, handleSubmit} from '../../../js/components/validation';
 
 const RegisterForm = () => {
     return (

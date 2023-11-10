@@ -1,5 +1,5 @@
-import logo from "./../../img/logo.png"
-import pupils from "./../../img/pupils.png"
+import logo from "../../../assets/img/logo.png"
+import pupils from "../../../assets/img/pupils.png"
 // import Avatar from "./../img/ava.jpg"
 
 import RegisterForm from "./RegisterForm"
@@ -27,7 +27,7 @@ const Home = () => {
                         <label htmlFor="tab-login" className="auth__form__tabs__tab__title auth__tab--margin-reset">Вход</label>
   
                         <section className="auth__form__tabs__content">
-                            <form action="" id="login" className="form form__login">
+                            <form action="src/main/resources/src/components/pages/home/Home" id="login" className="form form__login">
   
                                 <div className="form-box">
                                     <label className="form-box__label">Логин</label>
