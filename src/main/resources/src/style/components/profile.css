@@ -1,0 +1,156 @@
+.profile-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    border: 0.1rem solid;
+    border-color: var(--border-color);
+    border-radius: 2.4rem;
+    margin: 3rem 8rem;
+}
+
+.profile-nav {
+    background: var(--accent-primary-color);
+    height: 100vh;
+    border-top-left-radius: 2.4rem;
+    border-bottom-left-radius: 2.4rem;
+}
+
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5rem;
+}
+
+.logo {
+    padding: 1rem 0;
+}
+
+.logo__title {
+    font-size: 3.5rem;
+    font-weight: 600;
+    color: var(--text-header-color);
+}
+
+.space {
+    height: 5rem;
+}
+
+.nav {
+    margin: 1rem;
+    list-style-type: none;
+}
+
+.nav__item {
+    padding: 1rem;
+    margin: 0.8rem 0 0 1rem;
+    cursor: pointer;
+    border-top-left-radius: 2rem;
+    border-bottom-left-radius: 2rem;
+}
+
+.nav__item:hover {
+    background: var(--accent-primary-color-hover);
+}
+
+.nav__item--active {
+    background: var(--accent-primary-color-focus);
+}
+
+.nav__icon--active {
+    filter: invert(1);
+}
+
+.nav__link {
+    font-size: 1.6rem;
+    color: var(--text-label-color);
+    font-weight: 600;
+    margin-left: 2rem;
+    text-decoration: none;
+}
+
+.nav__link--active {
+    color: white;
+}
+
+.profile-content {
+    border-radius: 0.8rem;
+    position: relative;
+}
+
+.title {
+    font-size: 5rem;
+    margin-left: 7rem;
+    margin-top: 10rem;
+}
+
+/* Панель пользователя (верхняя) */
+
+.user-panel {
+    display: flex;
+    align-items: center;
+    grid-gap: 2rem;
+    justify-content: flex-end;
+    padding: 2rem;
+}
+
+.user-panel__avatar {
+    border-radius: 50%;
+    background: var(--border-color);
+    height: 5rem;
+    width: 5rem;
+}
+
+.user-panel__username {
+    font-size: 2rem;
+    margin-right: 3rem;
+}
+
+/* Информация о пользователе */
+
+.data-block {
+    border: 0.1rem solid;
+    border-color: var(--border-color);
+    border-radius: 2.4rem;
+    margin: 2rem 7rem;
+    padding: 2rem;
+}
+
+.data-block__header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.data-block__title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text-label-color);
+}
+
+.btn-edit {
+    border: 0.1rem solid;
+    border-radius: 0.8rem;
+    border-color: var(--border-color);
+    background: var(--input-disabled-color);
+    padding: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.btn-text {
+    font-size: 1.8rem;
+}
+
+.user-data {
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-data__block {
+    display: block;
+    padding: 3rem 0;
+}
+.user-data__label {
+    font-size: 2rem;
+    color: var(--text-label-color)
+}
+

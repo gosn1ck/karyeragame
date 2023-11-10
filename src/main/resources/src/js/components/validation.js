@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 // import { Formik } from 'formik';
 
 const validationSchema = Yup.object().shape({
-  login: Yup.string().required('Обязательное поле'),
+  login: Yup.string().max(20, "Имя пользователя не может быть длинее 20 символов").required('Обязательное поле'),
   email: Yup.string().email('Некорректный email').required('Обязательное поле'),
   password: Yup.string().min(6, 'Пароль должен содержать минимум 6 символов').required('Обязательное поле'),
   passwordConf: Yup.string()

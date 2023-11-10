@@ -4,12 +4,12 @@
     --text-label-color: #20272B;
     --text-button-color: #FFF;
     --text-passive-color: #8E9FA7;
+    --border-color: #8E9FA7;
+    --button-disabled-color: #8E9FA7;
     --accent-field-color: #CAE5FF;
     --block-color: #F5FAFF;
-    --border-color: #8E9FA7;
     --accent-primary-color: #8DDFFF;
     --accent-secondary-color: #FBB591;
-    --button-disabled-color: #8E9FA7;
     --input-disabled-color: #D7E0E5;
 
     --accent-primary-color-hover: #48C2F2;

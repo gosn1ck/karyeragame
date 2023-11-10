@@ -37,7 +37,7 @@ const Home = () => {
                                     {/* <a href="#" className="form-box--link">Не помню пароль</a> */}
                                 </div>
   
-                                <button className="form__button" type="submit">Войти</button>
+                                <button className="btn-form" type="submit">Войти</button>
   
                             </form>
                         </section>

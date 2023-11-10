@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Профиль</title>
+    <link rel="stylesheet" href="./../../style/style.css">
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="profile-wrapper">
+
+
+        <div class="profile-nav">
+            <div class="logo-wrapper">
+                <img src="./../../img/logo.png" class="logo"/>
+                <span class="logo__title">Карьера</span>
+            </div>
+
+            <nav>
+                <ul class="nav">
+                    <li class="nav__item nav__item--active">
+                        <img src="./../../img/icons/icon_profile.png" class="nav__icon--active">
+                        <a href="#" class="nav__link nav__link--active">Профиль</a>
+                    </li>
+                    <li class="nav__item">
+                        <img src="./../../img/icons/icon_statement.png">
+                        <a href="#" class="nav__link">Остаток по счету</a>
+                    </li>
+                    <li class="nav__item">
+                        <img src="./../../img/icons/icon_balance.png">
+                        <a href="#" class="nav__link">Выписка</a>
+                    </li>
+                    <li class="nav__item">
+                        <img src="./../../img/icons/icon_pay.png">
+                        <a href="#" class="nav__link">Заплатить</a>
+                    </li>
+                </ul>
+
+                <div class="space"></div>
+
+                <ul class="nav">
+                    <li class="nav__item">
+                        <img src="./../../img/icons/icon_game.png">
+                        <a href="#" class="nav__link">Игры</a>
+                    </li>
+                    <li class="nav__item">
+                        <img src="./../../img/icons/icon_accounts.png">
+                        <a href="#" class="nav__link">Аккаунты</a>
+                    </li>
+                    <li class="nav__item">
+                        <img src="./../../img/icons/icon_navigator.png">
+                        <a href="#" class="nav__link">Навигатор</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="profile-content">
+
+            <div class="user-panel">
+                <div class="user-panel__avatar"></div>
+                <label class="user-panel__username">Имя пользователя</label>
+                <a href="#"><img src="./../../img/icons/icon_exit.png"></a>
+            </div>
+
+
+            <h2 class="title">Профиль</h2>
+
+
+            <div class="data-block">
+
+                <div class="data-block__header">
+                    <span class="data-block__title">Информация о пользователе</span>
+                    <button class="btn-edit">
+                        <img src="./../../img/icons/icon_edit.png">
+                        <span class="btn-text">Изменить</span>
+                    </button>
+                </div>
+
+                <div class="user-data">
+                    <div class="user-data__block">
+                        <label for="login" class="user-data__label">Логин</label>
+                        <input id="login" name="login" class="input-field" disabled>
+                    </div>
+                    <div class="user-data__block">
+                        <label for="email" class="user-data__label">E-mail</label>
+                        <input id="email" type="email" name="email" class="input-field" disabled>
+                    </div>
+                    <div class="user-data__block">
+                        <label for="password" class="user-data__label">Пароль</label>
+                        <input id="password" type="password" name="email" class="input-field" disabled>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
