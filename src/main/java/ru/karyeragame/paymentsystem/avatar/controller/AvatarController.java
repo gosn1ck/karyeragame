@@ -28,9 +28,9 @@ public class AvatarController {
     }
 
     @GetMapping("/users/{userId}")
-    public void getAvatar(@PathVariable("userId") Long userId, HttpServletResponse response) throws IOException {
+    public void loadAvatar(@PathVariable("userId") Long userId, HttpServletResponse response) throws IOException {
         log.info("getAvatar started with id: {}", userId);
-        service.getAvatar(userId, response);
+        service.loadAvatar(userId, response);
         log.info("getAvatar finished");
     }
 }

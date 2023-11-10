@@ -27,7 +27,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Objects;
-import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Service
 @RequiredArgsConstructor
@@ -39,25 +39,16 @@ public class AvatarService {
 
     @Transactional
     public AvatarDto saveAvatar(MultipartFile file, Long userId) throws IOException {
-        String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
-
-        Optional<Avatar> avatar = repository.findByUserId(userId);
-        Avatar result;
-        if (avatar.isPresent()) {
-            avatar.get().setUrl(userId + "/" + fileName);
-            avatar.get().setUserId(userId);
-            result = repository.save(avatar.get());
-        } else {
-            Avatar entity = new Avatar();
-            entity.setUrl(userId + "/" + fileName);
-            entity.setUserId(userId);
-            result = repository.save(entity);
-        }
-        userService.updateUserAvatar(result, userId);
-
         if (ImageIO.read(file.getInputStream()) == null) {
             throw new InvalidFormatException("Avatar has to be an image");
         }
+
+        String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
+
+        Avatar avatar = putAvatar(userId, fileName);
+
+        userService.updateUserAvatar(avatar, userId);
+
         String uploadDir = Paths.get(".", "data", "avatars", userId.toString()).toString();
 
         Path uploadPath = Paths.get(uploadDir);
@@ -73,22 +64,22 @@ public class AvatarService {
         } catch (IOException e) {
             throw new IOException("Cannot save image" + fileName);
         }
-        return mapper.toDto(result);
+        return mapper.toDto(avatar);
     }
 
-    public void getAvatar(Long userId, HttpServletResponse response) throws IOException {
+    public void loadAvatar(Long userId, HttpServletResponse response) throws IOException {
         AvatarDto avatarDto = mapper.toDto(getAvatarEntityByUserId(userId));
 
         Path uploadPath = Paths.get("./data/avatars/" + avatarDto.getUrl());
 
         if (!Files.exists(uploadPath)) {
-            throw new NotFoundException("Avatar with id %d not found", userId);
+            throw new NotFoundException("Avatar with user id %d not found", userId);
         }
         try (InputStream is = new FileInputStream(uploadPath.toFile())) {
             response.setContentType(MediaType.IMAGE_PNG_VALUE);
             StreamUtils.copy(is, response.getOutputStream());
         } catch (IOException e) {
-            throw new IOException("Cannot return image");
+            throw new IOException("Cannot load image");
         }
     }
 
@@ -98,5 +89,26 @@ public class AvatarService {
 
     public Avatar getAvatarEntityByUserId(Long userId) {
         return repository.findByUserId(userId).orElseThrow(() -> new NotFoundException("Avatar not found with user id: %d", userId));
+    }
+
+    private Avatar putAvatar(Long userId, String fileName) {
+        AtomicReference<Avatar> result = new AtomicReference<>();
+        ;
+
+        repository.findByUserId(userId).ifPresentOrElse(
+                (entity)
+                        -> {
+                    entity.setUrl(userId + "/" + fileName);
+                    entity.setUserId(userId);
+                    result.set(repository.save(entity));
+                },
+                ()
+                        -> {
+                    Avatar entity = new Avatar();
+                    entity.setUrl(userId + "/" + fileName);
+                    entity.setUserId(userId);
+                    result.set(repository.save(entity));
+                });
+        return result.get();
     }
 }

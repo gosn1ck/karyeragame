@@ -55,8 +55,6 @@ public class UserService {
 
             response.addHeader("X-User-Id", user.getId().toString());
 
-            System.out.println(user);
-
             return AuthResponse
                     .builder()
                     .token(jwtToken)
