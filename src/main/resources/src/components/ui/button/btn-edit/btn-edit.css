@@ -1,0 +1,14 @@
+.btn-edit {
+    border: 0.1rem solid;
+    border-radius: 0.8rem;
+    border-color: var(--border-color);
+    background: var(--input-disabled-color);
+    padding: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.btn-text {
+    font-size: 1.8rem;
+}

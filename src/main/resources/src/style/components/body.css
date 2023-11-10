@@ -18,6 +18,10 @@
     --accent-secondary-color-focus: #B93F00;
     --border-color-hover: #1C2022;
     --border-color-input-outline-disabled: #AAAEB0;
+
+    /*    не согласовано с дизайнером */
+    --accent-grey-btn-color-hover: #A1B6C2;
+    --accent-grey-btn-color-focus: #6B8D9F;
 }
 
 html {

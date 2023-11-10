@@ -1,0 +1,31 @@
+.form-box__input {
+    border: 0.1rem solid var(--border-color);
+    border-radius: 3.2rem;
+    height: 6.4rem;
+    background-color: var(--block-color);
+
+    /* padding-top: 1.2rem; */
+    /* padding-bottom: 1.2rem; */
+    padding-left: 2.4rem;
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 25px;
+    letter-spacing: 0;
+    text-align: left;
+    text-transform: uppercase;
+
+    margin-bottom: 1rem;
+}
+
+.form-box__input:hover {
+    outline-color: var(--border-color-hover);
+}
+
+.form-box__input:focus {
+    outline-color: var(--accent-primary-color);
+}
+
+.form-box__input:disabled {
+    background: var(--input-disabled-color);
+    outline-color: var(--border-color-input-outline-disabled);
+}

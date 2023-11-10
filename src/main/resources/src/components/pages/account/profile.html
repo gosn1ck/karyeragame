@@ -12,10 +12,13 @@
 
 
         <div class="profile-nav">
-            <div class="logo-wrapper">
-                <img src="../../../assets/img/logo.png" class="logo"/>
-                <span class="logo__title">Карьера</span>
-            </div>
+
+            <a href="#" class="logo-link">
+                <div class="logo-wrapper">
+                    <img src="../../../assets/img/logo.png" class="logo"/>
+                    <span class="logo__title">Карьера</span>
+                </div>
+            </a>
 
             <nav>
                 <ul class="nav">
@@ -65,34 +68,116 @@
             </div>
 
 
-            <h2 class="title">Профиль</h2>
+            <h2 class="title-big">Профиль</h2>
 
 
             <div class="data-block">
 
                 <div class="data-block__header">
-                    <span class="data-block__title">Информация о пользователе</span>
+                    <div>
+                        <span class="data-block__title">Информация о пользователе </span>
+                        <span class="data-block__title">ID [здесь должен быть ID]</span>
+                    </div>
                     <button class="btn-edit">
                         <img src="../../../assets/icons/icon_edit.png">
-                        <span class="btn-text">Изменить</span>
+                        <span class="btn-edit__text">Изменить</span>
                     </button>
                 </div>
 
                 <div class="user-data">
                     <div class="user-data__block">
-                        <h4 for="login" class="user-data__label">Логин</h4>
-                        <input id="login" name="login" class="input-field" disabled>
+                        <h4 class="input__label">Логин</h4>
+                        <input id="login" name="login" class="input-field" size="30" disabled>
                     </div>
                     <div class="user-data__block">
-                        <h4 for="email" class="user-data__label">E-mail</h4>
-                        <input id="email" type="email" name="email" class="input-field" disabled>
+                        <h4 class="input__label">E-mail</h4>
+                        <input id="email" type="email" name="email" class="input-field" size="30" disabled>
                     </div>
                     <div class="user-data__block">
-                        <h4 for="password" class="user-data__label">Пароль</h4>
-                        <input id="password" type="password" name="email" class="input-field" disabled>
+                        <h4 class="input__label">Пароль</h4>
+                        <input id="password" type="password" name="email" class="input-field" size="30" disabled>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="data-block">
+
+                <div class="data-block__header">
+                    <div>
+                        <span class="data-block__title">Информация об игре </span>
+                        <span class="data-block__title">[здесь должно быть название игры]</span>
+                    </div>
+                </div>
+
+                <div class="game-data">
+                    <h4 class="title-medium">Участники</h4>
+                    <div class="participants">
+                        <ul class="participants__list">
+                            <li>
+                                <div class="participant__wrapper">
+                                    <div class="participants__avatar"></div>
+                                    <span class="participants__username">Участник 1</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="participant__wrapper">
+                                    <div class="participants__avatar"></div>
+                                    <span class="participants__username">Участник 2</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="participant__wrapper">
+                                    <div class="participants__avatar"></div>
+                                    <span class="participants__username">Участник 3</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="participant__wrapper">
+                                    <div class="participants__avatar"></div>
+                                    <span class="participants__username">Участник 4</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="participant__wrapper">
+                                    <div class="participants__avatar"></div>
+                                    <span class="participants__username">Участник 5</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="participant__wrapper">
+                                    <div class="participants__avatar"></div>
+                                    <span class="participants__username">Участник 6</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="participant__wrapper">
+                                    <div class="participants__avatar"></div>
+                                    <span class="participants__username">Участник 7</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="participant__wrapper">
+                                    <div class="participants__avatar"></div>
+                                    <span class="participants__username">Участник 8</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="participant__wrapper">
+                                    <div class="participants__avatar"></div>
+                                    <span class="participants__username">Участник 9</span>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
+
+            <div class="center">
+                <button class="btn-delete">Удалить аккаунт</button>
+            </div>
+
 
         </div>
 
