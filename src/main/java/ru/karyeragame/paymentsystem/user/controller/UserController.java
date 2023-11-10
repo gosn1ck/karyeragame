@@ -39,5 +39,4 @@ public class UserController {
         log.info("findAllUsers finished with result: {}", result);
         return result;
     }
-
 }

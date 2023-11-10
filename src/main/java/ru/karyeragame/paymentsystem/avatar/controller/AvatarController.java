@@ -1,5 +1,6 @@
 package ru.karyeragame.paymentsystem.avatar.controller;
 
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -19,18 +20,17 @@ public class AvatarController {
 
     @PostMapping("/users/{userId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public AvatarDto saveAvatar(@RequestParam("avatar") MultipartFile file, @PathVariable(name = "userId") Long id) throws IOException {
-        log.info("saveAvatar started with file: {} and userId: {}", file.getOriginalFilename(), id);
-        AvatarDto result = service.saveAvatar(file, id);
+    public AvatarDto saveAvatar(@RequestParam("avatar") MultipartFile file, @PathVariable(name = "userId") Long userId) throws IOException {
+        log.info("saveAvatar started with file: {} and userId: {}", file.getOriginalFilename(), userId);
+        AvatarDto result = service.saveAvatar(file, userId);
         log.info("saveAvatar finished with result: {}", result);
         return result;
     }
 
-    @GetMapping("/{id}")
-    public AvatarDto getAvatar(@PathVariable("id") Long id) {
-        log.info("getAvatar started with id: {}", id);
-        AvatarDto result = service.getAvatar(id);
-        log.info("getAvatar finished with result: {}", result);
-        return result;
+    @GetMapping("/users/{userId}")
+    public void getAvatar(@PathVariable("userId") Long userId, HttpServletResponse response) throws IOException {
+        log.info("getAvatar started with id: {}", userId);
+        service.getAvatar(userId, response);
+        log.info("getAvatar finished");
     }
 }

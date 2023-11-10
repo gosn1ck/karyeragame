@@ -8,7 +8,7 @@ import ru.karyeragame.paymentsystem.user.model.ProfileStatus;
 @Data
 public class ShortUserDto {
     private Long id;
-    private String username;
+    private String name;
     private String email;
     private ProfileStatus status;
 

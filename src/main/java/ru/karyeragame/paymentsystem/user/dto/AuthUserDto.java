@@ -9,13 +9,7 @@ import lombok.Data;
 
 @Builder
 @Data
-public class NewUserDto {
-    @Pattern(regexp = "^[^\\s][a-zA-Z0-9][\\sa-zA-Z0-9][\\p{L}\\p{N}\\p{P}\\p{Z}]+$")
-    //кириллица, латиница, 0-9, видимые символы
-    @NotBlank
-    @Size(min = 1, max = 20)
-    private String name;
-    // латиница (верхний и нижний регистры), 0-9, символы . _ - допустимы, точка не первый или последний символ
+public class AuthUserDto {
     @Email(regexp = "^(?=.{1,255}@)[A-Za-z0-9_-]" +
             "+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]" +
             "+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$")
