@@ -78,7 +78,7 @@
 											"mode": "raw",
 											"raw": "{{request_body}}"
 										},
-										"url": "{{baseUrl}}/users/auth/register"
+										"url": "{{baseUrl}}/users/auth/sign-up"
 									},
 									"response": []
 								},
@@ -96,7 +96,7 @@
 													"    let user;\r",
 													"    try {\r",
 													"        user = rnd.getUser();\r",
-													"        user.username = \"    \";\r",
+													"        user.name = \"    \";\r",
 													"    } catch(err) {\r",
 													"        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
 													"    }\r",
@@ -145,7 +145,7 @@
 											"mode": "raw",
 											"raw": "{{request_body}}"
 										},
-										"url": "{{baseUrl}}/users/auth/register"
+										"url": "{{baseUrl}}/users/auth/sign-up"
 									},
 									"response": []
 								},
@@ -212,7 +212,7 @@
 											"mode": "raw",
 											"raw": "{{request_body}}"
 										},
-										"url": "{{baseUrl}}/users/auth/register"
+										"url": "{{baseUrl}}/users/auth/sign-up"
 									},
 									"response": []
 								},
@@ -279,7 +279,7 @@
 											"mode": "raw",
 											"raw": "{{request_body}}"
 										},
-										"url": "{{baseUrl}}/users/auth/register"
+										"url": "{{baseUrl}}/users/auth/sign-up"
 									},
 									"response": []
 								},
@@ -297,7 +297,7 @@
 													"    let user;\r",
 													"    try {\r",
 													"        user = rnd.getUser();\r",
-													"        user.username = \"\";\r",
+													"        user.name = \"\";\r",
 													"    } catch(err) {\r",
 													"        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
 													"    }\r",
@@ -346,7 +346,7 @@
 											"mode": "raw",
 											"raw": "{{request_body}}"
 										},
-										"url": "{{baseUrl}}/users/auth/register"
+										"url": "{{baseUrl}}/users/auth/sign-up"
 									},
 									"response": []
 								},
@@ -413,7 +413,7 @@
 											"mode": "raw",
 											"raw": "{{request_body}}"
 										},
-										"url": "{{baseUrl}}/users/auth/register"
+										"url": "{{baseUrl}}/users/auth/sign-up"
 									},
 									"response": []
 								},
@@ -480,7 +480,7 @@
 											"mode": "raw",
 											"raw": "{{request_body}}"
 										},
-										"url": "{{baseUrl}}/users/auth/register"
+										"url": "{{baseUrl}}/users/auth/sign-up"
 									},
 									"response": []
 								},
@@ -547,7 +547,7 @@
 											"mode": "raw",
 											"raw": "{{request_body}}"
 										},
-										"url": "{{baseUrl}}/users/auth/register"
+										"url": "{{baseUrl}}/users/auth/sign-up"
 									},
 									"response": []
 								},
@@ -565,7 +565,7 @@
 													"    let user;\r",
 													"    try {\r",
 													"        user = rnd.getUser();\r",
-													"        delete user.username;\r",
+													"        delete user.name;\r",
 													"    } catch(err) {\r",
 													"        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
 													"    }\r",
@@ -614,7 +614,7 @@
 											"mode": "raw",
 											"raw": "{{request_body}}"
 										},
-										"url": "{{baseUrl}}/users/auth/register"
+										"url": "{{baseUrl}}/users/auth/sign-up"
 									},
 									"response": []
 								},
@@ -681,7 +681,7 @@
 											"mode": "raw",
 											"raw": "{{request_body}}"
 										},
-										"url": "{{baseUrl}}/users/auth/register"
+										"url": "{{baseUrl}}/users/auth/sign-up"
 									},
 									"response": []
 								}
@@ -704,7 +704,7 @@
 													"    let user;\r",
 													"    try {\r",
 													"        user = rnd.getUser();\r",
-													"        user.username = rnd.getWord(2);\r",
+													"        user.name = rnd.getWord(2);\r",
 													"        console.log(user);\r",
 													"    } catch(err) {\r",
 													"        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
@@ -771,7 +771,7 @@
 												}
 											}
 										},
-										"url": "{{baseUrl}}/users/auth/register"
+										"url": "{{baseUrl}}/users/auth/sign-up"
 									},
 									"response": []
 								},
@@ -789,7 +789,7 @@
 													"    let user;\r",
 													"    try {\r",
 													"        user = rnd.getUser();\r",
-													"        user.username = rnd.getWord(20);\r",
+													"        user.name = rnd.getWord(20);\r",
 													"        console.log(user);\r",
 													"    } catch(err) {\r",
 													"        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
@@ -856,7 +856,7 @@
 												}
 											}
 										},
-										"url": "{{baseUrl}}/users/auth/register"
+										"url": "{{baseUrl}}/users/auth/sign-up"
 									},
 									"response": []
 								},
@@ -940,7 +940,7 @@
 												}
 											}
 										},
-										"url": "{{baseUrl}}/users/auth/register"
+										"url": "{{baseUrl}}/users/auth/sign-up"
 									},
 									"response": []
 								},
@@ -1024,7 +1024,7 @@
 												}
 											}
 										},
-										"url": "{{baseUrl}}/users/auth/register"
+										"url": "{{baseUrl}}/users/auth/sign-up"
 									},
 									"response": []
 								},
@@ -1042,7 +1042,7 @@
 													"    let user;\r",
 													"    try {\r",
 													"        user = rnd.getUser();\r",
-													"        user.username = rnd.getWord(21);\r",
+													"        user.name = rnd.getWord(21);\r",
 													"    } catch(err) {\r",
 													"        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
 													"    }\r",
@@ -1108,7 +1108,7 @@
 												}
 											}
 										},
-										"url": "{{baseUrl}}/users/auth/register"
+										"url": "{{baseUrl}}/users/auth/sign-up"
 									},
 									"response": []
 								},
@@ -1192,7 +1192,7 @@
 												}
 											}
 										},
-										"url": "{{baseUrl}}/users/auth/register"
+										"url": "{{baseUrl}}/users/auth/sign-up"
 									},
 									"response": []
 								},
@@ -1276,7 +1276,7 @@
 												}
 											}
 										},
-										"url": "{{baseUrl}}/users/auth/register"
+										"url": "{{baseUrl}}/users/auth/sign-up"
 									},
 									"response": []
 								},
@@ -1360,7 +1360,7 @@
 												}
 											}
 										},
-										"url": "{{baseUrl}}/users/auth/register"
+										"url": "{{baseUrl}}/users/auth/sign-up"
 									},
 									"response": []
 								},
@@ -1444,7 +1444,7 @@
 												}
 											}
 										},
-										"url": "{{baseUrl}}/users/auth/register"
+										"url": "{{baseUrl}}/users/auth/sign-up"
 									},
 									"response": []
 								},
@@ -1528,7 +1528,7 @@
 												}
 											}
 										},
-										"url": "{{baseUrl}}/users/auth/register"
+										"url": "{{baseUrl}}/users/auth/sign-up"
 									},
 									"response": []
 								},
@@ -1612,7 +1612,7 @@
 												}
 											}
 										},
-										"url": "{{baseUrl}}/users/auth/register"
+										"url": "{{baseUrl}}/users/auth/sign-up"
 									},
 									"response": []
 								},
@@ -1696,7 +1696,93 @@
 												}
 											}
 										},
-										"url": "{{baseUrl}}/users/auth/register"
+										"url": "{{baseUrl}}/users/auth/sign-up"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Default values check",
+							"item": [
+								{
+									"name": "Проверка на значения по-умолчанию from и size",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"const main = async () => {\r",
+													"    const api = new API(pm);\r",
+													"    const rnd = new RandomUtils();\r",
+													"\r",
+													"    try {\r",
+													"        for (let i = 0; i < 11; i++){\r",
+													"            await api.addUser(rnd.getUser());\r",
+													"        }\r",
+													"        pm.sendRequest({\r",
+													"            url : \"http://localhost:8080/api/v1/users?from=0\",\r",
+													"            method : \"GET\",\r",
+													"            header: { \"Content-Type\": \"application/json\" }\r",
+													"        }, (error, response) => {pm.collectionVariables.set('source', response.json())});\r",
+													"    } catch(err) {\r",
+													"        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
+													"    }\r",
+													"};\r",
+													"\r",
+													"const interval = setInterval(() => {}, 1000);\r",
+													"\r",
+													"setTimeout(async () => \r",
+													"    {\r",
+													"        try {\r",
+													"            await main();\r",
+													"        } catch (e) {\r",
+													"            console.error(e);\r",
+													"        } finally {\r",
+													"            clearInterval(interval);\r",
+													"        }\r",
+													"    },  \r",
+													"    100 \r",
+													");"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", () => {\r",
+													"    pm.response.to.be.ok;    \r",
+													"    pm.response.to.be.withBody;\r",
+													"    pm.response.to.be.json;\r",
+													"});\r",
+													"\r",
+													"const target = pm.response.json();\r",
+													"const source = pm.collectionVariables.get('source');\r",
+													"\r",
+													"// pm.test(\"Значение from по-умолчанию должно быть равным 0\", function () {\r",
+													"//     pm.expect(target[0].id).to.be.equal(source[0].id, 'Запросы с from=0 и без него должны начинаться с одного и того же события');\r",
+													"// });\r",
+													"\r",
+													"pm.test(\"Значение size по-умолчанию должно быть равным 10\", function () {\r",
+													"    pm.expect(target.length).to.be.equal(10);\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": "{{baseUrl}}/users"
 									},
 									"response": []
 								}
@@ -1723,7 +1809,8 @@
 									"    let user;\r",
 									"    try {\r",
 									"        user = rnd.getUser();\r",
-									"        await api.addUser(user); \r",
+									"        await api.addUser(user);\r",
+									"        // pm.collectionVariables.set('apiToken', token);\r",
 									"    } catch(err) {\r",
 									"        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
 									"    }\r",
@@ -1774,7 +1861,7 @@
 							"mode": "raw",
 							"raw": "{{rerequest_body}}"
 						},
-						"url": "{{baseUrl}}/users/auth/register"
+						"url": "{{baseUrl}}/users/auth/sign-up"
 					},
 					"response": []
 				}
@@ -1887,19 +1974,17 @@
 									"const source = JSON.parse(pm.request.body.raw);\r",
 									"const target = pm.response.json();\r",
 									"\r",
-									"pm.test(\"Пользователь должен содержать поля: id, username, email, avatarId, createdOn\", () => {\r",
-									"    pm.expect(target).to.have.property('id');\r",
-									"    pm.expect(target).to.have.property('username');\r",
-									"    pm.expect(target).to.have.property('email');\r",
-									"    pm.expect(target).to.have.property('avatarId');\r",
-									"    pm.expect(target).to.have.property('createdOn');\r",
+									"pm.test(\"Ответ должен содержать поля: token\", () => {\r",
+									"    pm.expect(target).to.have.property('token');\r",
+									"    pm.collectionVariables.set(\"apiToken\", target.token);\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", () => {\r",
-									"    pm.expect(target.id).to.not.be.null;\r",
-									"    pm.expect(source.username).equal(target.username, 'Имя пользователя должно соответствовать отправленному в запросе');\r",
-									"    pm.expect(source.email).equal(target.email, 'Почта пользователя должна соответствовать отправленной в запросе');\r",
-									"});"
+									"// todo check saved data, no id или оставить в тесте \"Получение пользователей\"\r",
+									"// pm.test(\"Данные в ответе должны соответствовать данным в запросе\", () => {\r",
+									"//     pm.expect(target.id).to.not.be.null;\r",
+									"//     pm.expect(source.username).equal(target.username, 'Имя пользователя должно соответствовать отправленному в запросе');\r",
+									"//     pm.expect(source.email).equal(target.email, 'Почта пользователя должна соответствовать отправленной в запросе');\r",
+									"// });"
 								],
 								"type": "text/javascript"
 							}
@@ -1950,9 +2035,9 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{{rerequest_body}}"
+							"raw": "{{request_body}}"
 						},
-						"url": "{{baseUrl}}/users/auth/register"
+						"url": "{{baseUrl}}/users/auth/sign-up"
 					},
 					"response": []
 				},
@@ -1969,7 +2054,7 @@
 									"\r",
 									"    try {\r",
 									"        const user = await api.addUser(rnd.getUser());\r",
-									"        pm.collectionVariables.set(\"response\", user)\r",
+									"        pm.collectionVariables.set(\"response\", user);\r",
 									"    } catch(err) {\r",
 									"        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
 									"    }\r",
@@ -2163,7 +2248,7 @@
 					"    }",
 					"",
 					"    async addUser(user, verbose=null) {",
-					"        return this.post(\"/users/auth/register\", user, \"Ошибка при добавлении нового пользователя: \", verbose);",
+					"        return this.post(\"/users/auth/sign-up\", user, \"Ошибка при добавлении нового пользователя: \", verbose);",
 					"    }",
 					"",
 					"    async findUser(userId, verbose=null) {",
@@ -2229,7 +2314,7 @@
 					"",
 					"    getUser() {",
 					"        return {",
-					"            username: pm.variables.replaceIn('{{$randomFullName}}'),",
+					"            name: pm.variables.replaceIn('{{$randomFullName}}'),",
 					"            email: pm.variables.replaceIn('{{$randomEmail}}'),",
 					"            password: pm.variables.replaceIn('{{$randomPassword}}')",
 					"        };",
@@ -2289,6 +2374,15 @@
 		},
 		{
 			"key": "response",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "source",
+			"value": ""
+		},
+		{
+			"key": "apiToken",
 			"value": "",
 			"type": "string"
 		}
