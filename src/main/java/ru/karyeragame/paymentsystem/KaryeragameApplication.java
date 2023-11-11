@@ -28,8 +28,8 @@ public class KaryeragameApplication {
         {
             try {
                 User admin = new User();
-                admin.setUsername("admin");
-                admin.setPassword(encoder.encode("psw1"));
+                admin.setName("admin");
+                admin.setPassword(encoder.encode("psw123"));
                 admin.setEmail("admin@gmail.com");
                 admin.setStatus(ProfileStatus.ACTIVE);
                 admin.setRole(Roles.ADMIN);

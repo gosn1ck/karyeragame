@@ -20,4 +20,7 @@ public class Avatar {
 
     @Column(nullable = false)
     private String url;
+
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
 }

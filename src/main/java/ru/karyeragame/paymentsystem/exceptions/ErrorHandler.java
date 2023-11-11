@@ -47,6 +47,15 @@ public class ErrorHandler {
         return handleErrorResponse(HttpStatus.FORBIDDEN, e);
     }
 
+    //500 INTERNAL_SERVER_ERROR
+    @ExceptionHandler({
+            LoadDataException.class
+    })
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ErrorResponse handleInternalServerErrorException(final Exception e) {
+        return handleErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, e);
+    }
+
     //404 Not Found
     @ExceptionHandler({
             NotFoundException.class,

@@ -1,16 +1,106 @@
 package ru.karyeragame.paymentsystem.avatar.service;
 
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import ru.karyeragame.paymentsystem.avatar.dto.AvatarDto;
+import ru.karyeragame.paymentsystem.avatar.mapper.AvatarMapper;
 import ru.karyeragame.paymentsystem.avatar.model.Avatar;
+import ru.karyeragame.paymentsystem.avatar.repository.AvatarRepository;
+import ru.karyeragame.paymentsystem.exceptions.InvalidFormatException;
+import ru.karyeragame.paymentsystem.exceptions.LoadDataException;
+import ru.karyeragame.paymentsystem.exceptions.NotFoundException;
+import ru.karyeragame.paymentsystem.user.service.UserService;
 
+import javax.imageio.ImageIO;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicReference;
 
-public interface AvatarService {
+@Service
+@RequiredArgsConstructor
+public class AvatarService {
 
-    AvatarDto saveAvatar(MultipartFile file, Long id) throws IOException;
+    private final AvatarMapper mapper;
+    private final AvatarRepository repository;
+    private final UserService userService;
 
-    AvatarDto getAvatar(Long id);
+    @Transactional
+    public AvatarDto saveAvatar(MultipartFile file, Long userId) throws IOException {
+        if (ImageIO.read(file.getInputStream()) == null) {
+            throw new InvalidFormatException("Avatar has to be an image");
+        }
 
-    Avatar getAvatarEntity(Long id);
+        String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
+
+        Avatar avatar = putAvatar(userId, fileName);
+
+        userService.updateUserAvatar(avatar, userId);
+
+        String uploadDir = Paths.get(".", "data", "avatars", userId.toString()).toString();
+
+        Path uploadPath = Paths.get(uploadDir);
+        if (!Files.exists(uploadPath)) {
+            Files.createDirectories(uploadPath);
+        } else {
+            FileUtils.cleanDirectory(new File(uploadDir));
+        }
+        try (InputStream inputStream = file.getInputStream()) {
+            Path filePath = uploadPath.resolve(fileName);
+
+            Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            throw new LoadDataException("Cannot save image: %s", fileName);
+        }
+        return mapper.toDto(avatar);
+    }
+
+    public File loadAvatar(Long userId) {
+        AvatarDto avatarDto = mapper.toDto(getAvatarEntityByUserId(userId));
+
+        Path uploadPath = Paths.get("./data/avatars/" + avatarDto.getUrl());
+
+        if (!Files.exists(uploadPath)) {
+            throw new NotFoundException("Avatar with user id %d not found", userId);
+        }
+        return uploadPath.toFile();
+    }
+
+    public Avatar getAvatarEntity(Long id) {
+        return repository.findById(id).orElseThrow(() -> new NotFoundException("Avatar not found with id %d", id));
+    }
+
+    public Avatar getAvatarEntityByUserId(Long userId) {
+        return repository.findByUserId(userId).orElseThrow(() -> new NotFoundException("Avatar not found with user id: %d", userId));
+    }
+
+    private Avatar putAvatar(Long userId, String fileName) {
+        AtomicReference<Avatar> result = new AtomicReference<>();
+        ;
+
+        repository.findByUserId(userId).ifPresentOrElse(
+                (entity)
+                        -> {
+                    entity.setUrl(userId + "/" + fileName);
+                    entity.setUserId(userId);
+                    result.set(repository.save(entity));
+                },
+                ()
+                        -> {
+                    Avatar entity = new Avatar();
+                    entity.setUrl(userId + "/" + fileName);
+                    entity.setUserId(userId);
+                    result.set(repository.save(entity));
+                });
+        return result.get();
+    }
 }

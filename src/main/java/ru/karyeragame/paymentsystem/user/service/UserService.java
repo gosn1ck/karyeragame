@@ -17,6 +17,7 @@ import ru.karyeragame.paymentsystem.exceptions.*;
 import ru.karyeragame.paymentsystem.security.AuthResponse;
 import ru.karyeragame.paymentsystem.security.JwtService;
 import ru.karyeragame.paymentsystem.security.token.TokenService;
+import ru.karyeragame.paymentsystem.user.dto.AuthUserDto;
 import ru.karyeragame.paymentsystem.user.dto.FullUserDto;
 import ru.karyeragame.paymentsystem.user.dto.NewUserDto;
 import ru.karyeragame.paymentsystem.user.dto.ShortUserDto;
@@ -65,11 +66,14 @@ public class UserService {
     }
 
     @Transactional
-    public AuthResponse signIn(String email, String password, HttpServletResponse response) {
+    public AuthResponse signIn(AuthUserDto dto, HttpServletResponse response) {
+        String email = dto.getEmail();
+        String password = dto.getPassword();
+
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(email, password)
         );
-        var user = repository.findByEmail(email).orElseThrow(() -> new NotFoundException("User with email %s not found", email));
+        var user = repository.findByEmail(dto.getEmail()).orElseThrow(() -> new NotFoundException("User with email %s not found", dto.getEmail()));
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
 

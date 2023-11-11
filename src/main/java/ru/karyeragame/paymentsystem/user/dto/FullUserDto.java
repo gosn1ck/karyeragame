@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Data
 public class FullUserDto {
     private Long id;
-    private String username;
+    private String name;
     private String email;
     private Long avatarId;
     private LocalDateTime createdOn;
