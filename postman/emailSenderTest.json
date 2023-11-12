@@ -22,7 +22,7 @@
           }
         },
         "url": {
-          "raw": "http://localhost:8080/send-email",
+          "raw": "http://localhost:8080/api/v1/send-email",
           "protocol": "http",
           "host": [
             "localhost"
@@ -50,7 +50,7 @@
           }
         },
         "url": {
-          "raw": "http://localhost:8080/send-email/attach",
+          "raw": "http://localhost:8080/api/v1/send-email/attach",
           "protocol": "http",
           "host": [
             "localhost"
