@@ -1,0 +1,32 @@
+.auth-grid {
+    top: 10%;
+    left: 50%;
+    position: sticky;
+
+    padding: 0 12rem;
+    display: grid;
+    grid-template-columns: repeat(2, 54rem);
+    grid-template-rows: 1fr 1fr 25rem;
+    justify-content: center;
+    column-gap: 4.1rem;
+    grid-template-areas:
+    "logo form"
+    "text form"
+    "welcome-img form";
+}
+
+.welcome__logo {
+    grid-area: logo;
+}
+
+.welcome__text {
+    grid-area: text;
+}
+
+.welcome__img {
+    grid-area: welcome-img;
+}
+
+.auth__form {
+    grid-area: form;
+}

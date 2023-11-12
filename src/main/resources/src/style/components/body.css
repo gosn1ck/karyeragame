@@ -1,0 +1,61 @@
+:root {
+    --text-header-color: #004243;
+    --text-tab-color: #1C2022;
+    --text-label-color: #20272B;
+    --text-button-color: #FFF;
+    --text-passive-color: #8E9FA7;
+    --border-color: #8E9FA7;
+    --button-disabled-color: #8E9FA7;
+    --accent-field-color: #CAE5FF;
+    --block-color: #F5FAFF;
+    --accent-primary-color: #8DDFFF;
+    --accent-secondary-color: #FBB591;
+    --input-disabled-color: #D7E0E5;
+
+    --accent-primary-color-hover: #48C2F2;
+    --accent-primary-color-focus: #039AD6;
+    --accent-secondary-color-hover: #FF5700;
+    --accent-secondary-color-focus: #B93F00;
+    --border-color-hover: #1C2022;
+    --border-color-input-outline-disabled: #AAAEB0;
+
+    /*    не согласовано с дизайнером */
+    --grey-btn-color-hover: #A1B6C2;
+    --grey-btn-color-focus: #6B8D9F;
+    --delete-btn-color: #FF0000;
+    --delete-btn-color-hover: #CC0000;
+    --delete-btn-color-focus: #990000;
+}
+
+html {
+    font-size: 62.5%;
+    overflow: hidden;
+
+    width: 100%;
+    height: 100%;
+    font-family: Open Sans, sans-serif;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+button,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+    margin: 0;
+    padding: 0;
+}

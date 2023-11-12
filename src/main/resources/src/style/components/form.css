@@ -1,0 +1,212 @@
+.auth__form {
+    display: flex;
+    background-color: var(--block-color);
+    padding:  1.6rem 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.auth__form__tabs {
+    position: relative;
+    width: 100%;
+}
+
+.auth__form__tabs__tab input[type="radio"] {
+    display: none;
+}
+
+.auth__form__tabs__tab, .auth__form__tabs__tab__title {
+    display: inline-block;
+}
+
+.auth__form__tabs__tab__title {
+    margin-right: 3.3rem;
+
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 41px;
+    letter-spacing: 0;
+    text-align: center;
+
+    color: var(--text-passive-color);
+
+    cursor: pointer;
+}
+
+.auth__form__tabs__content {
+    position: absolute;
+    width: calc(100% - 0.75rem);
+    left: 0;
+    display: none;
+}
+
+.auth__form__tabs__tab :checked + .auth__form__tabs__tab__title {
+    position: relative;
+    color: var(--text-tab-color);
+    text-decoration-line: underline;
+    text-decoration-color: var(--accent-secondary-color);
+    text-decoration-thickness: 0.25rem;
+    text-underline-offset: 1rem;
+}
+
+.auth__form__tabs__tab :checked ~ .auth__form__tabs__content {
+    display: block;
+}
+
+.buttons__form-type {
+    background: none;
+    border: none;
+    margin: 0 1rem;
+
+
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 41px;
+    letter-spacing: 0;
+    text-align: center;
+
+    color: var(--text-passive-color);
+
+    cursor: pointer;
+}
+
+.buttons__form-type--active {
+    background: none;
+
+    border-bottom: 4px solid var(--accent-secondary-color);
+
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 41px;
+    letter-spacing: 0;
+    text-align: left;
+    color: var(--text-tab-color);
+}
+
+
+.form {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    transition: 0.5s;
+    width: 100%;
+}
+
+.form-box {
+    padding-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.form__register input[type="file"] {
+    display: none;
+}
+
+.form-box__label-img {
+position: relative;
+/* left: calc((100%-4.8rem)/2); */
+left: calc(100% - 4.8rem);
+
+width: 9.6rem; 
+height: 9.6rem;
+border-radius: 50%; 
+background-color: #CAE5FF; 
+font-size: 1.2rem;
+font-weight: bold;
+color: var(--text-button-color); 
+text-align: end;
+writing-mode: vertical-rl;
+cursor: pointer; 
+}
+
+.form-box__label {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 33px;
+    letter-spacing: 0;
+    text-align: left;
+    color: #20272B;
+    margin-left: 1.5rem;
+    margin-bottom: 0.625rem;
+}
+
+.form-box__input {
+    border: 0.1rem solid var(--border-color);
+    border-radius: 3.2rem;
+    height: 6.4rem;
+    background-color: var(--block-color);
+
+    /* padding-top: 1.2rem; */
+    /* padding-bottom: 1.2rem; */
+    padding-left: 2.4rem;
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 25px;
+    letter-spacing: 0;
+    text-align: left;
+    text-transform: uppercase;
+
+    margin-bottom: 1rem;
+}
+
+.form-box__input:hover {
+    outline-color: var(--border-color-hover);
+}
+
+.form-box__input:focus {
+    outline-color: var(--accent-primary-color);
+}
+
+.form-box__input:disabled {
+    background: var(--input-disabled-color);
+    outline-color: var(--border-color-input-outline-disabled);
+}
+
+.btn-form {
+    border-radius: 7rem;
+    border: none;
+    width: 25.3rem;
+    margin: 2.7rem auto auto;
+    height: 5.2rem;
+    align-self: center;
+    padding: 1.2rem 3.6rem;
+
+    background: var(--accent-primary-color);
+
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 28px;
+    letter-spacing: 0;
+    color: var(--text-button-color);
+    cursor: pointer;
+}
+
+.btn-form:hover {
+    background: var(--accent-primary-color-hover);
+}
+
+.btn-form:focus {
+    background: var(--accent-primary-color-focus);
+    box-shadow: -0.2rem -0.4rem 0.4rem 0 var(--accent-primary-color-hover) inset;
+}
+
+.btn-form:disabled {
+    background: var(--button-disabled-color);
+}
+
+.form-box--link {
+    margin-left: 1.5rem;
+    font-size: 1.4rem;
+    color: var(--text-label-color);
+}
+
+/*#login {*/
+/*    top: 3rem;*/
+/*    left: -100%;*/
+/*}*/
+
+/*#register {*/
+/*    top: 3rem;*/
+/*    left: 5%;*/
+/*  }*/

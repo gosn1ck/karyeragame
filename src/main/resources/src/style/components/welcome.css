@@ -1,0 +1,34 @@
+/*.welcome {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    justify-content: space-between;*/
+/*    align-items: center;*/
+/*    margin: 0 2.563rem;*/
+/*    width: 50%;*/
+/*}*/
+
+.text {
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 65px;
+    letter-spacing: 0;
+    text-align: center;
+    color: var(--text-header-color);
+}
+
+.text-accented {
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 76px;
+    letter-spacing: 0;
+    text-align: center;
+    color: var(--text-header-color);
+}
+
+.text-small-accented {
+    font-weight: 700;
+}
+
+.welcome__img {
+    place-self: center;
+}
