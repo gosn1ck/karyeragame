@@ -1,10 +1,11 @@
 //
 
+import axios from "axios";
 import * as Yup from 'yup';
 // import { Formik } from 'formik';
 
 const validationSchema = Yup.object().shape({
-  login: Yup.string().max(20, "Имя пользователя не может быть длинее 20 символов").required('Обязательное поле'),
+  login: Yup.string().required('Обязательное поле'),
   email: Yup.string().email('Некорректный email').required('Обязательное поле'),
   password: Yup.string().min(6, 'Пароль должен содержать минимум 6 символов').required('Обязательное поле'),
   passwordConf: Yup.string()
@@ -12,25 +13,26 @@ const validationSchema = Yup.object().shape({
     .required('Обязательное поле'),
 });
 
-const handleSubmit = (values, { setSubmitting }) => {
-  // Здесь можно добавить логику отправки данных на сервер
-  fetch('./', {
-    method: 'POST',
-    body: JSON.stringify(values),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data); // Обработка ответа от сервера
+const handleSubmit = async (values) => {
+  const NewUserDto = {
+    username: values.login,
+    email: values.email,
+    password: values.password,
+  };
+
+    axios.post('http://localhost:8080/users/auth/register', NewUserDto, {
+      headers: {
+        'Content-Type': 'application/json',
+      }
     })
-    .catch((error) => {
-      console.error('Ошибка:', error);
+
+    .then(response => {
+      console.log("Успешно",response);
     })
-    .finally(() => {
-      setSubmitting(false);
+    .catch(error => {
+      console.error(error);
     });
+
 };
 
 export { validationSchema, handleSubmit };
