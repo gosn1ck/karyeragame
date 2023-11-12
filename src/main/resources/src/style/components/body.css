@@ -20,8 +20,11 @@
     --border-color-input-outline-disabled: #AAAEB0;
 
     /*    не согласовано с дизайнером */
-    --accent-grey-btn-color-hover: #A1B6C2;
-    --accent-grey-btn-color-focus: #6B8D9F;
+    --grey-btn-color-hover: #A1B6C2;
+    --grey-btn-color-focus: #6B8D9F;
+    --delete-btn-color: #FF0000;
+    --delete-btn-color-hover: #CC0000;
+    --delete-btn-color-focus: #990000;
 }
 
 html {
