@@ -1,0 +1,9 @@
+.account-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    border: 0.1rem solid;
+    border-color: var(--border-color);
+    border-radius: 2.4rem;
+    margin: 2rem 4rem;
+    height: calc(100vh - 40px);
+}

@@ -1,0 +1,24 @@
+.user-panel {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    padding: 1rem 2.2rem;
+}
+
+.user-panel__avatar {
+    border-radius: 50%;
+    background: var(--border-color);
+    height: 3rem;
+    width: 3rem;
+}
+
+.user-panel__username {
+    font-size: 1.5rem;
+    margin-right: 3rem;
+}
+
+/*.user-panel__icon-exit {*/
+/*    !*width: 70%;*!*/
+/*}*/

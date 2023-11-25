@@ -1,0 +1,26 @@
+.btn-edit {
+    border: 0.1rem solid;
+    border-radius: 0.8rem;
+    border-color: var(--border-color);
+    background: var(--input-disabled-color);
+    padding: 0.6rem;
+    margin: auto 0;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    cursor: pointer;
+}
+
+.btn-edit:hover {
+    background: var(--grey-btn-color-hover);
+}
+
+.btn-edit:focus {
+    box-shadow: 4px 4px 4px 0px rgba(34, 60, 80, 0.2) inset;
+    border-color: var(--grey-btn-color-hover);
+    background: var(--grey-btn-color-focus);
+}
+
+.btn-edit__text {
+    font-size: 1.2rem;
+}

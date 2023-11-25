@@ -1,0 +1,10 @@
+.user-data {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.user-data__block {
+    margin: 1rem 0;
+}

@@ -29,3 +29,42 @@
     background: var(--input-disabled-color);
     outline-color: var(--border-color-input-outline-disabled);
 }
+
+.input__label {
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 33px;
+    letter-spacing: 0;
+    text-align: left;
+    color: #20272B;
+    margin-left: 1.5rem;
+}
+
+/* Profile */
+
+.input-field {
+    border: 0.1rem solid var(--border-color);
+    border-radius: 3.2rem;
+    height: 3rem;
+    background-color: var(--block-color);
+
+    padding-left: 2.4rem;
+    font-size: 18px;
+    text-transform: uppercase;
+
+    margin-bottom: 1rem;
+}
+
+.input-field:hover {
+    outline-color: var(--border-color-hover);
+}
+
+.input-field:focus {
+    outline-color: var(--accent-primary-color);
+}
+
+.input-field:disabled {
+    background: var(--input-disabled-color);
+    outline-color: var(--border-color-input-outline-disabled);
+    cursor: not-allowed;
+}

@@ -1,0 +1,20 @@
+.logo-link {
+    text-decoration: none;
+}
+
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+    margin: 0 2rem 5rem 0;
+}
+
+.logo {
+    padding: 1rem 0;
+    width: 30%;
+}
+
+.logo__title {
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: var(--text-header-color);
+}

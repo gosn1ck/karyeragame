@@ -1,276 +1,276 @@
-.profile-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 4fr;
-    border: 0.1rem solid;
-    border-color: var(--border-color);
-    border-radius: 2.4rem;
-    margin: 2rem 4rem;
-}
+/*.account-wrapper {*/
+/*    display: grid;*/
+/*    grid-template-columns: 1fr 4fr;*/
+/*    border: 0.1rem solid;*/
+/*    border-color: var(--border-color);*/
+/*    border-radius: 2.4rem;*/
+/*    margin: 2rem 4rem;*/
+/*}*/
 
-.profile-nav {
-    width: max-content;
-    background: var(--accent-primary-color);
-    border-top-left-radius: 2.4rem;
-    border-bottom-left-radius: 2.4rem;
-}
-
-
-/* Блок логотипа */
-
-.logo-link {
-    text-decoration: none;
-}
-
-.logo-wrapper {
-    display: flex;
-    align-items: center;
-    margin: 0 2rem 5rem 0;
-}
-
-.logo {
-    padding: 1rem 0;
-    width: 30%;
-}
-
-.logo__title {
-    font-size: 1.7rem;
-    font-weight: 600;
-    color: var(--text-header-color);
-}
-
-.space {
-    height: 5rem;
-}
-
-.nav {
-    margin: 1rem;
-    list-style-type: none;
-}
-
-.nav__item {
-    display: flex;
-    padding: 0.6rem;
-    margin: 0.8rem 0 0 1rem;
-    cursor: pointer;
-    border-top-left-radius: 2rem;
-    border-bottom-left-radius: 2rem;
-}
-
-.nav__item:hover {
-    background: var(--accent-primary-color-hover);
-}
-
-.nav__item--active {
-    background: var(--accent-primary-color-focus);
-}
-
-.nav__icon--active {
-    filter: invert(1);
-}
-
-.nav__link {
-    font-size: 1.6rem;
-    color: var(--text-label-color);
-    font-weight: 600;
-    margin-left: 2rem;
-    text-decoration: none;
-}
-
-.nav__link--active {
-    color: white;
-}
-
-.profile-content {
-    overflow: hidden;
-}
-
-.title-big {
-    font-size: 3rem;
-    margin-left: 3rem;
-}
-
-.title-medium {
-    font-size: 1.6rem;
-    margin: 2rem 0 1rem;
-}
+/*.account-nav {*/
+/*    width: max-content;*/
+/*    background: var(--accent-primary-color);*/
+/*    border-top-left-radius: 2.4rem;*/
+/*    border-bottom-left-radius: 2.4rem;*/
+/*}*/
 
 
-/* Панель пользователя (верхняя) */
+/*!* Блок логотипа *!*/
 
-.user-panel {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    justify-content: flex-end;
-    flex-wrap: wrap;
-    padding: 1rem 2.2rem;
-}
+/*.logo-link {*/
+/*    text-decoration: none;*/
+/*}*/
 
-.user-panel__avatar {
-    border-radius: 50%;
-    background: var(--border-color);
-    height: 3rem;
-    width: 3rem;
-}
+/*.logo-wrapper {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    margin: 0 2rem 5rem 0;*/
+/*}*/
 
-.user-panel__username {
-    font-size: 1.5rem;
-    margin-right: 3rem;
-}
+/*.logo {*/
+/*    padding: 1rem 0;*/
+/*    width: 30%;*/
+/*}*/
 
-.user-panel__icon-exit {
-    width: 70%;
-}
+/*.logo__title {*/
+/*    font-size: 1.7rem;*/
+/*    font-weight: 600;*/
+/*    color: var(--text-header-color);*/
+/*}*/
 
-/* Информация о пользователе */
+/*.space {*/
+/*    height: 5rem;*/
+/*}*/
 
-.data-block {
-    border: 0.1rem solid;
-    border-color: var(--border-color);
-    border-radius: 2.4rem;
-    margin: 2rem 3rem;
-    padding: 2rem;
-}
+/*.nav {*/
+/*    margin: 1rem;*/
+/*    list-style-type: none;*/
+/*}*/
 
-.data-block__header {
-    display: flex;
-    justify-content: space-between;
-}
+/*.nav__item {*/
+/*    display: flex;*/
+/*    padding: 0.6rem;*/
+/*    margin: 0.8rem 0 0 1rem;*/
+/*    cursor: pointer;*/
+/*    border-top-left-radius: 2rem;*/
+/*    border-bottom-left-radius: 2rem;*/
+/*}*/
 
-.data-block__title {
-    font-size: 1.6rem;
-    font-weight: 600;
-    color: var(--text-label-color);
-}
+/*.nav__item:hover {*/
+/*    background: var(--accent-primary-color-hover);*/
+/*}*/
 
-.btn-edit {
-    border: 0.1rem solid;
-    border-radius: 0.8rem;
-    border-color: var(--border-color);
-    background: var(--input-disabled-color);
-    padding: 0.6rem;
-    margin: auto 0;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    cursor: pointer;
-}
+/*.nav__item--active {*/
+/*    background: var(--accent-primary-color-focus);*/
+/*}*/
 
-.btn-edit:hover {
-    background: var(--grey-btn-color-hover);
-}
+/*.nav__icon--active {*/
+/*    filter: invert(1);*/
+/*}*/
 
-.btn-edit:focus {
-    box-shadow: 4px 4px 4px 0px rgba(34, 60, 80, 0.2) inset;
-    border-color: var(--grey-btn-color-hover);
-    background: var(--grey-btn-color-focus);
-}
+/*.nav__link {*/
+/*    font-size: 1.6rem;*/
+/*    color: var(--text-label-color);*/
+/*    font-weight: 600;*/
+/*    margin-left: 2rem;*/
+/*    text-decoration: none;*/
+/*}*/
 
-.btn-edit__text {
-    font-size: 1.2rem;
-}
+/*.nav__link--active {*/
+/*    color: white;*/
+/*}*/
 
-.user-data {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-}
+/*.profile-content {*/
+/*    overflow: hidden;*/
+/*}*/
 
-.user-data__block {
-    margin: 1rem 0;
-}
+/*.title-big {*/
+/*    font-size: 3rem;*/
+/*    margin-left: 3rem;*/
+/*}*/
 
-.input__label {
-    font-size: 1.6rem;
-    font-weight: 600;
-    line-height: 33px;
-    letter-spacing: 0;
-    text-align: left;
-    color: #20272B;
-    margin-left: 1.5rem;
-}
-
-.input-field {
-    border: 0.1rem solid var(--border-color);
-    border-radius: 3.2rem;
-    height: 3rem;
-    background-color: var(--block-color);
-
-    padding-left: 2.4rem;
-    font-size: 18px;
-    text-transform: uppercase;
-
-    margin-bottom: 1rem;
-}
-
-.input-field:hover {
-    outline-color: var(--border-color-hover);
-}
-
-.input-field:focus {
-    outline-color: var(--accent-primary-color);
-}
-
-.input-field:disabled {
-    background: var(--input-disabled-color);
-    outline-color: var(--border-color-input-outline-disabled);
-    cursor: not-allowed;
-}
+/*.title-medium {*/
+/*    font-size: 1.6rem;*/
+/*    margin: 2rem 0 1rem;*/
+/*}*/
 
 
-/* Перечень участников игры с аватарами */
+/*!* Панель пользователя (верхняя) *!*/
 
-.participants__list {
-    list-style-type: none;
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: 3rem;
-    row-gap: 1rem;
-}
+/*.user-panel {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    gap: 1rem;*/
+/*    justify-content: flex-end;*/
+/*    flex-wrap: wrap;*/
+/*    padding: 1rem 2.2rem;*/
+/*}*/
 
-.participant__wrapper {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
+/*.user-panel__avatar {*/
+/*    border-radius: 50%;*/
+/*    background: var(--border-color);*/
+/*    height: 3rem;*/
+/*    width: 3rem;*/
+/*}*/
 
-.participants__avatar {
-    border-radius: 50%;
-    background: var(--border-color);
-    height: 2rem;
-    width: 2rem;
-}
+/*.user-panel__username {*/
+/*    font-size: 1.5rem;*/
+/*    margin-right: 3rem;*/
+/*}*/
 
-.participants__username {
-    font-size: 1.2rem;
-}
+/*.user-panel__icon-exit {*/
+/*    width: 70%;*/
+/*}*/
 
-/* Блок для выарвнивания по центру */
-.center {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 0.6rem;
-}
+/*!* Информация о пользователе *!*/
+
+/*.data-block {*/
+/*    border: 0.1rem solid;*/
+/*    border-color: var(--border-color);*/
+/*    border-radius: 2.4rem;*/
+/*    margin: 2rem 3rem;*/
+/*    padding: 2rem;*/
+/*}*/
+
+/*.data-block__header {*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*}*/
+
+/*.data-block__title {*/
+/*    font-size: 1.6rem;*/
+/*    font-weight: 600;*/
+/*    color: var(--text-label-color);*/
+/*}*/
+
+/*.btn-edit {*/
+/*    border: 0.1rem solid;*/
+/*    border-radius: 0.8rem;*/
+/*    border-color: var(--border-color);*/
+/*    background: var(--input-disabled-color);*/
+/*    padding: 0.6rem;*/
+/*    margin: auto 0;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    gap: 0.6rem;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.btn-edit:hover {*/
+/*    background: var(--grey-btn-color-hover);*/
+/*}*/
+
+/*.btn-edit:focus {*/
+/*    box-shadow: 4px 4px 4px 0px rgba(34, 60, 80, 0.2) inset;*/
+/*    border-color: var(--grey-btn-color-hover);*/
+/*    background: var(--grey-btn-color-focus);*/
+/*}*/
+
+/*.btn-edit__text {*/
+/*    font-size: 1.2rem;*/
+/*}*/
+
+/*.user-data {*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    align-items: center;*/
+/*    flex-wrap: wrap;*/
+/*}*/
+
+/*.user-data__block {*/
+/*    margin: 1rem 0;*/
+/*}*/
+
+/*.input__label {*/
+/*    font-size: 1.6rem;*/
+/*    font-weight: 600;*/
+/*    line-height: 33px;*/
+/*    letter-spacing: 0;*/
+/*    text-align: left;*/
+/*    color: #20272B;*/
+/*    margin-left: 1.5rem;*/
+/*}*/
+
+/*.input-field {*/
+/*    border: 0.1rem solid var(--border-color);*/
+/*    border-radius: 3.2rem;*/
+/*    height: 3rem;*/
+/*    background-color: var(--block-color);*/
+
+/*    padding-left: 2.4rem;*/
+/*    font-size: 18px;*/
+/*    text-transform: uppercase;*/
+
+/*    margin-bottom: 1rem;*/
+/*}*/
+
+/*.input-field:hover {*/
+/*    outline-color: var(--border-color-hover);*/
+/*}*/
+
+/*.input-field:focus {*/
+/*    outline-color: var(--accent-primary-color);*/
+/*}*/
+
+/*.input-field:disabled {*/
+/*    background: var(--input-disabled-color);*/
+/*    outline-color: var(--border-color-input-outline-disabled);*/
+/*    cursor: not-allowed;*/
+/*}*/
 
 
-/* Кнопка удаления */
+/*!* Перечень участников игры с аватарами *!*/
 
-.btn-delete {
-    background: var(--delete-btn-color);
-    border-radius: 8rem;
-    border: none;
-    padding: 1rem 2rem;
-    font-weight: 400;
-    color: var(--text-button-color);
-    cursor: pointer;
-}
+/*.participants__list {*/
+/*    list-style-type: none;*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*    column-gap: 3rem;*/
+/*    row-gap: 1rem;*/
+/*}*/
 
-.btn-delete:hover {
-    background: var(--delete-btn-color-hover);
-}
+/*.participant__wrapper {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    gap: 1rem;*/
+/*}*/
 
-.btn-delete:focus {
-    background: var(--delete-btn-color-focus);
-}
+/*.participants__avatar {*/
+/*    border-radius: 50%;*/
+/*    background: var(--border-color);*/
+/*    height: 2rem;*/
+/*    width: 2rem;*/
+/*}*/
+
+/*.participants__username {*/
+/*    font-size: 1.2rem;*/
+/*}*/
+
+/*!* Блок для выравнивания по центру *!*/
+/*.center {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    margin-bottom: 0.6rem;*/
+/*}*/
+
+
+/*!* Кнопка удаления *!*/
+
+/*.btn-delete {*/
+/*    background: var(--delete-btn-color);*/
+/*    border-radius: 8rem;*/
+/*    border: none;*/
+/*    padding: 1rem 2rem;*/
+/*    font-weight: 400;*/
+/*    color: var(--text-button-color);*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.btn-delete:hover {*/
+/*    background: var(--delete-btn-color-hover);*/
+/*}*/
+
+/*.btn-delete:focus {*/
+/*    background: var(--delete-btn-color-focus);*/
+/*}*/
 
