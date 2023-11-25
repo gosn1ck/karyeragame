@@ -1,0 +1,6 @@
+.account-nav {
+    width: max-content;
+    background: var(--accent-primary-color);
+    border-top-left-radius: 2.4rem;
+    border-bottom-left-radius: 2.4rem;
+}

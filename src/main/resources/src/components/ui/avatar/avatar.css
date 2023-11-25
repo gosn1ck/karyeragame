@@ -1,0 +1,6 @@
+.user-panel__avatar {
+    border-radius: 50%;
+    background: var(--border-color);
+    height: 3rem;
+    width: 3rem;
+}

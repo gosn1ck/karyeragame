@@ -1,11 +1,10 @@
-
-
+import AccountWrapper from "../../layout/account-wrapper/account-wrapper";
 
 const Profile = () => {
     return (
-        <>
-        <h2>Профиль</h2>
-        </>
+        <div className="wrapper">
+            <AccountWrapper />
+        </div>
     );
 }
 
