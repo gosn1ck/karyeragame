@@ -13,6 +13,7 @@ import ru.karyeragame.paymentsystem.user.dto.AuthUserDto;
 import ru.karyeragame.paymentsystem.user.dto.NewUserDto;
 import ru.karyeragame.paymentsystem.user.service.UserService;
 
+//@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor

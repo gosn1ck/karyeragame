@@ -145,7 +145,7 @@ cursor: pointer;
     line-height: 25px;
     letter-spacing: 0;
     text-align: left;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
 
     margin-bottom: 1rem;
 }

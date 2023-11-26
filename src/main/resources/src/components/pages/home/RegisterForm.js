@@ -1,10 +1,9 @@
 import React from 'react';
-// import { Formik,Form} from 'formik';
 import {Formik, Field, Form, ErrorMessage} from 'formik';
 import {Link} from "react-router-dom";
 
 
-import {validationSchema, handleSubmit} from '../../../js/components/validation';
+import {validationRegisterSchema, handleSubmit} from '../../../js/components/validation';
 
 const RegisterForm = () => {
     return (
@@ -15,8 +14,8 @@ const RegisterForm = () => {
                 password: '',
                 passwordConf: '',
             }}
-            validationSchema={validationSchema}
-            onSubmit={handleSubmit} // Используйте импортированный обработчик
+            validationSchema={validationRegisterSchema}
+            onSubmit={handleSubmit}
         >
             <Form method="post" id="register" className="form form__register">
 
@@ -48,7 +47,9 @@ const RegisterForm = () => {
             {/* </div> */}
             <>
                 <button className="btn-form" type="submit">
-                    <Link to='/profile'>Зарегистрироваться</Link>
+                    Зарегистрироваться
+                    {/* <Link to='/profile'>Зарегистрироваться</Link> */}
+                    
                 </button>
             </>
 

@@ -21,13 +21,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 import static org.springframework.http.HttpMethod.*;
 import static ru.karyeragame.paymentsystem.user.model.Permission.*;
 import static ru.karyeragame.paymentsystem.user.model.Roles.ADMIN;
 import static ru.karyeragame.paymentsystem.user.model.Roles.DEVELOPER;
-
+@CrossOrigin(origins = "http://localhost:3000")
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor

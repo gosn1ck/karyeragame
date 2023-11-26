@@ -3,6 +3,8 @@ import pupils from "../../../assets/img/pupils.png"
 // import Avatar from "./../img/ava.jpg"
 
 import RegisterForm from "./RegisterForm"
+import LoginForm from "./LoginForm"
+
 
 const Home = () => {
     return ( 
@@ -27,19 +29,21 @@ const Home = () => {
                         <label htmlFor="tab-login" className="auth__form__tabs__tab__title auth__tab--margin-reset">Вход</label>
   
                         <section className="auth__form__tabs__content">
-                            <form action="src/main/resources/src/components/pages/home/Home" id="login" className="form form__login">
+                            {/* <form action="src/main/resources/src/components/pages/home/Home" id="login" className="form form__login"> */}
   
                                 <div className="form-box">
-                                    <label className="form-box__label">Логин</label>
-                                    <input className="form-box__input" type="text" />
+
+                                    <LoginForm/>
+                                    {/* <label className="form-box__label">E-mail</label>
+                                    <input className="form-box__input" name="email"  type="text" />
                                     <label className="form-box__label">Пароль</label>
-                                    <input className="form-box__input" type="password" />
+                                    <input className="form-box__input" name="password" type="password" /> */}
                                     {/* <a href="#" className="form-box--link">Не помню пароль</a> */}
                                 </div>
   
-                                <button className="btn-form" type="submit">Войти</button>
+                                {/* <button className="btn-form" type="submit">Войти</button> */}
   
-                            </form>
+                            {/* </form> */}
                         </section>
   
                         <div className="auth__form__tabs__tab">
